@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cmKits:jar">
+    <output-path>$USER_HOME$/Desktop/Servers/Teste/plugins</output-path>
+    <root id="archive" name="cmKits.jar">
+      <element id="module-output" name="cmKits" />
+    </root>
+  </artifact>
+</component>

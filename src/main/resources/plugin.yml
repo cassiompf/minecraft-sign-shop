@@ -1,0 +1,9 @@
+name: cmLoja
+version: ${project.version}
+main: gmail.fopypvp174.cmloja.Main
+authors: [C4ssi0]
+description: Plugin de loja
+depend: [Vault]
+commands:
+  geraritem:
+    description: Gerar novo item para a loja
