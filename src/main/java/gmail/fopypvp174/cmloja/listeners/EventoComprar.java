@@ -33,6 +33,7 @@ public final class EventoComprar implements Listener {
             if (Utilidades.isLoja(sign.getLines())) {
                 if (sign.getLine(0).equals(p.getDisplayName())) {
                     p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro3", 0, null, null));
+                    e.setCancelled(true);
                     return;
                 }
                 ItemStack item = Utilidades.itemLoja(sign.getLines());
@@ -56,9 +57,12 @@ public final class EventoComprar implements Listener {
                         }
                     } else {
                         p.sendMessage(Main.messageConfig.message("mensagens.inventory_full", 0, null, null));
+                        e.setCancelled(true);
+                        return;
                     }
                 } else {
                     p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro1", 0, null, null));
+                    e.setCancelled(true);
                     return;
                 }
             }

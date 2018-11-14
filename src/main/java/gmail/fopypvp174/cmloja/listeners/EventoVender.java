@@ -32,6 +32,7 @@ public final class EventoVender implements Listener {
             if (Utilidades.isLoja(sign.getLines())) {
                 if (sign.getLine(0).equals(p.getDisplayName())) {
                     p.sendMessage(Main.messageConfig.message("mensagens.vender_erro1", 0, null, null));
+                    e.setCancelled(true);
                     return;
                 }
                 final ItemStack item = Utilidades.itemLoja(sign.getLines());
@@ -42,12 +43,15 @@ public final class EventoVender implements Listener {
                     final Chest chest = (Chest) block.getState();
                     if (target != null) {
                         sellItens(p, target, chest, item, sign);
+                        e.setCancelled(true);
                     } else {
                         p.sendMessage(Main.messageConfig.message("mensagens.player_unknown", 0, null, target));
+                        e.setCancelled(true);
                         return;
                     }
                 } else {
                     sellItens(p, null, null, item, sign);
+                    e.setCancelled(true);
                 }
             }
         }
@@ -59,7 +63,7 @@ public final class EventoVender implements Listener {
 
         double qntPlaca = Double.parseDouble(sign.getLine(1));
         double valor1Item = Utilidades.valores(LojaEnum.VENDER, sign) * (1 / qntPlaca);
-        double valorFinalVenda = 0;
+        double valorFinalVenda;
         List<Short> position = new ArrayList<>();
         Inventory invPlayer = p.getInventory();
         for (short i = 0; i < invPlayer.getSize(); i++) {
@@ -128,7 +132,7 @@ public final class EventoVender implements Listener {
                                 break;
                             }
                         }
-                        Utilidades.removeMoneyVault(p, valorFinalVenda);
+                        Utilidades.darMoneyVault(p, valorFinalVenda);
                         Utilidades.removeMoneyVault(target, valorFinalVenda);
                         p.sendMessage(Main.messageConfig.message("mensagens.vender_success", itemStack.getAmount(), String.format("%.2f", valorFinalVenda), null));
 
