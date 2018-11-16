@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
         <module name="cmkits" />
         <module name="cmVault" />
       </profile>
@@ -19,6 +20,13 @@
       <module name="cmVault" target="1.8" />
       <module name="cmvault" target="1.8" />
       <module name="workspace-plugins" target="1.8" />
+=======
+        <module name="cmLoja" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cmLoja" target="1.8" />
+>>>>>>> Arrumando o plugin cmLoja
     </bytecodeTargetLevel>
   </component>
 </project>
