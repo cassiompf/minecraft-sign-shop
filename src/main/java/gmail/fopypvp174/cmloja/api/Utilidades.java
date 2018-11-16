@@ -5,9 +5,7 @@ import gmail.fopypvp174.cmloja.listeners.LojaEnum;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Sound;
 import org.bukkit.block.Sign;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public final class Utilidades {
@@ -55,14 +53,14 @@ public final class Utilidades {
 
     public static void darMoneyVault(OfflinePlayer p, double quantia) {
         EconomyResponse r = Main.econ.depositPlayer(p, quantia);
-        if (!r.transactionSuccess()){
+        if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao dar o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
         }
     }
 
     public static void removeMoneyVault(OfflinePlayer p, double quantia) {
         EconomyResponse r = Main.econ.withdrawPlayer(p, quantia);
-        if (!r.transactionSuccess()){
+        if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao remover o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
         }
     }
