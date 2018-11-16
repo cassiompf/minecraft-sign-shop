@@ -35,7 +35,7 @@ public final class Main extends JavaPlugin {
         getCommand("geraritem").setExecutor(new GerarItem());
     }
 
-    public void setupVault(){
+    public void setupVault() {
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         econ = rsp.getProvider();
     }
