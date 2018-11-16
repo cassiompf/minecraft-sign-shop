@@ -37,7 +37,6 @@ public final class EventoComprar implements Listener {
                     return;
                 }
                 ItemStack item = Utilidades.itemLoja(sign.getLines());
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(p.getName());
                 if (Main.econ.getBalance(p.getName()) >= Utilidades.valores(LojaEnum.COMPRAR, sign)) {
                     double slots = Math.floor(Short.parseShort(sign.getLine(1)) / 64);
                     double slotsEmptyPlayer = -1;

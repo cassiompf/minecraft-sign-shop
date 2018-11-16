@@ -8,6 +8,7 @@ import gmail.fopypvp174.cmloja.listeners.EventoCriar;
 import gmail.fopypvp174.cmloja.listeners.EventoVender;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -24,6 +25,7 @@ public final class Main extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        setupVault();
         plugin = this;
         loja = new LojaConfig(this, "itens.yml", "itens.yml");
         messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
@@ -31,6 +33,11 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventoComprar(), plugin);
         getServer().getPluginManager().registerEvents(new EventoVender(), plugin);
         getCommand("geraritem").setExecutor(new GerarItem());
+    }
+
+    public void setupVault(){
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        econ = rsp.getProvider();
     }
 
     @Override
