@@ -17,7 +17,13 @@ public final class EventoCriar implements Listener {
         Player p = e.getPlayer();
         if (Utilidades.isLoja(e.getLines())) {
             String[] CeV = Utilidades.replace(e.getLine(2)).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
-            e.setLine(2, "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1]);
+            if (CeV[0].matches("^(?i)(0)+(\\s|$)")) {
+                e.setLine(2, "§4V§r " + CeV[1]);
+            } else if (CeV[1].matches("^(?i)(0)+(\\s|$)")) {
+                e.setLine(2, "§2C§r " + CeV[0]);
+            } else {
+                e.setLine(2, "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1]);
+            }
             if (p.hasPermission("loja.admin")) {
                 if (!checarBau(e.getBlock())) {
                     if (!e.getLine(0).equals("[Loja]")) {
@@ -82,7 +88,13 @@ public final class EventoCriar implements Listener {
         String valor = null;
         if (position == 2) {
             String[] CeV = Utilidades.replace(linha).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
-            valor = "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1];
+            if (CeV[0].matches("^(0)+(\\s|$)")) {
+                valor = "§4V§r " + CeV[1];
+            } else if (CeV[1].matches("^(0)+(\\s|$)")) {
+                valor = "§2C§r " + CeV[0];
+            } else {
+                valor = "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1];
+            }
         }
         return valor;
     }

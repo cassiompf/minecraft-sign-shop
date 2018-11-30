@@ -9,7 +9,7 @@ mensagens:
   comprar_erro1: "&cVocê não tem dinheiro suficiente para comprar esse item."
   comprar_erro2: "&cNão tem item suficiente no baú para você comprar."
   comprar_erro3: "&cVocê não pode comprar de você mesmo."
-  comprar_erro4: "&cVocê só pode fazer compras nessa placa."
+  comprar_erro4: "&cEssa placa não tem opção para você comprar."
   comprar_success: "&aVocê comprou %i itens por %m reais."
   comprar_vip_vantagem: "&6[VIP] &f» &aVocê ganhou %i de desconto do valor original da compra."
 

@@ -37,32 +37,37 @@ public final class EventoComprar implements Listener {
                     return;
                 }
                 ItemStack item = Utilidades.itemLoja(sign.getLines());
-                if (Main.econ.getBalance(p.getName()) >= Utilidades.valores(LojaEnum.COMPRAR, sign)) {
-                    double slots = Math.floor(Short.parseShort(sign.getLine(1)) / 64);
-                    double slotsEmptyPlayer = -1;
-                    for (int i = 0; i < p.getInventory().getSize(); i++) {
-                        if (p.getInventory().getItem(i) == null) {
-                            slotsEmptyPlayer += 1;
+                if (Utilidades.valores(LojaEnum.COMPRAR, sign) != 0) {
+                    if (Main.econ.getBalance(p.getName()) >= Utilidades.valores(LojaEnum.COMPRAR, sign)) {
+                        double slots = Math.floor(Short.parseShort(sign.getLine(1)) / 64);
+                        double slotsEmptyPlayer = -1;
+                        for (int i = 0; i < p.getInventory().getSize(); i++) {
+                            if (p.getInventory().getItem(i) == null) {
+                                slotsEmptyPlayer += 1;
+                            }
                         }
-                    }
-                    if (slotsEmptyPlayer >= slots) {
-                        //Verificar se a placa está num baú
-                        if (block.getType().equals(Material.CHEST) || block.getType().equals(Material.TRAPPED_CHEST)) {
-                            Chest chest = (Chest) block.getState();
-                            removerItensBau(sign, chest, item, p);
+                        if (slotsEmptyPlayer >= slots) {
+                            //Verificar se a placa está num baú
+                            if (block.getType().equals(Material.CHEST) || block.getType().equals(Material.TRAPPED_CHEST)) {
+                                Chest chest = (Chest) block.getState();
+                                removerItensBau(sign, chest, item, p);
+                            } else {
+                                p.getInventory().addItem(item);
+                                buyForce(p, sign);
+                            }
                         } else {
-                            p.getInventory().addItem(item);
-                            buyForce(p, sign);
+                            p.sendMessage(Main.messageConfig.message("mensagens.inventory_full", 0, null, null));
+                            e.setCancelled(true);
+                            return;
                         }
                     } else {
-                        p.sendMessage(Main.messageConfig.message("mensagens.inventory_full", 0, null, null));
+                        p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro1", 0, null, null));
                         e.setCancelled(true);
                         return;
                     }
                 } else {
-                    p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro1", 0, null, null));
-                    e.setCancelled(true);
-                    return;
+                    //mensagem nao pode comprar
+                    p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro4", 0, null, null));
                 }
             }
         }

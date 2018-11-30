@@ -12,12 +12,33 @@ public final class Utilidades {
     private static TextComponent message = null;
 
     public final static int valores(LojaEnum type, Sign placa) {
-        String[] linha = Utilidades.replace(placa.getLine(2)).replace("C", "").replace("V", "").split(":");
-        if (type.equals(LojaEnum.COMPRAR)) {
-            return Integer.valueOf(linha[0]);
+        String[] linha = new String[2];
+        boolean comprar = false;
+        boolean vender = false;
+        if (replace(placa.getLine(2)).matches("^(?i)c(\\d)+(\\s|$)")) {
+            linha[0] = Utilidades.replace(placa.getLine(2)).replace("C", "");
+            comprar = true;
         }
-        //linha 1 = vender
-        return Integer.valueOf(linha[1]);
+        if (replace(placa.getLine(2)).matches("^(?i)v(\\d)+(\\s|$)")) {
+            linha[1] = Utilidades.replace(placa.getLine(2)).replace("V", "");
+            vender = true;
+        }
+        if (replace(placa.getLine(2)).matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)")) {
+            linha = Utilidades.replace(placa.getLine(2)).replace("C", "").replace("V", "").split(":");
+            comprar = true;
+            vender = true;
+        }
+        if (type.equals(LojaEnum.COMPRAR)) {
+            if (comprar == true) {
+                return Integer.valueOf(linha[0]);
+            }
+        }
+        if (type.equals(LojaEnum.VENDER)) {
+            if (vender == true) {
+                return Integer.valueOf(linha[1]);
+            }
+        }
+        return 0;
     }
 
     public final static ItemStack itemLoja(String[] linha) {
@@ -38,7 +59,9 @@ public final class Utilidades {
 
     public final static boolean isLoja(String[] valores) {
         if (valores[1].matches("([0-9])+(\\s|$)")) {
-            if (replace(valores[2]).matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)")) {
+            if (replace(valores[2]).matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)") ||
+                    replace(valores[2]).matches("^(?i)c(\\d)+(\\s|$)") ||
+                    replace(valores[2]).matches("^(?i)v(\\d)+(\\s|$)")) {
                 if (replace(valores[3]).matches("(\\d)+(\\:(\\d){1,2}|\\#(\\w){4,4})?(\\s|$)")) {
                     return true;
                 }

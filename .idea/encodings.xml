@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/../cmKits" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/configurar.yml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/plugin.yml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../cmSpawners" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../cmTags" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../cmTags" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../cmVault" charset="UTF-8" />
   </component>
 </project>
