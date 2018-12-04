@@ -83,7 +83,7 @@ public final class EventoComprar implements Listener {
                     break;
                 }
                 if (p.hasPermission("loja.comprar." + i)) {
-                    valorFinalVenda -= valorFinalVenda * (i / 100);
+                    valorFinalVenda -= (valorFinalVenda * i) / 100;
                     p.sendMessage(Main.messageConfig.message("mensagens.comprar_vip_vantagem", i, null, null));
                     break;
                 }

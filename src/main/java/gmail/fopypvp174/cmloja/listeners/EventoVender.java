@@ -166,7 +166,7 @@ public final class EventoVender implements Listener {
                             break;
                         }
                         if (p.hasPermission("loja.vender." + i)) {
-                            valorFinalVenda += valorFinalVenda * (i / 100);
+                            valorFinalVenda += (valorFinalVenda * i) / 100;
                             p.sendMessage(Main.messageConfig.message("mensagens.vender_vip_vantagem", i, null, null));
                             break;
                         }
