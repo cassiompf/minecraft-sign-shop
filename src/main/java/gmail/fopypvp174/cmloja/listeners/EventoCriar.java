@@ -13,7 +13,7 @@ public class EventoCriar implements Listener {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onCriar(SignChangeEvent e) {
         Player p = e.getPlayer();
         if (plugin.getUtilidades().isLoja(e.getLines())) {

@@ -23,7 +23,7 @@ public class EventoVender implements Listener {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onVender(final PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_BLOCK) {
             return;

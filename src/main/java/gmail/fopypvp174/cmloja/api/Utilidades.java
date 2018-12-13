@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Utilidades {
     private TextComponent message = null;
+    private Main plugin = Main.getPlugin(Main.class);
 
     public final int valores(LojaEnum type, Sign placa) {
         String[] linha = new String[2];
@@ -44,7 +45,7 @@ public class Utilidades {
     public final ItemStack itemLoja(String[] linha) {
         ItemStack item;
         if (replace(linha[3]).matches("(\\d)+(\\#(\\w){4}){1}(\\s|$)")) {
-            item = Main.loja.getItem(replace(linha[3]));
+            item = plugin.getLoja().getItem(replace(linha[3]));
             item.setAmount(Integer.parseInt(replace(linha[1])));
             return item;
         } else if (replace(linha[3]).matches("(\\d)+(\\:(\\d){1,2}){1}(\\s|$)")) {
@@ -73,14 +74,14 @@ public class Utilidades {
     }
 
     public void darMoneyVault(OfflinePlayer p, double quantia) {
-        EconomyResponse r = Main.econ.depositPlayer(p, quantia);
+        EconomyResponse r = plugin.getEcon().depositPlayer(p, quantia);
         if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao dar o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
         }
     }
 
     public void removeMoneyVault(OfflinePlayer p, double quantia) {
-        EconomyResponse r = Main.econ.withdrawPlayer(p, quantia);
+        EconomyResponse r = plugin.getEcon().withdrawPlayer(p, quantia);
         if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao remover o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
         }

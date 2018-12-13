@@ -21,7 +21,7 @@ public class EventoComprar implements Listener {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
