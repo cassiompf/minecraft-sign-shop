@@ -11,6 +11,7 @@ import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -24,7 +25,7 @@ public class EventoVender implements Listener {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onVender(final PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_BLOCK) {
             return;
@@ -46,7 +47,7 @@ public class EventoVender implements Listener {
                     e.setCancelled(true);
                     return;
                 }
-                final ItemStack item = plugin.getUtilidades().itemLoja(sign.getLines());
+                final ItemStack item = plugin.getUtilidades().getItemLoja(sign.getLines());
 
                 final OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
                 if (block.getType().equals(Material.CHEST) || block.getType().equals(Material.TRAPPED_CHEST)) {
@@ -72,7 +73,7 @@ public class EventoVender implements Listener {
         int qntItensBauSuportaVender = 0;
 
         double qntPlaca = Double.parseDouble(sign.getLine(1));
-        double valor1Item = plugin.getUtilidades().valores(LojaEnum.VENDER, sign) * (1 / qntPlaca);
+        double valor1Item = plugin.getUtilidades().getPrices(LojaEnum.VENDER, sign) * (1 / qntPlaca);
         if (valor1Item != 0) {
             double valorFinalVenda;
             List<Short> position = new ArrayList<>();
@@ -143,7 +144,7 @@ public class EventoVender implements Listener {
                                     break;
                                 }
                             }
-                            plugin.getUtilidades().darMoneyVault(p, valorFinalVenda);
+                            plugin.getUtilidades().giveMoneyVault(p, valorFinalVenda);
                             plugin.getUtilidades().removeMoneyVault(target, valorFinalVenda);
                             p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success", itemStack.getAmount(), String.format("%.2f", valorFinalVenda), null));
 
@@ -173,7 +174,7 @@ public class EventoVender implements Listener {
                             break;
                         }
                     }
-                    plugin.getUtilidades().darMoneyVault(p, valorFinalVenda);
+                    plugin.getUtilidades().giveMoneyVault(p, valorFinalVenda);
                 } else {
                     p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro3", 0, null, null));
                 }

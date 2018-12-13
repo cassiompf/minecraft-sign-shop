@@ -1,33 +1,26 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.material.Sign;
 
 public class EventoCriar implements Listener {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onCriar(SignChangeEvent e) {
         Player p = e.getPlayer();
+        Sign placa = (Sign) e.getBlock();
         if (plugin.getUtilidades().isLoja(e.getLines())) {
-            String[] CeV = plugin.getUtilidades().replace(e.getLine(2)).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
-            if (CeV[0].matches("^(?i)(0)+(\\s|$)")) {
-                e.setLine(2, "§4V§r " + CeV[1]);
-            } else if (CeV[1].matches("^(?i)(0)+(\\s|$)")) {
-                e.setLine(2, "§2C§r " + CeV[0]);
-            } else {
-                e.setLine(2, "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1]);
-            }
+            plugin.getUtilidades().updatePriceSign(placa);
             if (p.hasPermission("loja.admin")) {
-                if (!plugin.getUtilidades().checarBau(e.getBlock())) {
-                    if (!e.getLine(0).equals("[Loja]")) {
+                if (!plugin.getUtilidades().checkBau(e.getBlock())) {
+                    if (!e.getLine(0).equals(plugin.getMessageConfig().message("placa.nomeLoja", 0, null, null))) {
                         e.getBlock().breakNaturally();
                         p.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro1", 0, null, null));
                         return;
@@ -35,9 +28,9 @@ public class EventoCriar implements Listener {
                 }
                 p.sendMessage(plugin.getMessageConfig().message("mensagens.criar_success", 0, null, null));
             } else if (p.hasPermission("loja.jogador")) {
-                if (plugin.getUtilidades().checarBau(e.getBlock())) {
+                if (plugin.getUtilidades().checkBau(e.getBlock())) {
                     if (e.getLine(0).equals(p.getName())) {
-                        if (!plugin.getUtilidades().itemValido(e.getLine(3))) {
+                        if (!plugin.getUtilidades().isItemValid(e.getLine(3))) {
                             e.getBlock().breakNaturally();
                             p.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro2", 0, null, null));
                             return;

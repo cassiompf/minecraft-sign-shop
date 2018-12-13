@@ -10,6 +10,7 @@ import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -22,7 +23,7 @@ public class EventoComprar implements Listener {
 
     private Main plugin = Main.getPlugin(Main.class);
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
@@ -37,9 +38,9 @@ public class EventoComprar implements Listener {
                     e.setCancelled(true);
                     return;
                 }
-                ItemStack item = plugin.getUtilidades().itemLoja(sign.getLines());
-                if (plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign) != 0) {
-                    if (plugin.getEcon().getBalance(p.getName()) >= plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign)) {
+                ItemStack item = plugin.getUtilidades().getItemLoja(sign.getLines());
+                if (plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign) != 0) {
+                    if (plugin.getEcon().getBalance(p.getName()) >= plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign)) {
                         double slots = Math.floor(Short.parseShort(sign.getLine(1)) / 64);
                         double slotsEmptyPlayer = -1;
                         for (int i = 0; i < p.getInventory().getSize(); i++) {
@@ -77,7 +78,7 @@ public class EventoComprar implements Listener {
     public void buyForce(Player p, Sign sign) {
         OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
         if (sign.getLine(0).equals("[Loja]")) {
-            double valorFinalVenda = plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign);
+            double valorFinalVenda = plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign);
             //Adiciona desconto na compra
             for (int i = 0; i <= 100; i++) {
                 if (p.hasPermission("*") || p.isOp()) {
@@ -93,8 +94,8 @@ public class EventoComprar implements Listener {
             p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success", Integer.parseInt(sign.getLine(1)), String.valueOf(valorFinalVenda), null));
 
         } else if (target != null) {
-            plugin.getUtilidades().darMoneyVault(target, plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign));
-            plugin.getUtilidades().removeMoneyVault(p, plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign));
+            plugin.getUtilidades().giveMoneyVault(target, plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign));
+            plugin.getUtilidades().removeMoneyVault(p, plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign));
         } else {
             p.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown", 0, null, target));
         }

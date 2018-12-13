@@ -32,3 +32,7 @@ mensagens:
 
   #Mensagens para gerar item
   gerar_erro1: "&cVocê não tem permissão para gerar o item."
+
+placa:
+  #O nome da loja do servidor que deve ser colocado na primeira linha
+  nomeLoja: "[Loja]"

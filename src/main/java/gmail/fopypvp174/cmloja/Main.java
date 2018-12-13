@@ -15,7 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    private JavaPlugin plugin;
     private LojaConfig loja;
     private MessageConfig messageConfig;
     private Economy econ;
@@ -29,13 +28,12 @@ public class Main extends JavaPlugin {
             return;
         }
         setupVault();
-        plugin = this;
         loja = new LojaConfig(this, "itens.yml", "itens.yml");
         messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
         utilidades = new Utilidades();
-        getServer().getPluginManager().registerEvents(new EventoCriar(), plugin);
-        getServer().getPluginManager().registerEvents(new EventoComprar(), plugin);
-        getServer().getPluginManager().registerEvents(new EventoVender(), plugin);
+        getServer().getPluginManager().registerEvents(new EventoCriar(), this);
+        getServer().getPluginManager().registerEvents(new EventoComprar(), this);
+        getServer().getPluginManager().registerEvents(new EventoVender(), this);
         getCommand("geraritem").setExecutor(new GerarItem());
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Plugin [cmLoja] ativado com sucesso!");
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Autor: C4ssi0");
@@ -48,16 +46,12 @@ public class Main extends JavaPlugin {
     }
 
     @Override
-    public final void onDisable() {
+    public void onDisable() {
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
             loja.save();
             messageConfig.save();
             getServer().getConsoleSender().sendMessage(ChatColor.RED + "Plugin [cmLoja] desativado com sucesso!");
         }
-    }
-
-    public JavaPlugin getPlugin() {
-        return plugin;
     }
 
     public Utilidades getUtilidades() {
