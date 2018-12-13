@@ -9,6 +9,7 @@ import gmail.fopypvp174.cmloja.listeners.EventoCriar;
 import gmail.fopypvp174.cmloja.listeners.EventoVender;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,6 +37,9 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventoComprar(), plugin);
         getServer().getPluginManager().registerEvents(new EventoVender(), plugin);
         getCommand("geraritem").setExecutor(new GerarItem());
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Plugin [cmLoja] ativado com sucesso!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Autor: C4ssi0");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "GitHub: github.com/C4ssi0/cmLoja");
     }
 
     public void setupVault() {
@@ -48,6 +52,7 @@ public class Main extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
             loja.save();
             messageConfig.save();
+            getServer().getConsoleSender().sendMessage(ChatColor.RED + "Plugin [cmLoja] desativado com sucesso!");
         }
     }
 

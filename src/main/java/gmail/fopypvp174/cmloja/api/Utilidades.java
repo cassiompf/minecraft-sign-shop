@@ -1,10 +1,12 @@
 package gmail.fopypvp174.cmloja.api;
 
 import gmail.fopypvp174.cmloja.Main;
-import gmail.fopypvp174.cmloja.listeners.LojaEnum;
+import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.inventory.ItemStack;
 
@@ -85,5 +87,37 @@ public class Utilidades {
         if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao remover o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
         }
+    }
+
+    public boolean itemValido(String valor) {
+        if (valor.matches("(\\d)+(\\#(\\w){4,4}){1}(\\s|$)")) {
+            System.out.println(valor);
+            return plugin.getLoja().isItem(valor);
+        } else if (valor.matches("(\\d)+(\\:(\\d){1,2}){1}(\\s|$)")) {
+            String[] item = valor.split(":");
+            return Short.parseShort(item[1]) <= 15;
+        }
+        return true;
+    }
+
+    public boolean checarBau(Block b) {
+        Block bau = b.getRelative(((org.bukkit.material.Sign) b.getState().getData()).getAttachedFace());
+        return (b.getType().equals(Material.SIGN_POST) || b.getType().equals(Material.WALL_SIGN))
+                && (bau.getType().equals(Material.CHEST) || bau.getType().equals(Material.TRAPPED_CHEST));
+    }
+
+    public String updatePlaca(int position, String linha) {
+        String valor = null;
+        if (position == 2) {
+            String[] CeV = plugin.getUtilidades().replace(linha).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
+            if (CeV[0].matches("^(0)+(\\s|$)")) {
+                valor = "§4V§r " + CeV[1];
+            } else if (CeV[1].matches("^(0)+(\\s|$)")) {
+                valor = "§2C§r " + CeV[0];
+            } else {
+                valor = "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1];
+            }
+        }
+        return valor;
     }
 }

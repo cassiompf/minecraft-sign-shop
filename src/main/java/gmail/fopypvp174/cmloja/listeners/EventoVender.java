@@ -1,6 +1,7 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
+import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
