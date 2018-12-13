@@ -1,7 +1,6 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -18,8 +17,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class EventoComprar implements Listener {
+public class EventoComprar implements Listener {
 
+    private Main plugin = Main.getPlugin(Main.class);
 
     @EventHandler
     public void onComprar(PlayerInteractEvent e) {
@@ -30,15 +30,15 @@ public final class EventoComprar implements Listener {
         if (e.getClickedBlock().getType() == Material.SIGN_POST || e.getClickedBlock().getType() == Material.WALL_SIGN) {
             Sign sign = (Sign) e.getClickedBlock().getState();
             Block block = e.getClickedBlock().getRelative(((org.bukkit.material.Sign) sign.getData()).getAttachedFace());
-            if (Utilidades.isLoja(sign.getLines())) {
+            if (plugin.getUtilidades().isLoja(sign.getLines())) {
                 if (sign.getLine(0).equals(p.getDisplayName())) {
-                    p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro3", 0, null, null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro3", 0, null, null));
                     e.setCancelled(true);
                     return;
                 }
-                ItemStack item = Utilidades.itemLoja(sign.getLines());
-                if (Utilidades.valores(LojaEnum.COMPRAR, sign) != 0) {
-                    if (Main.econ.getBalance(p.getName()) >= Utilidades.valores(LojaEnum.COMPRAR, sign)) {
+                ItemStack item = plugin.getUtilidades().itemLoja(sign.getLines());
+                if (plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign) != 0) {
+                    if (plugin.getEcon().getBalance(p.getName()) >= plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign)) {
                         double slots = Math.floor(Short.parseShort(sign.getLine(1)) / 64);
                         double slotsEmptyPlayer = -1;
                         for (int i = 0; i < p.getInventory().getSize(); i++) {
@@ -56,18 +56,18 @@ public final class EventoComprar implements Listener {
                                 buyForce(p, sign);
                             }
                         } else {
-                            p.sendMessage(Main.messageConfig.message("mensagens.inventory_full", 0, null, null));
+                            p.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full", 0, null, null));
                             e.setCancelled(true);
                             return;
                         }
                     } else {
-                        p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro1", 0, null, null));
+                        p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro1", 0, null, null));
                         e.setCancelled(true);
                         return;
                     }
                 } else {
                     //mensagem nao pode comprar
-                    p.sendMessage(Main.messageConfig.message("mensagens.comprar_erro4", 0, null, null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro4", 0, null, null));
                 }
             }
         }
@@ -76,7 +76,7 @@ public final class EventoComprar implements Listener {
     public void buyForce(Player p, Sign sign) {
         OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
         if (sign.getLine(0).equals("[Loja]")) {
-            double valorFinalVenda = Utilidades.valores(LojaEnum.COMPRAR, sign);
+            double valorFinalVenda = plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign);
             //Adiciona desconto na compra
             for (int i = 0; i <= 100; i++) {
                 if (p.hasPermission("*") || p.isOp()) {
@@ -84,18 +84,18 @@ public final class EventoComprar implements Listener {
                 }
                 if (p.hasPermission("loja.comprar." + i)) {
                     valorFinalVenda -= (valorFinalVenda * i) / 100;
-                    p.sendMessage(Main.messageConfig.message("mensagens.comprar_vip_vantagem", i, null, null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", i, null, null));
                     break;
                 }
             }
-            Utilidades.removeMoneyVault(p, valorFinalVenda);
-            p.sendMessage(Main.messageConfig.message("mensagens.comprar_success", Integer.parseInt(sign.getLine(1)), String.valueOf(valorFinalVenda), null));
+            plugin.getUtilidades().removeMoneyVault(p, valorFinalVenda);
+            p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success", Integer.parseInt(sign.getLine(1)), String.valueOf(valorFinalVenda), null));
 
         } else if (target != null) {
-            Utilidades.darMoneyVault(target, Utilidades.valores(LojaEnum.COMPRAR, sign));
-            Utilidades.removeMoneyVault(p, Utilidades.valores(LojaEnum.COMPRAR, sign));
+            plugin.getUtilidades().darMoneyVault(target, plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign));
+            plugin.getUtilidades().removeMoneyVault(p, plugin.getUtilidades().valores(LojaEnum.COMPRAR, sign));
         } else {
-            p.sendMessage(Main.messageConfig.message("mensagens.player_unknown", 0, null, target));
+            p.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown", 0, null, target));
         }
     }
 
@@ -103,8 +103,8 @@ public final class EventoComprar implements Listener {
         short size = (short) chest.getInventory().getSize();
         short slot = 0;
         short quantiaBau = 0;
-        short quantiaPlaca = Short.parseShort(Utilidades.replace(placa.getLine(1)));
-        short quantiaDeu = Short.parseShort(Utilidades.replace(placa.getLine(1)));
+        short quantiaPlaca = Short.parseShort(plugin.getUtilidades().replace(placa.getLine(1)));
+        short quantiaDeu = Short.parseShort(plugin.getUtilidades().replace(placa.getLine(1)));
         List<Short> valores = new ArrayList<>();
         while (slot < size) {
             if (quantiaBau >= quantiaPlaca) {
@@ -142,7 +142,7 @@ public final class EventoComprar implements Listener {
             player.getInventory().addItem(itemDar);
             buyForce(player, placa);
         } else {
-            player.sendMessage(Main.messageConfig.message("mensagens.comprar_erro2", 0, null, null));
+            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro2", 0, null, null));
         }
     }
 }

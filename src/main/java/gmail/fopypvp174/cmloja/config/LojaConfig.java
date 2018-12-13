@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
 
-public final class LojaConfig extends Config {
+public class LojaConfig extends Config {
 
     private final String alphabet = "abcdefghijklmnopqrstuvwxqzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private final int alphabetLenght = alphabet.length();

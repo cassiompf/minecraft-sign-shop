@@ -1,5 +1,6 @@
 package gmail.fopypvp174.cmloja;
 
+import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.cmds.GerarItem;
 import gmail.fopypvp174.cmloja.config.LojaConfig;
 import gmail.fopypvp174.cmloja.config.MessageConfig;
@@ -11,15 +12,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Main extends JavaPlugin {
+public class Main extends JavaPlugin {
 
-    public static JavaPlugin plugin;
-    public static LojaConfig loja;
-    public static MessageConfig messageConfig;
-    public static Economy econ;
+    private JavaPlugin plugin;
+    private LojaConfig loja;
+    private MessageConfig messageConfig;
+    private Economy econ;
+    private Utilidades utilidades;
 
     @Override
-    public final void onEnable() {
+    public void onEnable() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             Bukkit.getLogger().info(String.format("[%s] Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
@@ -29,6 +31,7 @@ public final class Main extends JavaPlugin {
         plugin = this;
         loja = new LojaConfig(this, "itens.yml", "itens.yml");
         messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
+        utilidades = new Utilidades();
         getServer().getPluginManager().registerEvents(new EventoCriar(), plugin);
         getServer().getPluginManager().registerEvents(new EventoComprar(), plugin);
         getServer().getPluginManager().registerEvents(new EventoVender(), plugin);
@@ -46,5 +49,25 @@ public final class Main extends JavaPlugin {
             loja.save();
             messageConfig.save();
         }
+    }
+
+    public JavaPlugin getPlugin() {
+        return plugin;
+    }
+
+    public Utilidades getUtilidades() {
+        return utilidades;
+    }
+
+    public LojaConfig getLoja() {
+        return loja;
+    }
+
+    public MessageConfig getMessageConfig() {
+        return messageConfig;
+    }
+
+    public Economy getEcon() {
+        return econ;
     }
 }

@@ -1,7 +1,6 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -20,7 +19,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class EventoVender implements Listener {
+public class EventoVender implements Listener {
+
+    private Main plugin = Main.getPlugin(Main.class);
 
     @EventHandler
     public void onVender(final PlayerInteractEvent e) {
@@ -38,13 +39,13 @@ public final class EventoVender implements Listener {
                     return;
                 }
             }
-            if (Utilidades.isLoja(sign.getLines())) {
+            if (plugin.getUtilidades().isLoja(sign.getLines())) {
                 if (sign.getLine(0).equals(p.getDisplayName())) {
-                    p.sendMessage(Main.messageConfig.message("mensagens.vender_erro1", 0, null, null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro1", 0, null, null));
                     e.setCancelled(true);
                     return;
                 }
-                final ItemStack item = Utilidades.itemLoja(sign.getLines());
+                final ItemStack item = plugin.getUtilidades().itemLoja(sign.getLines());
 
                 final OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
                 if (block.getType().equals(Material.CHEST) || block.getType().equals(Material.TRAPPED_CHEST)) {
@@ -53,7 +54,7 @@ public final class EventoVender implements Listener {
                         sellItens(p, target, chest, item, sign);
                         e.setCancelled(true);
                     } else {
-                        p.sendMessage(Main.messageConfig.message("mensagens.player_unknown", 0, null, target));
+                        p.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown", 0, null, target));
                         e.setCancelled(true);
                         return;
                     }
@@ -70,7 +71,7 @@ public final class EventoVender implements Listener {
         int qntItensBauSuportaVender = 0;
 
         double qntPlaca = Double.parseDouble(sign.getLine(1));
-        double valor1Item = Utilidades.valores(LojaEnum.VENDER, sign) * (1 / qntPlaca);
+        double valor1Item = plugin.getUtilidades().valores(LojaEnum.VENDER, sign) * (1 / qntPlaca);
         if (valor1Item != 0) {
             double valorFinalVenda;
             List<Short> position = new ArrayList<>();
@@ -86,7 +87,7 @@ public final class EventoVender implements Listener {
             }
             ItemStack itemStack = item.clone();
             if (chest != null) {
-                double moneyP = Main.econ.getBalance(target);
+                double moneyP = plugin.getEcon().getBalance(target);
                 double valorDeX = Math.ceil(moneyP / valor1Item);
                 Inventory invBau = chest.getInventory();
                 //Percorrer o baú e salvar quantos itens ele suporta vender.
@@ -141,18 +142,18 @@ public final class EventoVender implements Listener {
                                     break;
                                 }
                             }
-                            Utilidades.darMoneyVault(p, valorFinalVenda);
-                            Utilidades.removeMoneyVault(target, valorFinalVenda);
-                            p.sendMessage(Main.messageConfig.message("mensagens.vender_success", itemStack.getAmount(), String.format("%.2f", valorFinalVenda), null));
+                            plugin.getUtilidades().darMoneyVault(p, valorFinalVenda);
+                            plugin.getUtilidades().removeMoneyVault(target, valorFinalVenda);
+                            p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success", itemStack.getAmount(), String.format("%.2f", valorFinalVenda), null));
 
                         } else {
-                            p.sendMessage(Main.messageConfig.message("mensagens.vender_erro4", 0, null, null));
+                            p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro4", 0, null, null));
                         }
                     } else {
-                        p.sendMessage(Main.messageConfig.message("mensagens.vender_erro3", 0, null, null));
+                        p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro3", 0, null, null));
                     }
                 } else {
-                    p.sendMessage(Main.messageConfig.message("mensagens.vender_erro2", 0, null, target));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro2", 0, null, target));
                 }
             } else {
                 if (qntItensJogadorPodeVender != 0) {
@@ -160,25 +161,25 @@ public final class EventoVender implements Listener {
                     for (int i = 0; i < position.size(); i++) {
                         invPlayer.clear(position.get(i));
                     }
-                    p.sendMessage(Main.messageConfig.message("mensagens.vender_success", qntItensJogadorPodeVender, String.format("%.2f", valorFinalVenda), null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success", qntItensJogadorPodeVender, String.format("%.2f", valorFinalVenda), null));
                     for (int i = 0; i <= 100; i++) {
                         if (p.hasPermission("*") || p.isOp()) {
                             break;
                         }
                         if (p.hasPermission("loja.vender." + i)) {
                             valorFinalVenda += (valorFinalVenda * i) / 100;
-                            p.sendMessage(Main.messageConfig.message("mensagens.vender_vip_vantagem", i, null, null));
+                            p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", i, null, null));
                             break;
                         }
                     }
-                    Utilidades.darMoneyVault(p, valorFinalVenda);
+                    plugin.getUtilidades().darMoneyVault(p, valorFinalVenda);
                 } else {
-                    p.sendMessage(Main.messageConfig.message("mensagens.vender_erro3", 0, null, null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro3", 0, null, null));
                 }
             }
         } else {
             //não pode vender;
-            p.sendMessage(Main.messageConfig.message("mensagens.vender_erro5", 0, null, null));
+            p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro5", 0, null, null));
         }
     }
 }

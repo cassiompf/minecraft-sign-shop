@@ -8,7 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public final class GerarItem implements CommandExecutor {
+public class GerarItem implements CommandExecutor {
+
+    private Main plugin = Main.getPlugin(Main.class);
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("geraritem")) {
@@ -23,14 +26,14 @@ public final class GerarItem implements CommandExecutor {
                         p.sendMessage(ChatColor.GREEN + "ID do item: (" + ChatColor.WHITE + item.getData().getItemTypeId() + ChatColor.GREEN + ":" + ChatColor.WHITE + item.getData().getData() + ChatColor.GREEN + ").");
                         return false;
                     }
-                    if (Main.loja.equalsItem(item)) {
-                        p.sendMessage(ChatColor.RED + "Esse item já tem ID: (" + ChatColor.WHITE + Main.loja.nameItem(item) + ChatColor.RED + ").");
+                    if (plugin.getLoja().equalsItem(item)) {
+                        p.sendMessage(ChatColor.RED + "Esse item já tem ID: (" + ChatColor.WHITE + plugin.getLoja().nameItem(item) + ChatColor.RED + ").");
                     } else {
-                        Main.loja.setItem(item);
-                        p.sendMessage(ChatColor.GREEN + "ID do item: (" + ChatColor.WHITE + Main.loja.nameItem(item) + ChatColor.GREEN + ").");
+                        plugin.getLoja().setItem(item);
+                        p.sendMessage(ChatColor.GREEN + "ID do item: (" + ChatColor.WHITE + plugin.getLoja().nameItem(item) + ChatColor.GREEN + ").");
                     }
                 } else {
-                    p.sendMessage(Main.messageConfig.message("mensagens.gerar_erro1", 0, null, null));
+                    p.sendMessage(plugin.getMessageConfig().message("mensagens.gerar_erro1", 0, null, null));
                 }
             } else {
                 sender.sendMessage(ChatColor.RED + "Apenas jogadores podem usar esse comando");

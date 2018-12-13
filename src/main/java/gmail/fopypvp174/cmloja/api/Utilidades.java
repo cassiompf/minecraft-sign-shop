@@ -8,23 +8,23 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Sign;
 import org.bukkit.inventory.ItemStack;
 
-public final class Utilidades {
-    private static TextComponent message = null;
+public class Utilidades {
+    private TextComponent message = null;
 
-    public final static int valores(LojaEnum type, Sign placa) {
+    public final int valores(LojaEnum type, Sign placa) {
         String[] linha = new String[2];
         boolean comprar = false;
         boolean vender = false;
         if (replace(placa.getLine(2)).matches("^(?i)c(\\d)+(\\s|$)")) {
-            linha[0] = Utilidades.replace(placa.getLine(2)).replace("C", "");
+            linha[0] = replace(placa.getLine(2)).replace("C", "");
             comprar = true;
         }
         if (replace(placa.getLine(2)).matches("^(?i)v(\\d)+(\\s|$)")) {
-            linha[1] = Utilidades.replace(placa.getLine(2)).replace("V", "");
+            linha[1] = replace(placa.getLine(2)).replace("V", "");
             vender = true;
         }
         if (replace(placa.getLine(2)).matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)")) {
-            linha = Utilidades.replace(placa.getLine(2)).replace("C", "").replace("V", "").split(":");
+            linha = replace(placa.getLine(2)).replace("C", "").replace("V", "").split(":");
             comprar = true;
             vender = true;
         }
@@ -41,7 +41,7 @@ public final class Utilidades {
         return 0;
     }
 
-    public final static ItemStack itemLoja(String[] linha) {
+    public final ItemStack itemLoja(String[] linha) {
         ItemStack item;
         if (replace(linha[3]).matches("(\\d)+(\\#(\\w){4}){1}(\\s|$)")) {
             item = Main.loja.getItem(replace(linha[3]));
@@ -57,31 +57,29 @@ public final class Utilidades {
         }
     }
 
-    public final static boolean isLoja(String[] valores) {
+    public final boolean isLoja(String[] valores) {
         if (valores[1].matches("([0-9])+(\\s|$)")) {
             if (replace(valores[2]).matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)") ||
                     replace(valores[2]).matches("^(?i)c(\\d)+(\\s|$)") ||
                     replace(valores[2]).matches("^(?i)v(\\d)+(\\s|$)")) {
-                if (replace(valores[3]).matches("(\\d)+(\\:(\\d){1,2}|\\#(\\w){4,4})?(\\s|$)")) {
-                    return true;
-                }
+                return replace(valores[3]).matches("(\\d)+(\\:(\\d){1,2}|\\#(\\w){4,4})?(\\s|$)");
             }
         }
         return false;
     }
 
-    public final static String replace(String valor) {
+    public final String replace(String valor) {
         return valor.replace(" ", "").replace("§2", "").replace("§4", "").replace("§0", "");
     }
 
-    public static void darMoneyVault(OfflinePlayer p, double quantia) {
+    public void darMoneyVault(OfflinePlayer p, double quantia) {
         EconomyResponse r = Main.econ.depositPlayer(p, quantia);
         if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao dar o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
         }
     }
 
-    public static void removeMoneyVault(OfflinePlayer p, double quantia) {
+    public void removeMoneyVault(OfflinePlayer p, double quantia) {
         EconomyResponse r = Main.econ.withdrawPlayer(p, quantia);
         if (!r.transactionSuccess()) {
             throw new RuntimeException("Erro ao remover o dinheiro do jogador " + p.getName() + ", consulte o desenvolvedor do plugin!");
