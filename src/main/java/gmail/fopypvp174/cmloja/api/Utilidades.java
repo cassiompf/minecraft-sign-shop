@@ -59,10 +59,10 @@ public class Utilidades {
     }
 
     public final boolean isLoja(String[] valores) {
-        if (valores[1].matches("([0-9])+(\\s|$)")) {
-            if (replace(valores[2]).matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)") ||
-                    replace(valores[2]).matches("^(?i)c(\\d)+(\\s|$)") ||
-                    replace(valores[2]).matches("^(?i)v(\\d)+(\\s|$)")) {
+        if (valores[1].matches("^[1-9](\\d)*(\\s|$)")) {
+            if (replace(valores[2]).matches("^(?i)c([1-9]){1}(\\d)*:(?i)v([1-9]){1}(\\d)*") ||
+                    replace(valores[2]).matches("^(?i)c([1-9]){1}(\\d)*(\\s|$)") ||
+                    replace(valores[2]).matches("^(?i)v([1-9]){1}(\\d)*(\\s|$)")) {
                 return replace(valores[3]).matches("(\\d)+(\\:(\\d){1,2}|\\#(\\w){4,4})?(\\s|$)");
             }
         }
@@ -104,11 +104,10 @@ public class Utilidades {
                 && (bau.getType().equals(Material.CHEST) || bau.getType().equals(Material.TRAPPED_CHEST));
     }
 
-    public String updatePriceSign(String[] linhas) {
-        String linha = plugin.getUtilidades().replace(linhas[2]);
-        if (linha.matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)")) {
+    public String updatePriceSign(String linha) {
+        if (replace(linha).matches("^(?i)c([1-9]){1}(\\d)*:(?i)v([1-9]){1}(\\d)*")) {
             return "§2C§r " + linha.split(":")[0].replace("C", "").replace("c", "") + " : §4V§r " + linha.split(":")[1].replace("V", "").replace("v", "");
-        } else if (linha.matches("^(?i)c(\\d)+(\\s|$)")) {
+        } else if (replace(linha).matches("^(?i)c([1-9]){1}(\\d)*(\\s|$)")) {
             return "§2C§r " + linha.replace("C", "").replace("c", "");
         } else {
             return "§4V§r " + linha.replace("V", "").replace("v", "");

@@ -15,7 +15,7 @@ public class EventoCriar implements Listener {
     public void onCriar(SignChangeEvent e) {
         Player p = e.getPlayer();
         if (plugin.getUtilidades().isLoja(e.getLines())) {
-            e.setLine(2, plugin.getUtilidades().updatePriceSign(e.getLines()));
+            e.setLine(2, plugin.getUtilidades().updatePriceSign(e.getLine(2)));
             if (p.hasPermission("loja.admin")) {
                 if (!plugin.getUtilidades().checkBau(e.getBlock())) {
                     if (!e.getLine(0).equals(plugin.getMessageConfig().message("placa.nomeLoja", 0, null, null))) {
