@@ -1,7 +1,6 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
-import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,9 +14,8 @@ public class EventoCriar implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onCriar(SignChangeEvent e) {
         Player p = e.getPlayer();
-        Sign placa = (Sign) e.getBlock().getState();
         if (plugin.getUtilidades().isLoja(e.getLines())) {
-            plugin.getUtilidades().updatePriceSign(placa);
+            e.setLine(2, plugin.getUtilidades().updatePriceSign(e.getLines()));
             if (p.hasPermission("loja.admin")) {
                 if (!plugin.getUtilidades().checkBau(e.getBlock())) {
                     if (!e.getLine(0).equals(plugin.getMessageConfig().message("placa.nomeLoja", 0, null, null))) {

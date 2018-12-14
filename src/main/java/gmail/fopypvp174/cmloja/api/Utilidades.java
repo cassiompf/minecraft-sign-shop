@@ -104,14 +104,16 @@ public class Utilidades {
                 && (bau.getType().equals(Material.CHEST) || bau.getType().equals(Material.TRAPPED_CHEST));
     }
 
-    public void updatePriceSign(Sign placa) {
-        String[] CeV = plugin.getUtilidades().replace(placa.getLine(2)).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
-        if (CeV[0].matches("^(?i)(0)+(\\s|$)")) {
-            placa.setLine(2, "§4V§r " + CeV[1]);
-        } else if (CeV[1].matches("^(?i)(0)+(\\s|$)")) {
-            placa.setLine(2, "§2C§r " + CeV[0]);
+    public String updatePriceSign(String[] linhas) {
+        plugin.getServer().getConsoleSender().sendMessage("Linha: " + linhas[2]);
+        String[] CeV = plugin.getUtilidades().replace(linhas[2]).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
+        System.out.println(CeV[0] + CeV[1]);
+        if (CeV[0].matches("^(?i)(\\d)+(\\s|$)")) {
+            return "§4V§r " + CeV[1];
+        } else if (CeV[1].matches("^(?i)(\\d)+(\\s|$)")) {
+            return "§2C§r " + CeV[0];
         } else {
-            placa.setLine(2, "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1]);
+            return "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1];
         }
     }
 }
