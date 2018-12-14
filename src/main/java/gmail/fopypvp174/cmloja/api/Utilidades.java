@@ -105,7 +105,6 @@ public class Utilidades {
     }
 
     public String updatePriceSign(String[] linhas) {
-        plugin.getServer().getConsoleSender().sendMessage("Linha: " + linhas[2]);
         String[] CeV = plugin.getUtilidades().replace(linhas[2]).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
         System.out.println(CeV[0] + CeV[1]);
         if (CeV[0].matches("^(?i)(\\d)+(\\s|$)")) {
