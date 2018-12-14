@@ -15,7 +15,7 @@ public class EventoCriar implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onCriar(SignChangeEvent e) {
         Player p = e.getPlayer();
-        Sign placa = (Sign) e.getBlock();
+        Sign placa = (Sign) e.getBlock().getState();
         if (plugin.getUtilidades().isLoja(e.getLines())) {
             plugin.getUtilidades().updatePriceSign(placa);
             if (p.hasPermission("loja.admin")) {
