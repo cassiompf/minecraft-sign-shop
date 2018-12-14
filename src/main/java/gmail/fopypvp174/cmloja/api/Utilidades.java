@@ -105,13 +105,13 @@ public class Utilidades {
     }
 
     public String updatePriceSign(String[] linhas) {
-        String[] CeV = plugin.getUtilidades().replace(linhas[2]).replace("v", "").replace("V", "").replace("c", "").replace("C", "").split(":");
-        if (CeV[0].matches("^(?i)(\\d)+(\\s|$)")) {
-            return "§4V§r " + CeV[1];
-        } else if (CeV[1].matches("^(?i)(\\d)+(\\s|$)")) {
-            return "§2C§r " + CeV[0];
+        String linha = plugin.getUtilidades().replace(linhas[2]);
+        if (linha.matches("^(?i)c(\\d)+:(?i)v(\\d)+(\\s|$)")) {
+            return "§2C§r " + linha.split(":")[0].replace("C", "").replace("c", "") + " : §4V§r " + linha.split(":")[1].replace("V", "").replace("v", "");
+        } else if (linha.matches("^(?i)c(\\d)+(\\s|$)")) {
+            return "§2C§r " + linha.replace("C", "").replace("c", "");
         } else {
-            return "§2C§r " + CeV[0] + " : " + "§4V§r " + CeV[1];
+            return "§4V§r " + linha.replace("V", "").replace("v", "");
         }
     }
 }
