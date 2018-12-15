@@ -22,12 +22,10 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+        if (setupVault() == false) {
             Bukkit.getLogger().info(String.format("[%s] Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
-            return;
         }
-        setupVault();
         loja = new LojaConfig(this, "itens.yml", "itens.yml");
         messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
         utilidades = new Utilidades();
@@ -40,9 +38,13 @@ public class Main extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "GitHub: github.com/C4ssi0/cmLoja");
     }
 
-    public void setupVault() {
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        econ = rsp.getProvider();
+    public boolean setupVault() {
+        if (getServer().getPluginManager().getPlugin("Vault") != null) {
+            RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+            econ = rsp.getProvider();
+            return econ != null;
+        }
+        return false;
     }
 
     @Override
