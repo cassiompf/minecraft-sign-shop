@@ -2,6 +2,8 @@ package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
+import gmail.fopypvp174.cmloja.events.LojaBuyOtherPlayer;
+import gmail.fopypvp174.cmloja.events.LojaBuyServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -55,7 +57,7 @@ public class EventoComprar implements Listener {
                                 removerItensBau(sign, chest, item, p);
                             } else {
                                 p.getInventory().addItem(item);
-                                buyForce(p, sign);
+                                buyForce(p, sign, item);
                             }
                         } else {
                             p.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full", 0, null, null));
@@ -75,10 +77,11 @@ public class EventoComprar implements Listener {
         }
     }
 
-    public void buyForce(Player p, Sign sign) {
+    public void buyForce(Player p, Sign sign, ItemStack itemStack) {
         OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
+        double valorFinalVenda = plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign);
+        int qntPlaca = Integer.parseInt(sign.getLine(1));
         if (sign.getLine(0).equals("[Loja]")) {
-            double valorFinalVenda = plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign);
             //Adiciona desconto na compra
             for (int i = 0; i <= 100; i++) {
                 if (p.hasPermission("*") || p.isOp()) {
@@ -91,11 +94,15 @@ public class EventoComprar implements Listener {
                 }
             }
             plugin.getUtilidades().removeMoneyVault(p, valorFinalVenda);
-            p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success", Integer.parseInt(sign.getLine(1)), String.valueOf(valorFinalVenda), null));
-
+            p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success", qntPlaca, String.valueOf(valorFinalVenda), null));
+            LojaBuyServer eventBuy = new LojaBuyServer(p, valorFinalVenda, itemStack, qntPlaca);
+            Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         } else if (target != null) {
-            plugin.getUtilidades().giveMoneyVault(target, plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign));
-            plugin.getUtilidades().removeMoneyVault(p, plugin.getUtilidades().getPrices(LojaEnum.COMPRAR, sign));
+            plugin.getUtilidades().giveMoneyVault(target, valorFinalVenda);
+            plugin.getUtilidades().removeMoneyVault(p, valorFinalVenda);
+            p.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success", qntPlaca, String.valueOf(valorFinalVenda), null));
+            LojaBuyOtherPlayer eventBuy = new LojaBuyOtherPlayer(target, p, valorFinalVenda, itemStack, qntPlaca);
+            Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         } else {
             p.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown", 0, null, target));
         }
@@ -142,7 +149,7 @@ public class EventoComprar implements Listener {
             }
             itemDar.setAmount(quantiaPlaca);
             player.getInventory().addItem(itemDar);
-            buyForce(player, placa);
+            buyForce(player, placa, item);
         } else {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro2", 0, null, null));
         }

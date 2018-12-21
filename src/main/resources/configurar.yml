@@ -33,6 +33,9 @@ mensagens:
   #Mensagens para gerar item
   gerar_erro1: "&cVocê não tem permissão para gerar o item."
 
+  #mensagem para expulsar o jogador que entrar com o mesmo nome da placa do servidor
+  kick_erro1:
+
 placa:
   #O nome da loja do servidor que deve ser colocado na primeira linha
   nomeLoja: "[Loja]"

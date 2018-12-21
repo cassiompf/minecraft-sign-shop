@@ -2,6 +2,8 @@ package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.Main;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
+import gmail.fopypvp174.cmloja.events.LojaSellOtherPlayer;
+import gmail.fopypvp174.cmloja.events.LojaSellServer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -147,6 +149,8 @@ public class EventoVender implements Listener {
                             plugin.getUtilidades().giveMoneyVault(p, valorFinalVenda);
                             plugin.getUtilidades().removeMoneyVault(target, valorFinalVenda);
                             p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success", itemStack.getAmount(), String.format("%.2f", valorFinalVenda), null));
+                            LojaSellOtherPlayer sellOtherPlayer = new LojaSellOtherPlayer(target, p, valorFinalVenda, item, itemStack.getAmount());
+                            Bukkit.getServer().getPluginManager().callEvent(sellOtherPlayer);
 
                         } else {
                             p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro4", 0, null, null));
@@ -175,6 +179,8 @@ public class EventoVender implements Listener {
                         }
                     }
                     plugin.getUtilidades().giveMoneyVault(p, valorFinalVenda);
+                    LojaSellServer lojaSellServer = new LojaSellServer(p, valorFinalVenda, item, itemStack.getAmount());
+                    Bukkit.getServer().getPluginManager().callEvent(lojaSellServer);
                 } else {
                     p.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro3", 0, null, null));
                 }

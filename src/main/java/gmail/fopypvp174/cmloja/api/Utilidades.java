@@ -106,11 +106,11 @@ public class Utilidades {
 
     public String updatePriceSign(String linha) {
         if (replace(linha).matches("^(?i)c([1-9]){1}(\\d)*:(?i)v([1-9]){1}(\\d)*")) {
-            return "§2C§r " + linha.split(":")[0].replace("C", "").replace("c", "") + " : §4V§r " + linha.split(":")[1].replace("V", "").replace("v", "");
+            return "§2C§r " + replace(linha).split(":")[0].replace("C", "").replace("c", "") + " : §4V§r " + replace(linha).split(":")[1].replace("V", "").replace("v", "");
         } else if (replace(linha).matches("^(?i)c([1-9]){1}(\\d)*(\\s|$)")) {
-            return "§2C§r " + linha.replace("C", "").replace("c", "");
+            return "§2C§r " + replace(linha).replace("C", "").replace("c", "");
         } else {
-            return "§4V§r " + linha.replace("V", "").replace("v", "");
+            return "§4V§r " + replace(linha).replace("V", "").replace("v", "");
         }
     }
 }
