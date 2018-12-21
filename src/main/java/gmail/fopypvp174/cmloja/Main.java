@@ -6,6 +6,7 @@ import gmail.fopypvp174.cmloja.config.LojaConfig;
 import gmail.fopypvp174.cmloja.config.MessageConfig;
 import gmail.fopypvp174.cmloja.listeners.EventoComprar;
 import gmail.fopypvp174.cmloja.listeners.EventoCriar;
+import gmail.fopypvp174.cmloja.listeners.EventoPlayer;
 import gmail.fopypvp174.cmloja.listeners.EventoVender;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -32,10 +33,12 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventoCriar(), this);
         getServer().getPluginManager().registerEvents(new EventoComprar(), this);
         getServer().getPluginManager().registerEvents(new EventoVender(), this);
+        getServer().getPluginManager().registerEvents(new EventoPlayer(), this);
+
         getCommand("geraritem").setExecutor(new GerarItem());
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Plugin [cmLoja] ativado com sucesso!");
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Autor: C4ssi0");
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "GitHub: github.com/C4ssi0/cmLoja");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Plugin ativado com sucesso!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Autor: C4ssi0");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] GitHub: github.com/C4ssi0/cmLoja");
     }
 
     public boolean setupVault() {
