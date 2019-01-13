@@ -61,7 +61,7 @@ public class EventoCriar implements Listener {
 
     public void createSignLoja(Player jogador, String[] linhas, Sign placa) throws CreateSignPlayerWithoutPermissionException, CreateSignWithoutChestException,
             CreateSignItemInvalidException, CreateSignNickOtherPlayerException, CreateSignServerWithoutPermissionException, CreateSignServerOnChestException {
-        if ((!jogador.hasPermission("loja.admin")) || (!jogador.hasPermission("loja.jogador"))) {
+        if ((!jogador.hasPermission("loja.admin")) && (!jogador.hasPermission("loja.jogador"))) {
             throw new CreateSignPlayerWithoutPermissionException("O jogador " + jogador.getName() + " tentou criar loja sem permissão.");
         }
 

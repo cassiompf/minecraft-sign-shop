@@ -78,7 +78,8 @@ public class EventoComprarChest implements Listener {
         }
 
         int quantiaPlaca = Short.parseShort(Utilidades.replace(placa.getLine(1)));
-        if (!chest.getInventory().contains(item, quantiaPlaca)) {
+        int quantiaBau = Utilidades.quantidadeItemInventory(chest.getInventory(), item);
+        if (quantiaBau < quantiaPlaca) {
             throw new EmptyChestException("Não tem item suficiente no baú para fazer a compra.");
         }
 
@@ -110,16 +111,18 @@ public class EventoComprarChest implements Listener {
         int amout = quantidade;
         for (int i = 0; i < chest.getInventory().getSize(); i++) {
             ItemStack item = chest.getInventory().getItem(i);
-            if (item.isSimilar(itemStack)) {
-                if ((amout - item.getAmount()) > 0) {
-                    amout -= item.getAmount();
-                    chest.getInventory().setItem(i, new ItemStack(Material.AIR));
-                } else if ((amout - item.getAmount()) == 0) {
-                    chest.getInventory().setItem(i, new ItemStack(Material.AIR));
-                    break;
-                } else {
-                    item.setAmount(item.getAmount() - amout);
-                    break;
+            if (item != null) {
+                if (item.isSimilar(itemStack)) {
+                    if ((amout - item.getAmount()) > 0) {
+                        amout -= item.getAmount();
+                        chest.getInventory().setItem(i, new ItemStack(Material.AIR));
+                    } else if ((amout - item.getAmount()) == 0) {
+                        chest.getInventory().setItem(i, new ItemStack(Material.AIR));
+                        break;
+                    } else {
+                        item.setAmount(item.getAmount() - amout);
+                        break;
+                    }
                 }
             }
         }

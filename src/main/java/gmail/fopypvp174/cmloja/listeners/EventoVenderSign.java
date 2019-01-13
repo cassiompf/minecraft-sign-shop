@@ -95,7 +95,7 @@ public class EventoVenderSign implements Listener {
                 break;
             }
             if (player.hasPermission("loja.vender." + i)) {
-                valorFinalVenda = valorVenda + ((valorVenda * i) / 100);
+                valorFinalVenda = valorVenda + ((valorVenda * (double) i) / 100.0);
                 descontoVip = true;
                 break;
             }
@@ -106,7 +106,7 @@ public class EventoVenderSign implements Listener {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", dinheiroFormatado));
         }
 
-        valorFinalVenda *= (qntItemJogadorTem / qntItemPlaca);
+        valorFinalVenda *= ((double) qntItemJogadorTem / (double) qntItemPlaca);
         dinheiroFormatado = String.format("%.2f", valorFinalVenda);
         player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success_sign", qntItemJogadorTem, dinheiroFormatado));
 

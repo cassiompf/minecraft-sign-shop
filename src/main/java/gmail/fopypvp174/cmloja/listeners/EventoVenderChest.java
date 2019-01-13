@@ -104,14 +104,14 @@ public class EventoVenderChest implements Listener {
         }
 
         Integer qntItemPlaca = Integer.parseInt(Utilidades.replace(placa.getLine(1)));
-        Double valorFinalVenda = (qntItemJogadorTem / qntItemPlaca) * valorVenda;
+        Double valorFinalVenda = ((double) qntItemJogadorTem / (double) qntItemPlaca) * valorVenda;
 
         if (plugin.getEcon().getBalance(target) < valorFinalVenda) {
             throw new TargetMoneyException("O jogador " + target.getName() + " não tem dinheiro para pagar o jogador " + player.getName() + " pela venda.");
         }
 
         String dinheiroFormatado = String.format("%.2f", valorFinalVenda);
-        player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success_chest", qntItemPlaca, dinheiroFormatado, target));
+        player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success_chest", qntItemJogadorTem, dinheiroFormatado, target));
 
         item.setAmount(qntItemJogadorTem);
 
@@ -121,7 +121,7 @@ public class EventoVenderChest implements Listener {
         plugin.getEcon().withdrawPlayer(target, valorFinalVenda);
         plugin.getEcon().depositPlayer(player, valorFinalVenda);
 
-        LojaSellOtherPlayer eventBuy = new LojaSellOtherPlayer(target, player, valorFinalVenda, item, qntItemPlaca);
+        LojaSellOtherPlayer eventBuy = new LojaSellOtherPlayer(target, player, valorFinalVenda, item, qntItemJogadorTem);
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 }

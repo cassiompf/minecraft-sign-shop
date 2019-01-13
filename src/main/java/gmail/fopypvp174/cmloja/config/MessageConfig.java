@@ -33,6 +33,6 @@ public class MessageConfig extends Config {
         return ChatColor.translateAlternateColorCodes('&',
                 getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : "")
                         .replace("%m", money != null ? money : "")
-                        .replace("%p", target != null ? target.getPlayer().getDisplayName() : ""));
+                        .replace("%p", target != null ? target.getName() : ""));
     }
 }
