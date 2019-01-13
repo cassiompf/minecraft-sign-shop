@@ -3,6 +3,7 @@ package gmail.fopypvp174.cmloja.config;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Map;
 import java.util.Random;
 
 public class LojaConfig extends Config {
@@ -41,7 +42,8 @@ public class LojaConfig extends Config {
     }
 
     public ItemStack getItem(String nome) {
-        return getItemStack("itens." + nome);
+        Map<String, Object> itemSerialize = (Map<String, Object>) get("itens." + nome);
+        return ItemStack.deserialize(itemSerialize);
     }
 
 
@@ -59,7 +61,8 @@ public class LojaConfig extends Config {
                 stringBuilder.append(alphabet.charAt(r.nextInt(alphabetLenght)));
             }
         }
-        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), item);
+
+        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), item.serialize());
         save();
     }
 }
