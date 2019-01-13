@@ -1,9 +1,18 @@
 name: cmLoja
 version: ${project.version}
-main: gmail.fopypvp174.cmloja.Main
+main: gmail.fopypvp174.cmloja.CmLoja
 authors: [C4ssi0]
 description: Plugin de loja
 depend: [Vault]
 commands:
   geraritem:
-    description: Gerar novo item para a loja
+    description: Gerar um item customizado para loja
+    usage:
+    permission: loja.geraritem
+    permission-message: "§cVocê não tem permissão para usar o comando '/geraritem'."
+    aliases: [itemgerar]
+
+permissions:
+  loja.geraritem:
+    description: Permissão para o jogador poder gerar um item customizado na loja.
+    default: op

@@ -10,7 +10,29 @@ public class MessageConfig extends Config {
         super(plugin, fileName, defaultsName);
     }
 
-    public String message(String string, int itens, String money, OfflinePlayer target) {
-        return ChatColor.translateAlternateColorCodes('&', getString(string).replace("%i", String.valueOf(itens)).replace("%m", money != null ? money : "").replace("%p", target != null ? target.getPlayer().getDisplayName() : ""));
+    public String message(String string) {
+        return ChatColor.translateAlternateColorCodes('&', getString(string));
+    }
+
+    public String message(String string, String money) {
+        return ChatColor.translateAlternateColorCodes('&', getString(string).replace("%m", money != null ? money : ""));
+    }
+
+    public String message(String string, Integer itemQuantia) {
+        return ChatColor.translateAlternateColorCodes('&',
+                getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : ""));
+    }
+
+    public String message(String string, Integer itemQuantia, String money) {
+        return ChatColor.translateAlternateColorCodes('&',
+                getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : "")
+                        .replace("%m", money != null ? money : ""));
+    }
+
+    public String message(String string, Integer itemQuantia, String money, OfflinePlayer target) {
+        return ChatColor.translateAlternateColorCodes('&',
+                getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : "")
+                        .replace("%m", money != null ? money : "")
+                        .replace("%p", target != null ? target.getPlayer().getDisplayName() : ""));
     }
 }

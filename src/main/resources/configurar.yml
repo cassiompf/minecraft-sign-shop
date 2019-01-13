@@ -5,29 +5,36 @@ mensagens:
   inventory_full: "&cSeu inventário não tem espaço suficiente para receber os itens."
   player_unknown: "&cO jogador %p não foi encontrado."
 
-  #Mensagens de compra
+  #Mensagens de compra geral
   comprar_erro1: "&cVocê não tem dinheiro suficiente para comprar esse item."
-  comprar_erro2: "&cNão tem item suficiente no baú para você comprar."
-  comprar_erro3: "&cVocê não pode comprar de você mesmo."
   comprar_erro4: "&cEssa placa não tem opção para você comprar."
-  comprar_success: "&aVocê comprou %i itens por %m reais."
+  comprar_success_sign: "&aVocê comprou %i itens por %m reais."
   comprar_vip_vantagem: "&6[VIP] &f» &aVocê ganhou %i de desconto do valor original da compra."
 
-  #Mensagens de vendas
-  vender_success: "&aVocê vendeu %i itens por %m reais."
-  vender_erro1: "&cVocê não pode vender de você mesmo."
-  vender_erro2: "&cO jogador %p não tem dinheiro suficiente para comprar seu item."
+  #Mensagens de compra do baú
+  comprar_success_chest: "&aVocê comprou %i itens por %m reais da loja do jogador %p."
+  comprar_erro2: "&cNão tem item suficiente no baú para você comprar."
+  comprar_erro3: "&cVocê não pode comprar de você mesmo."
+
+  #Mensagens de venda geral
+  vender_success_sign: "&aVocê vendeu %i itens por %m reais."
   vender_erro3: "&cVocê não tem itens suficiente para vender."
+  vender_erro5: "&cEssa placa não tem opção para você vender."
+  vender_vip_vantagem: "&6[VIP] &f» &aVocê ganhou mais %m do valor original da venda."
+
+  #Mensagens de venda por baú
+  vender_success_chest: "&aVocê vendeu %i itens por %m reais para o jogador %p."
+  vender_erro2: "&cO jogador %p não tem dinheiro suficiente para comprar seu item."
   vender_erro4: "&cEste baú que você está tentando vender está lotado, tente em outro baú."
-  vender_erro5: "&cVocê só pode fazer vendas nessa placa."
-  vender_vip_vantagem: "&6[VIP] &f» &aVocê ganhou mais %i do valor original da venda."
+  vender_erro1: "&cVocê não pode vender para você mesmo."
 
   #Mensagens de criar placa
-  criar_erro1: "&cVocê só pode criar lojas com nome de jogadores colocando a placa no baú."
+  criar_erro1: "&cVocê só pode criar lojas colocando a placa no baú."
   criar_erro2: "&cItem que você inseriu está inválido."
   criar_erro3: "&cVocê só pode criar loja com seu nome."
-  criar_erro4: "&cVocê só pode criar loja colocando as placas em baús."
-  criar_erro5: "&cVocê não tem permissão para criar loja."
+  criar_erro4: "&cVocê não tem permissão para criar loja com o nome do servidor."
+  criar_erro5: "&cVocê não tem permissão para criar qualquer tipo de loja."
+  criar_erro6: "&cVocê não pode criar loja do servidor em baús."
   criar_success: "&aLoja criada com sucesso."
 
   #Mensagens para gerar item

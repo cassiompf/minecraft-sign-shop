@@ -17,7 +17,7 @@ public class LojaConfig extends Config {
     public boolean equalsItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                if (itemStack.equals(getItemStack("itens." + itens))) {
+                if (getItemStack("itens." + itens).equals(itemStack)) {
                     return true;
                 }
             }
