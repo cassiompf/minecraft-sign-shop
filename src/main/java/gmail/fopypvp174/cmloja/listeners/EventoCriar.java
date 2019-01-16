@@ -58,7 +58,6 @@ public class EventoCriar implements Listener {
         jogador.sendMessage(plugin.getMessageConfig().message("mensagens.criar_success"));
     }
 
-
     public void createSignLoja(Player jogador, String[] linhas, Sign placa) throws CreateSignPlayerWithoutPermissionException, CreateSignWithoutChestException,
             CreateSignItemInvalidException, CreateSignNickOtherPlayerException, CreateSignServerWithoutPermissionException, CreateSignServerOnChestException {
         if ((!jogador.hasPermission("loja.admin")) && (!jogador.hasPermission("loja.jogador"))) {

@@ -40,7 +40,7 @@ public class Utilidades {
     public static final ItemStack getItemLoja(String[] linha) {
         ItemStack item;
         if (replace(linha[3]).matches("^[1-9](\\d)*(\\#(\\w){4}){1}(\\s|$)")) {
-            item = plugin.getLoja().getItemStack("itens." + replace(linha[3]));
+            item = plugin.getLoja().getItemDeserialize("itens." + replace(linha[3]));
             item.setAmount(1);
             return item;
         } else if (replace(linha[3]).matches("^[1-9](\\d)*(\\:(\\d){1,2}){1}(\\s|$)")) {

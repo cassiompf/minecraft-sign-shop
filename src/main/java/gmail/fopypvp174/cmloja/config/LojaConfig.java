@@ -1,5 +1,6 @@
 package gmail.fopypvp174.cmloja.config;
 
+import gmail.fopypvp174.cmloja.api.ItemStackSerializable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,7 +18,7 @@ public class LojaConfig extends Config {
     public boolean equalsItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                ItemStack itemConfig = getItemStack("itens." + itens);
+                ItemStack itemConfig = getItemDeserialize("itens." + itens);
                 if (itemStack.isSimilar(itemConfig)) {
                     return true;
                 }
@@ -29,7 +30,7 @@ public class LojaConfig extends Config {
     public String nameItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                ItemStack itemConfig = getItemStack("itens." + itens);
+                ItemStack itemConfig = getItemDeserialize("itens." + itens);
                 if (itemStack.isSimilar(itemConfig)) {
                     return itens;
                 }
@@ -38,6 +39,11 @@ public class LojaConfig extends Config {
         return null;
     }
 
+
+    public ItemStack getItemDeserialize(String nomeItem) {
+        ItemStackSerializable itemStackSerializable = (ItemStackSerializable) get(nomeItem);
+        return itemStackSerializable.deserialize();
+    }
 
     public void setItem(ItemStack item) {
         ItemStack itemStack = item.clone();
@@ -53,8 +59,8 @@ public class LojaConfig extends Config {
                 stringBuilder.append(alphabet.charAt(r.nextInt(alphabetLenght)));
             }
         }
-
-        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), item);
+        ItemStackSerializable itemStackSerializable = new ItemStackSerializable(itemStack);
+        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), itemStackSerializable);
         save();
     }
 }
