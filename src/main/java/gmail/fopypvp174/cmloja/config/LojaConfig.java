@@ -3,7 +3,6 @@ package gmail.fopypvp174.cmloja.config;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Map;
 import java.util.Random;
 
 public class LojaConfig extends Config {
@@ -18,7 +17,8 @@ public class LojaConfig extends Config {
     public boolean equalsItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                if (getItemStack("itens." + itens).equals(itemStack)) {
+                ItemStack itemConfig = getItemStack("itens." + itens);
+                if (itemStack.isSimilar(itemConfig)) {
                     return true;
                 }
             }
@@ -29,21 +29,13 @@ public class LojaConfig extends Config {
     public String nameItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                if (itemStack.equals(getItemStack("itens." + itens))) {
+                ItemStack itemConfig = getItemStack("itens." + itens);
+                if (itemStack.isSimilar(itemConfig)) {
                     return itens;
                 }
             }
         }
         return null;
-    }
-
-    public boolean isItem(String nome) {
-        return isItemStack("itens." + nome);
-    }
-
-    public ItemStack getItem(String nome) {
-        Map<String, Object> itemSerialize = (Map<String, Object>) get("itens." + nome);
-        return ItemStack.deserialize(itemSerialize);
     }
 
 
@@ -55,14 +47,14 @@ public class LojaConfig extends Config {
         for (int i = 0; i < stringBuilder.capacity(); i++) {
             stringBuilder.append(alphabet.charAt(r.nextInt(alphabetLenght)));
         }
-        while (isItem(itemStack.getType().getId() + "#" + stringBuilder.toString())) {
+        while (isConfigurationSection("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString())) {
             stringBuilder.delete(0, 4);
             for (int i = 0; i < stringBuilder.length(); i++) {
                 stringBuilder.append(alphabet.charAt(r.nextInt(alphabetLenght)));
             }
         }
 
-        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), item.serialize());
+        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), item);
         save();
     }
 }

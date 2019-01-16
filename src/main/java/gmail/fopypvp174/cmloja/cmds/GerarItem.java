@@ -23,10 +23,12 @@ public class GerarItem implements CommandExecutor {
             item.setItemMeta(p.getItemInHand().getItemMeta());
             item.setAmount(1);
             ItemStack compararItem = new ItemStack(item.getType(), 1, item.getData().getData());
+
             if (item.isSimilar(compararItem)) {
                 p.sendMessage(ChatColor.GREEN + "ID do item: (" + ChatColor.WHITE + item.getData().getItemTypeId() + ChatColor.GREEN + ":" + ChatColor.WHITE + item.getData().getData() + ChatColor.GREEN + ").");
                 return true;
             }
+
             if (plugin.getLoja().equalsItem(item)) {
                 p.sendMessage(ChatColor.RED + "Esse item já tem ID: (" + ChatColor.WHITE + plugin.getLoja().nameItem(item) + ChatColor.RED + ").");
                 return true;
