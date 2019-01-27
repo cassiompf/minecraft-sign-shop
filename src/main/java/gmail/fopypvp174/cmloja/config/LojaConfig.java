@@ -1,6 +1,5 @@
 package gmail.fopypvp174.cmloja.config;
 
-import gmail.fopypvp174.cmloja.api.ItemStackSerializable;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +10,10 @@ public class LojaConfig extends Config {
     private final String alphabet = "abcdefghijklmnopqrstuvwxqzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private final int alphabetLenght = alphabet.length();
 
+    public LojaConfig(JavaPlugin plugin, String fileName) {
+        super(plugin, fileName);
+    }
+
     public LojaConfig(JavaPlugin plugin, String nome, String defaultName) {
         super(plugin, nome, defaultName);
     }
@@ -18,7 +21,7 @@ public class LojaConfig extends Config {
     public boolean equalsItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                ItemStack itemConfig = getItemDeserialize("itens." + itens);
+                ItemStack itemConfig = getItemStack("itens." + itens);
                 if (itemStack.isSimilar(itemConfig)) {
                     return true;
                 }
@@ -30,20 +33,11 @@ public class LojaConfig extends Config {
     public String nameItem(ItemStack itemStack) {
         if (isConfigurationSection("itens")) {
             for (String itens : getConfigurationSection("itens").getKeys(false)) {
-                ItemStack itemConfig = getItemDeserialize("itens." + itens);
+                ItemStack itemConfig = getItemStack("itens." + itens);
                 if (itemStack.isSimilar(itemConfig)) {
                     return itens;
                 }
             }
-        }
-        return null;
-    }
-
-
-    public ItemStack getItemDeserialize(String nomeItem) {
-        ItemStackSerializable itemStackSerializable = (ItemStackSerializable) get(nomeItem);
-        if (itemStackSerializable != null) {
-            return itemStackSerializable.deserialize();
         }
         return null;
     }
@@ -62,8 +56,8 @@ public class LojaConfig extends Config {
                 stringBuilder.append(alphabet.charAt(r.nextInt(alphabetLenght)));
             }
         }
-        ItemStackSerializable itemStackSerializable = new ItemStackSerializable(itemStack);
-        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), itemStackSerializable);
+        set("itens." + itemStack.getType().getId() + "#" + stringBuilder.toString(), itemStack);
         save();
+        reload();
     }
 }

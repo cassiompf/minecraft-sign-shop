@@ -1,6 +1,5 @@
 package gmail.fopypvp174.cmloja;
 
-import gmail.fopypvp174.cmloja.api.ItemStackSerializable;
 import gmail.fopypvp174.cmloja.cmds.GerarItem;
 import gmail.fopypvp174.cmloja.config.LojaConfig;
 import gmail.fopypvp174.cmloja.config.MessageConfig;
@@ -8,7 +7,6 @@ import gmail.fopypvp174.cmloja.listeners.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,10 +15,6 @@ public class CmLoja extends JavaPlugin {
     private LojaConfig loja;
     private MessageConfig messageConfig;
     private Economy econ;
-
-    static {
-        ConfigurationSerialization.registerClass(ItemStackSerializable.class, "ItemStackSerializable");
-    }
 
     @Override
     public void onEnable() {
