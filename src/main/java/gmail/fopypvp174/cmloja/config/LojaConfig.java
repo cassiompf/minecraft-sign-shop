@@ -42,7 +42,10 @@ public class LojaConfig extends Config {
 
     public ItemStack getItemDeserialize(String nomeItem) {
         ItemStackSerializable itemStackSerializable = (ItemStackSerializable) get(nomeItem);
-        return itemStackSerializable.deserialize();
+        if (itemStackSerializable != null) {
+            return itemStackSerializable.deserialize();
+        }
+        return null;
     }
 
     public void setItem(ItemStack item) {

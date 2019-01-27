@@ -41,6 +41,9 @@ public class Utilidades {
         ItemStack item;
         if (replace(linha[3]).matches("^[1-9](\\d)*(\\#(\\w){4}){1}(\\s|$)")) {
             item = plugin.getLoja().getItemDeserialize("itens." + replace(linha[3]));
+            if (item == null) {
+                return null;
+            }
             item.setAmount(1);
             return item;
         } else if (replace(linha[3]).matches("^[1-9](\\d)*(\\:(\\d){1,2}){1}(\\s|$)")) {
