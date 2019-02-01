@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MessageConfig extends Config {
+public final class MessageConfig extends Config {
 
     public MessageConfig(JavaPlugin plugin, String fileName, String defaultsName) {
         super(plugin, fileName, defaultsName);

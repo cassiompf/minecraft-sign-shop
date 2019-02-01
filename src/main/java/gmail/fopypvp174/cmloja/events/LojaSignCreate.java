@@ -6,7 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
 
-public class LojaSignCreate extends Event {
+public final class LojaSignCreate extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private Player player;

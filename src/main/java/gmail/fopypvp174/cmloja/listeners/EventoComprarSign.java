@@ -20,12 +20,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventoComprarSign implements Listener {
+public final class EventoComprarSign implements Listener {
 
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+    private CmLoja plugin;
+
+    public EventoComprarSign(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onComprar(PlayerInteractEvent e) {
+    private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
@@ -64,7 +68,7 @@ public class EventoComprarSign implements Listener {
         }
     }
 
-    public void comprarPelaPlaca(Player player, Sign placa, ItemStack item) throws PlayerMoneyException, SignUnknowBuy, InventoryFullException, PlayerEqualsTargetException {
+    private void comprarPelaPlaca(Player player, Sign placa, ItemStack item) throws PlayerMoneyException, SignUnknowBuy, InventoryFullException, PlayerEqualsTargetException {
         if (placa.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }

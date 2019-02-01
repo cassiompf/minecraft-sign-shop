@@ -5,10 +5,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Random;
 
-public class LojaConfig extends Config {
+public final class LojaConfig extends Config {
 
-    private final String alphabet = "abcdefghijklmnopqrstuvwxqzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private final int alphabetLenght = alphabet.length();
+    private String alphabet = "abcdefghijklmnopqrstuvwxqzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private int alphabetLenght = alphabet.length();
 
     public LojaConfig(JavaPlugin plugin, String fileName) {
         super(plugin, fileName);

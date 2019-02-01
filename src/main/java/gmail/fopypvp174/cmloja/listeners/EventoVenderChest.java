@@ -20,12 +20,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventoVenderChest implements Listener {
+public final class EventoVenderChest implements Listener {
 
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+    private CmLoja plugin;
+
+    public EventoVenderChest(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onComprar(PlayerInteractEvent e) {
+    private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_BLOCK) {
             return;
         }
@@ -79,7 +83,7 @@ public class EventoVenderChest implements Listener {
         }
     }
 
-    public void venderPelaPlaca(Player player, Sign placa, Chest chest, ItemStack item) throws PlayerEqualsTargetException, PlayerUnknowItemException, TargetUnknowException, SignUnknowSell, InventoryFullException, TargetMoneyException {
+    private void venderPelaPlaca(Player player, Sign placa, Chest chest, ItemStack item) throws PlayerEqualsTargetException, PlayerUnknowItemException, TargetUnknowException, SignUnknowSell, InventoryFullException, TargetMoneyException {
         if (placa.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }

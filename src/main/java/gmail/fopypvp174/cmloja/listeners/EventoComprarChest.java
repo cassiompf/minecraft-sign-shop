@@ -19,11 +19,15 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventoComprarChest implements Listener {
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+public final class EventoComprarChest implements Listener {
+    private CmLoja plugin;
+
+    public EventoComprarChest(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onComprar(PlayerInteractEvent e) {
+    private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
@@ -66,7 +70,7 @@ public class EventoComprarChest implements Listener {
         }
     }
 
-    public void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException {
+    private void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException {
         if (placa.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
@@ -107,23 +111,26 @@ public class EventoComprarChest implements Listener {
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 
-    public void removeItemBau(Chest chest, ItemStack itemStack, int quantidade) {
+    private void removeItemBau(Chest chest, ItemStack itemStack, int quantidade) {
         int amout = quantidade;
         for (int i = 0; i < chest.getInventory().getSize(); i++) {
             ItemStack item = chest.getInventory().getItem(i);
             if (item != null) {
-                if (item.isSimilar(itemStack)) {
-                    if ((amout - item.getAmount()) > 0) {
-                        amout -= item.getAmount();
-                        chest.getInventory().setItem(i, new ItemStack(Material.AIR));
-                    } else if ((amout - item.getAmount()) == 0) {
-                        chest.getInventory().setItem(i, new ItemStack(Material.AIR));
-                        break;
-                    } else {
-                        item.setAmount(item.getAmount() - amout);
-                        break;
-                    }
-                }
+                continue;
+            }
+            if (!item.isSimilar(itemStack)) {
+                continue;
+            }
+
+            if ((amout - item.getAmount()) > 0) {
+                amout -= item.getAmount();
+                chest.getInventory().setItem(i, new ItemStack(Material.AIR));
+            } else if ((amout - item.getAmount()) == 0) {
+                chest.getInventory().setItem(i, new ItemStack(Material.AIR));
+                break;
+            } else {
+                item.setAmount(item.getAmount() - amout);
+                break;
             }
         }
     }

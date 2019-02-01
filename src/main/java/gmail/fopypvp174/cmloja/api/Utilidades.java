@@ -6,7 +6,7 @@ import org.bukkit.block.Sign;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class Utilidades {
+public final class Utilidades {
     private static CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
 
     public static final int getPrices(LojaEnum type, Sign placa) {
@@ -93,16 +93,18 @@ public class Utilidades {
         int quantidade = amount;
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack item = inventory.getItem(i);
-            if (item == null) {
-                quantidade -= 64;
-            }
-            if (itemStack.isSimilar(item)) {
-                if (itemStack.getMaxStackSize() != 1) {
-                    quantidade -= (64 - item.getAmount());
-                }
-            }
             if (quantidade <= 0) {
                 return true;
+            }
+            if (item == null) {
+                quantidade -= 64;
+                continue;
+            }
+            if (!itemStack.isSimilar(item)) {
+                continue;
+            }
+            if (itemStack.getMaxStackSize() != 1) {
+                quantidade -= (64 - item.getAmount());
             }
         }
         return false;
@@ -111,10 +113,11 @@ public class Utilidades {
     public static final int quantidadeItemInventory(Inventory inventory, ItemStack itemStack) {
         int quantia = 0;
         for (ItemStack item : inventory.getContents()) {
-            if (item != null) {
-                if (item.isSimilar(itemStack)) {
-                    quantia += item.getAmount();
-                }
+            if (item == null) {
+                continue;
+            }
+            if (item.isSimilar(itemStack)) {
+                quantia += item.getAmount();
             }
         }
         return quantia;

@@ -5,7 +5,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
-public class LojaBuyServer extends Event {
+public final class LojaBuyServer extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private Player player;

@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class GerarItem implements CommandExecutor {
+public final class GerarItem implements CommandExecutor {
 
     private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
 

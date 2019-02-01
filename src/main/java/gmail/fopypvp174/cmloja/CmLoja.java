@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class CmLoja extends JavaPlugin {
+public final class CmLoja extends JavaPlugin {
 
     private LojaConfig loja;
     private MessageConfig messageConfig;
@@ -25,15 +25,15 @@ public class CmLoja extends JavaPlugin {
         loja = new LojaConfig(this, "itens.yml", "itens.yml");
         messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
 
-        getServer().getPluginManager().registerEvents(new EventoCriar(), this);
+        getServer().getPluginManager().registerEvents(new EventoCriar(this), this);
 
-        getServer().getPluginManager().registerEvents(new EventoComprarSign(), this);
-        getServer().getPluginManager().registerEvents(new EventoComprarChest(), this);
+        getServer().getPluginManager().registerEvents(new EventoComprarSign(this), this);
+        getServer().getPluginManager().registerEvents(new EventoComprarChest(this), this);
 
-        getServer().getPluginManager().registerEvents(new EventoVenderSign(), this);
-        getServer().getPluginManager().registerEvents(new EventoVenderChest(), this);
+        getServer().getPluginManager().registerEvents(new EventoVenderSign(this), this);
+        getServer().getPluginManager().registerEvents(new EventoVenderChest(this), this);
 
-        getServer().getPluginManager().registerEvents(new EventoPlayer(), this);
+        getServer().getPluginManager().registerEvents(new EventoPlayer(this), this);
 
         getCommand("geraritem").setExecutor(new GerarItem());
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Plugin ativado com sucesso!");
