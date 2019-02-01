@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="cmLoja:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="Bugs corrigidos!">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/CmLoja.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/CmLoja.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/cmds/GerarItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/cmds/GerarItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/LojaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/LojaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/MessageConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/MessageConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyOtherPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyOtherPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellOtherPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellOtherPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoCriar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoCriar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1287">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#930#931#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>erro4</find>
+      <find>Main.messageConfig</find>
+      <find>item</find>
+      <find>[Loja]</find>
+      <find>itemSell</find>
+      <find>target</find>
+      <find>Player</find>
+      <find>getPla</find>
+      <find>System.out</find>
+      <find>sellOtherPlayer</find>
+      <find>vender_erro5</find>
+      <find>comprar_erro4</find>
+      <find>comprar_erro2</find>
+      <find>player_unknown</find>
+      <find>comprar_vip_vantagem</find>
+      <find>SignUnknowBuy</find>
+      <find>TargetUnko</find>
+      <find>null</find>
+      <find>TargetUnk</find>
+      <find>getItem</find>
+      <find>loja.staff</find>
+      <find>getLine</find>
+      <find>CHEST</find>
+      <find>itemStackSerializable.</find>
+      <find>itemNBTTag</find>
+      <find>temEspaco</find>
+      <find>temEspacoInvPara</find>
+      <find>private</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>plugin.getMessageConfig()</replace>
+      <replace>itemBuy</replace>
+      <replace>itemNBT</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Users\cs_ca\Documents\workspace-plugins\cmLoja\src\main\java</dir>
+      <dir>C:\Users\cs_ca\Documents\workspace-plugins\cmLoja\src\main</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/itens.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignServerCreate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignPlayerCreate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/EmptyChestException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/InventoryFullException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/TargetUnknowException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/TargetMoneyException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/PlayerMoneyException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignSellZeroException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignUnknowBuy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/PlayerEqualsTargetException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVender.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignUnknowSell.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/PlayerUnknowItemException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignAmountInvalidExcecption.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignPriceInvalidException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignItemInvalidException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignInvalidException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignNickOtherPlayerException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignWithoutPermissionException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignWithoutChestException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignItemInvalidException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignServerWithoutPermissionException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignServerOnChestException.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/configurar.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/SerializeItemStack.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/ReflectionUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/BukkitObjectOutputStream.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/BukkitObjectInputStream.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Wrapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/ItemStackSerializable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/LojaConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoCriar.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoPlayer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/CmLoja.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyOtherPlayer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellOtherPlayer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignCreate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/MessageConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/cmds/GerarItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1386" />
+    <option name="height" value="788" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cmloja" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cmloja" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cmloja" type="462c0819:PsiDirectoryNode" />
+              <item name="listeners" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543941865208" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15332031" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="cmLoja build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="" />
+      <created>1542655721858</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1542655721858</updated>
+      <workItem from="1542655727936" duration="684000" />
+      <workItem from="1543353607347" duration="897000" />
+      <workItem from="1543616382755" duration="4453000" />
+      <workItem from="1543630032473" duration="274000" />
+      <workItem from="1543681465322" duration="107000" />
+      <workItem from="1543887045190" duration="608000" />
+      <workItem from="1543941253347" duration="1104000" />
+      <workItem from="1543958115493" duration="261000" />
+    </task>
+    <task id="LOCAL-00001" summary="Atualização v1.3">
+      <created>1543618583722</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1543618583722</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Atualização">
+      <created>1543941646872</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1543941646872</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Versão 1.5 do cmLoja (código refeito)">
+      <created>1547406152727</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1547406152727</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Versão 1.5 do cmLoja (Arrumando algumas coisas)">
+      <created>1547409919765</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1547409919765</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Versão 1.6 do cmLoja (Código todo refeito e bugs corrigidos)">
+      <created>1547410087761</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1547410087761</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Versão 1.6 do cmLoja (Adicionado ItemSerialize and Deserialize)">
+      <created>1547421218655</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1547421218655</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Versão 1.6 do cmLoja (Retirado o ItemSerialize e o Deserialize para evitar Bugs)">
+      <created>1547602867382</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1547602867382</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Versão 1.6 do cmLoja (Adicionado ItemStackSerializable, agora sem erros!)">
+      <created>1547662517928</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1547662517928</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Versão 1.6 do cmLoja (Adicionado NBTTagCompound)">
+      <created>1547663015717</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1547663015717</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Arrumando Bugs encontrados">
+      <created>1548553615129</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1548553615129</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Bugs corrigidos!">
+      <created>1548604125062</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1548604125062</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8388000" />
+  </component>
+  <component name="TodoView" selected-index="1">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31694403" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32569557" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.19312602" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.3289689" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.37065053" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32569557" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.19312602" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven" order="9" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Atualização v1.3" />
+    <MESSAGE value="Atualização" />
+    <MESSAGE value="Atualizações" />
+    <MESSAGE value="Adicionado novo item na config" />
+    <MESSAGE value="Adicionado versão 1.4 no pom.xml" />
+    <MESSAGE value="Arrumando uma linha" />
+    <MESSAGE value="Arrumando ao criar a placa" />
+    <MESSAGE value="Arrumando ao criar a placa2" />
+    <MESSAGE value="Arrumando ao criar a placa 3" />
+    <MESSAGE value="Arrumando o bug de criar placas" />
+    <MESSAGE value="Mudando expressões regulares" />
+    <MESSAGE value="Arrumando setupVault()" />
+    <MESSAGE value="Versão 1.5 do cmLoja" />
+    <MESSAGE value="Versão 1.5 do cmLoja (código refeito)" />
+    <MESSAGE value="Versão 1.5 do cmLoja (Arrumando algumas coisas)" />
+    <MESSAGE value="Versão 1.6 do cmLoja (Código todo refeito e bugs corrigidos)" />
+    <MESSAGE value="Versão 1.6 do cmLoja (Adicionado ItemSerialize and Deserialize)" />
+    <MESSAGE value="Versão 1.6 do cmLoja (Retirado o ItemSerialize e o Deserialize para evitar Bugs)" />
+    <MESSAGE value="Versão 1.6 do cmLoja (Adicionado ItemStackSerializable, agora sem erros!)" />
+    <MESSAGE value="Versão 1.6 do cmLoja (Adicionado NBTTagCompound)" />
+    <MESSAGE value="Arrumando Bugs encontrados" />
+    <MESSAGE value="Bugs corrigidos!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugs corrigidos!" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.8.8-R0.1-SNAPSHOT/spigot-api-1.8.8-R0.1-20160221.082514-43-sources.jar!/org/bukkit/configuration/file/YamlConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3674">
+          <caret line="233" column="36" selection-start-line="233" selection-start-column="36" selection-end-line="233" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignPlayerCreate.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/EmptyChestException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="43" selection-start-column="43" selection-end-column="43" />
+          <folding>
+            <element signature="e#294#295#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/TargetMoneyException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+          <folding>
+            <element signature="e#176#177#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/InventoryFullException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+          <folding>
+            <element signature="e#180#181#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/TargetUnknowException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
+          <folding>
+            <element signature="e#148#149#0" expanded="true" />
+            <element signature="e#178#179#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/PlayerEqualsTargetException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
+          <folding>
+            <element signature="e#192#193#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignUnknowBuy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+          <folding>
+            <element signature="e#179#180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/PlayerMoneyException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+          <folding>
+            <element signature="e#177#178#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignUnknowSell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+          <folding>
+            <element signature="e#164#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/PlayerUnknowItemException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
+          <folding>
+            <element signature="e#186#187#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/itens.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVender.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignPriceInvalidException.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignItemInvalidException.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignAmountInvalidExcecption.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/SignInvalidException.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignNickOtherPlayerException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="63" selection-start-line="3" selection-start-column="63" selection-end-line="3" selection-end-column="63" />
+          <folding>
+            <element signature="e#205#206#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignWithoutChestException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
+          <folding>
+            <element signature="e#198#199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignPlayerWithoutPermissionException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignServerWithoutPermissionException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="71" selection-start-line="3" selection-start-column="71" selection-end-line="3" selection-end-column="71" />
+          <folding>
+            <element signature="e#221#222#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignServerOnChestException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="61" selection-start-line="3" selection-start-column="61" selection-end-line="3" selection-end-column="61" />
+          <folding>
+            <element signature="e#200#201#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/configurar.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="28" column="20" selection-end-line="47" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/SerializeItemStack.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/ConfigurationSerializable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/BukkitObjectInputStream.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Wrapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/BukkitObjectOutputStream.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/ReflectionUtils.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/ItemStackSerializable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="64" column="56" selection-start-line="64" selection-start-column="56" selection-end-line="64" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/LojaConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-386">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/CmLoja.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="35" column="75" selection-start-line="35" selection-start-column="75" selection-end-line="35" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/exceptions/CreateSignItemInvalidException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+          <folding>
+            <element signature="e#197#198#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyOtherPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellOtherPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignCreate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/MessageConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#455#456#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/cmds/GerarItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/enums/LojaEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1824">
+          <caret line="133" column="12" selection-start-line="133" selection-start-column="12" selection-end-line="133" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-233">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1045#1046#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoCriar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-816">
+          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1236">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1012#1013#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1287">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#930#931#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="109" column="19" selection-start-line="109" selection-start-column="19" selection-end-line="109" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>cmLoja:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Minecraft</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>cmLoja</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.google.code.gson:gson:2.2.4</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
