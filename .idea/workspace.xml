@@ -6,26 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="Bugs corrigidos!">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/CmLoja.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/CmLoja.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/cmds/GerarItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/cmds/GerarItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/LojaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/LojaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/MessageConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/config/MessageConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyOtherPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyOtherPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaBuyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellOtherPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellOtherPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSellServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/events/LojaSignCreate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoCriar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoCriar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderChest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-    </list>
+    <list default="true" id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -427,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548604125062</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="1.6.8 Editando algumas coisas nas classes">
+      <created>1549056273961</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1549056273961</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -581,7 +569,8 @@
     <MESSAGE value="Versão 1.6 do cmLoja (Adicionado NBTTagCompound)" />
     <MESSAGE value="Arrumando Bugs encontrados" />
     <MESSAGE value="Bugs corrigidos!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugs corrigidos!" />
+    <MESSAGE value="1.6.8 Editando algumas coisas nas classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.6.8 Editando algumas coisas nas classes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
