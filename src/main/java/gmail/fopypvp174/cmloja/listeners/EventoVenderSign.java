@@ -1,12 +1,12 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
-import gmail.fopypvp174.cmloja.events.LojaSellServer;
 import gmail.fopypvp174.cmloja.exceptions.PlayerEqualsTargetException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerUnknowItemException;
 import gmail.fopypvp174.cmloja.exceptions.SignUnknowSell;
+import gmail.fopypvp174.cmloja.handlers.LojaSellServer;
+import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -80,14 +80,14 @@ public final class EventoVenderSign implements Listener {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 
-        Integer qntItemJogadorTem = Utilidades.quantidadeItemInventory(player.getInventory(), item);
-        if (qntItemJogadorTem == 0) {
-            throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
-        }
-
         Double valorVenda = (double) Utilidades.getPrices(LojaEnum.VENDER, placa);
         if (valorVenda == 0) {
             throw new SignUnknowSell("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para vender.");
+        }
+
+        Integer qntItemJogadorTem = Utilidades.quantidadeItemInventory(player.getInventory(), item);
+        if (qntItemJogadorTem == 0) {
+            throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
         }
 
         Integer qntItemPlaca = Integer.parseInt(Utilidades.replace(placa.getLine(1)));

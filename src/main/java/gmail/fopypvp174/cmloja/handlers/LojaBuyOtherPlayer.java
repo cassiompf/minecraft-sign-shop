@@ -1,4 +1,4 @@
-package gmail.fopypvp174.cmloja.events;
+package gmail.fopypvp174.cmloja.handlers;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

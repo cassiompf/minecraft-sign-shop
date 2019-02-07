@@ -1,4 +1,4 @@
-package gmail.fopypvp174.cmloja.cmds;
+package gmail.fopypvp174.cmloja.commands;
 
 import gmail.fopypvp174.cmloja.CmLoja;
 import org.bukkit.ChatColor;
@@ -10,7 +10,11 @@ import org.bukkit.inventory.ItemStack;
 
 public final class GerarItem implements CommandExecutor {
 
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+    private CmLoja plugin;
+
+    public GerarItem(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

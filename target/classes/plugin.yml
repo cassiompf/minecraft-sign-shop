@@ -1,8 +1,8 @@
 name: cmLoja
-version: 1.6-SNAPSHOT
+version: 1.6.8-SNAPSHOT
 main: gmail.fopypvp174.cmloja.CmLoja
 authors: [C4ssi0]
-description: Plugin de loja
+description: Plugin de loja por placa
 depend: [Vault]
 commands:
   geraritem:

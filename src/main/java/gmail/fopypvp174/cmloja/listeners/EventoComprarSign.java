@@ -1,13 +1,13 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
-import gmail.fopypvp174.cmloja.events.LojaBuyServer;
 import gmail.fopypvp174.cmloja.exceptions.InventoryFullException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerEqualsTargetException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerMoneyException;
 import gmail.fopypvp174.cmloja.exceptions.SignUnknowBuy;
+import gmail.fopypvp174.cmloja.handlers.LojaBuyServer;
+import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -69,15 +69,17 @@ public final class EventoComprarSign implements Listener {
     }
 
     private void comprarPelaPlaca(Player player, Sign placa, ItemStack item) throws PlayerMoneyException, SignUnknowBuy, InventoryFullException, PlayerEqualsTargetException {
-        if (placa.getLine(0).equals(player.getDisplayName())) {
-            throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
-        }
 
         Double valorCompra = (double) Utilidades.getPrices(LojaEnum.COMPRAR, placa);
 
         if (valorCompra == 0) {
             throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
         }
+
+        if (placa.getLine(0).equals(player.getDisplayName())) {
+            throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
+        }
+
         int qntItemPlaca = Short.parseShort(Utilidades.replace(placa.getLine(1)));
 
         if (!Utilidades.temEspacoInvParaItem(player.getInventory(), item, qntItemPlaca)) {

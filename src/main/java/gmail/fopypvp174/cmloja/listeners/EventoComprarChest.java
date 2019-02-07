@@ -1,10 +1,10 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
-import gmail.fopypvp174.cmloja.events.LojaBuyOtherPlayer;
 import gmail.fopypvp174.cmloja.exceptions.*;
+import gmail.fopypvp174.cmloja.handlers.LojaBuyOtherPlayer;
+import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -67,15 +67,21 @@ public final class EventoComprarChest implements Listener {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full"));
         } catch (TargetUnknowException erro5) {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown").replace("%p", sign.getLine(0)));
+        } catch (SignUnknowBuy erro6) {
+            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro4"));
         }
     }
 
-    private void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException {
+    private void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException, SignUnknowBuy {
         if (placa.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
 
         Double valorCompra = (double) Utilidades.getPrices(LojaEnum.COMPRAR, placa);
+
+        if (valorCompra == 0) {
+            throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
+        }
 
         if (plugin.getEcon().getBalance(player) < valorCompra) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
