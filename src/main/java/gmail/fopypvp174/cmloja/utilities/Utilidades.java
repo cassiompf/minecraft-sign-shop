@@ -13,18 +13,12 @@ public final class Utilidades {
         String[] linhaPreço = replace(placa.getLine(2)).toLowerCase().split(":");
 
         if (type.equals(LojaEnum.COMPRAR)) {
-            if (linhaPreço[0].matches("^c[1-9](\\d)*.*")) {
-                return Integer.valueOf(linhaPreço[0].replace("c", ""));
-            }
+            return Integer.valueOf(linhaPreço[0].replace("c", ""));
         } else if (type.equals(LojaEnum.VENDER)) {
             if (linhaPreço.length == 2) {
-                if (linhaPreço[1].matches(".*v[1-9](\\d)*(\\s|$)")) {
-                    return Integer.valueOf(linhaPreço[1].replace("v", ""));
-                }
+                return Integer.valueOf(linhaPreço[1].replace("v", ""));
             }
-            if (linhaPreço[0].matches(".*v[1-9](\\d)*(\\s|$)")) {
-                return Integer.valueOf(linhaPreço[0].replace("v", ""));
-            }
+            return Integer.valueOf(linhaPreço[0].replace("v", ""));
         }
         return 0;
     }
@@ -76,18 +70,18 @@ public final class Utilidades {
     }
 
     public static final String updatePriceSign(String linha) {
-        String linhaUpdate = replace(linha).toLowerCase();
-        if (linhaUpdate.matches("^c[1-9](\\d)*:v[1-9](\\d)*(\\s|$)")) {
-            String[] precos = linhaUpdate.split(":");
-            return "§2C§r " + precos[0].replace("c", "") + " : §4V§r " +
-                    precos[1].replace("v", "");
-        } else if (linhaUpdate.matches("^c[1-9](\\d)*(\\s|$)")) {
-            String comprar = linhaUpdate.replace("c", "");
-            return "§2C§r " + comprar;
-        } else {
-            String vender = linhaUpdate.replace("v", "");
-            return "§4V§r " + vender;
+        String[] linhaUpdate = replace(linha).toLowerCase().split(":");
+
+        if (linhaUpdate.length == 2) {
+            return "§2C§r " + linhaUpdate[0].replace("c", "") + " : §4V§r " +
+                    linhaUpdate[1].replace("v", "");
         }
+        if (linhaUpdate[0].contains("c")) {
+            String comprar = linhaUpdate[0].replace("c", "");
+            return "§2C§r " + comprar;
+        }
+        String vender = linhaUpdate[0].replace("v", "");
+        return "§4V§r " + vender;
     }
 
     public static final boolean temEspacoInvParaItem(Inventory inventory, ItemStack itemStack, int amount) {
