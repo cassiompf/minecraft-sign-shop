@@ -13,16 +13,12 @@ public final class Utilidades {
         String[] linhaPreço = replace(placa.getLine(2)).toLowerCase().split(":");
 
         if (type.equals(LojaEnum.COMPRAR)) {
-            if (linhaPreço[0].contains("c")) {
-                return Integer.valueOf(linhaPreço[0].replace("c", ""));
-            }
+            return Integer.valueOf(linhaPreço[0].replace("c", ""));
         } else if (type.equals(LojaEnum.VENDER)) {
-            if (linhaPreço[0].contains("v") || linhaPreço[1].contains("v")) {
-                if (linhaPreço.length == 2) {
-                    return Integer.valueOf(linhaPreço[1].replace("v", ""));
-                }
-                return Integer.valueOf(linhaPreço[0].replace("v", ""));
+            if (linhaPreço.length == 2) {
+                return Integer.valueOf(linhaPreço[1].replace("v", ""));
             }
+            return Integer.valueOf(linhaPreço[0].replace("v", ""));
         }
         return 0;
     }

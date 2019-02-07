@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="1.7.2 Arrumando coisas do plugin">
+    <list default="true" id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/utilities/Utilidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/utilities/Utilidades.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.class" afterDir="false" />
@@ -25,23 +25,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/utilities/Utilidades.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="19" column="72" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+            <state relative-caret-position="1141">
+              <caret line="72" column="59" lean-forward="true" selection-start-line="72" selection-start-column="59" selection-end-line="72" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -180,8 +171,8 @@
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java" />
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarSign.java" />
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoComprarChest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/utilities/Utilidades.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/utilities/Utilidades.java" />
       </list>
     </option>
   </component>
@@ -426,14 +417,7 @@
       <option name="project" value="LOCAL" />
       <updated>1549507710973</updated>
     </task>
-    <task id="LOCAL-00014" summary="1.7.2 Arrumando coisas do plugin">
-      <created>1549508561304</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1549508561304</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -470,7 +454,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" visible="true" weight="0.19312602" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.19312602" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -565,6 +549,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Atualização v1.3" />
     <MESSAGE value="Atualização" />
     <MESSAGE value="Atualizações" />
     <MESSAGE value="Adicionado novo item na config" />
@@ -589,8 +574,7 @@
     <MESSAGE value="1.6.8 Editando algumas coisas nas classes" />
     <MESSAGE value="1.7.1 Arrumando coisas" />
     <MESSAGE value="1.7.1 Arrumando coisas do plugin" />
-    <MESSAGE value="1.7.2 Arrumando coisas do plugin" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.7.2 Arrumando coisas do plugin" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.7.1 Arrumando coisas do plugin" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -919,6 +903,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventoVenderSign.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1015">
@@ -965,18 +956,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/utilities/Utilidades.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="19" column="72" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+        <state relative-caret-position="1141">
+          <caret line="72" column="59" lean-forward="true" selection-start-line="72" selection-start-column="59" selection-end-line="72" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
         </state>
       </provider>
     </entry>
