@@ -13,12 +13,16 @@ public final class Utilidades {
         String[] linhaPreço = replace(placa.getLine(2)).toLowerCase().split(":");
 
         if (type.equals(LojaEnum.COMPRAR)) {
-            return Integer.valueOf(linhaPreço[0].replace("c", ""));
+            if (linhaPreço[0].contains("c")) {
+                return Integer.valueOf(linhaPreço[0].replace("c", ""));
+            }
         } else if (type.equals(LojaEnum.VENDER)) {
+            if (linhaPreço[0].contains("v")) {
+                return Integer.valueOf(linhaPreço[0].replace("v", ""));
+            }
             if (linhaPreço.length == 2) {
                 return Integer.valueOf(linhaPreço[1].replace("v", ""));
             }
-            return Integer.valueOf(linhaPreço[0].replace("v", ""));
         }
         return 0;
     }
@@ -71,17 +75,20 @@ public final class Utilidades {
 
     public static final String updatePriceSign(String linha) {
         String[] linhaUpdate = replace(linha).toLowerCase().split(":");
-
+        StringBuilder stringBuilder = new StringBuilder();
+        if (linhaUpdate.length == 1) {
+            if (linhaUpdate[0].contains("c")) {
+                stringBuilder.append("§2C§r " + linhaUpdate[0].replace("c", ""));
+            }
+            if (linhaUpdate[0].contains("v")) {
+                stringBuilder.append("§4V§r " + linhaUpdate[0].replace("v", ""));
+            }
+        }
         if (linhaUpdate.length == 2) {
-            return "§2C§r " + linhaUpdate[0].replace("c", "") + " : §4V§r " +
-                    linhaUpdate[1].replace("v", "");
+            stringBuilder.append("§2C§r " + linhaUpdate[0].replace("c", "") + " : " +
+                    "§4V§r " + linhaUpdate[1].replace("v", ""));
         }
-        if (linhaUpdate[0].contains("c")) {
-            String comprar = linhaUpdate[0].replace("c", "");
-            return "§2C§r " + comprar;
-        }
-        String vender = linhaUpdate[0].replace("v", "");
-        return "§4V§r " + vender;
+        return stringBuilder.toString();
     }
 
     public static final boolean temEspacoInvParaItem(Inventory inventory, ItemStack itemStack, int amount) {
