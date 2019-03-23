@@ -6,12 +6,16 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-public class EventoPlayer implements Listener {
+public final class EventoPlayer implements Listener {
 
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+    private CmLoja plugin;
+
+    public EventoPlayer(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onPreLogin(PlayerLoginEvent e) {
+    private void onPreLogin(PlayerLoginEvent e) {
         if (e.getPlayer().getName().equalsIgnoreCase(plugin.getMessageConfig().message("placa.nomeLoja"))) {
             e.setKickMessage(plugin.getMessageConfig().message("mensagens.kick_erro1"));
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, e.getKickMessage());

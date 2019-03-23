@@ -1,10 +1,10 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
-import gmail.fopypvp174.cmloja.events.LojaBuyOtherPlayer;
 import gmail.fopypvp174.cmloja.exceptions.*;
+import gmail.fopypvp174.cmloja.handlers.LojaBuyOtherPlayer;
+import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -19,11 +19,15 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventoComprarChest implements Listener {
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+public final class EventoComprarChest implements Listener {
+    private CmLoja plugin;
+
+    public EventoComprarChest(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onComprar(PlayerInteractEvent e) {
+    private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
@@ -63,16 +67,22 @@ public class EventoComprarChest implements Listener {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full"));
         } catch (TargetUnknowException erro5) {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown").replace("%p", sign.getLine(0)));
+        } catch (SignUnknowBuy erro6) {
+            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro4"));
         }
     }
 
-    public void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException {
+    public void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException, SignUnknowBuy {
         String linha1 = Utilidades.replace(placa.getLine(0));
         if (linha1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
 
         Double valorCompra = (double) Utilidades.getPrices(LojaEnum.COMPRAR, placa);
+
+        if (valorCompra == 0) {
+            throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
+        }
 
         if (plugin.getEcon().getBalance(player) < valorCompra) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
@@ -108,22 +118,23 @@ public class EventoComprarChest implements Listener {
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 
-    public void removeItemBau(Chest chest, ItemStack itemStack, int quantidade) {
+    private void removeItemBau(Chest chest, ItemStack itemStack, int quantidade) {
         int amout = quantidade;
         for (int i = 0; i < chest.getInventory().getSize(); i++) {
             ItemStack item = chest.getInventory().getItem(i);
-            if (item != null) {
-                if (item.isSimilar(itemStack)) {
-                    if ((amout - item.getAmount()) > 0) {
-                        amout -= item.getAmount();
-                        chest.getInventory().setItem(i, new ItemStack(Material.AIR));
-                    } else if ((amout - item.getAmount()) == 0) {
-                        chest.getInventory().setItem(i, new ItemStack(Material.AIR));
-                        break;
-                    } else if ((amout - item.getAmount()) < 0) {
-                        item.setAmount(item.getAmount() - amout);
-                        break;
-                    }
+            if (item == null) {
+                continue;
+            }
+            if (item.isSimilar(itemStack)) {
+                if ((amout - item.getAmount()) > 0) {
+                    amout -= item.getAmount();
+                    chest.getInventory().setItem(i, new ItemStack(Material.AIR));
+                } else if ((amout - item.getAmount()) == 0) {
+                    chest.getInventory().setItem(i, new ItemStack(Material.AIR));
+                    break;
+                } else if ((amout - item.getAmount()) < 0) {
+                    item.setAmount(item.getAmount() - amout);
+                    break;
                 }
             }
         }

@@ -1,10 +1,10 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
-import gmail.fopypvp174.cmloja.events.LojaSellOtherPlayer;
 import gmail.fopypvp174.cmloja.exceptions.*;
+import gmail.fopypvp174.cmloja.handlers.LojaSellOtherPlayer;
+import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -20,12 +20,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class EventoVenderChest implements Listener {
+public final class EventoVenderChest implements Listener {
 
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+    private CmLoja plugin;
+
+    public EventoVenderChest(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onComprar(PlayerInteractEvent e) {
+    private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_BLOCK) {
             return;
         }
@@ -86,6 +90,11 @@ public class EventoVenderChest implements Listener {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 
+        Double valorVenda = (double) Utilidades.getPrices(LojaEnum.VENDER, placa);
+        if (valorVenda == 0) {
+            throw new SignUnknowSell("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para vender.");
+        }
+
         Integer qntItemJogadorTem = Utilidades.quantidadeItemInventory(player.getInventory(), item);
         if (qntItemJogadorTem == 0) {
             throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
@@ -94,11 +103,6 @@ public class EventoVenderChest implements Listener {
         OfflinePlayer target = Bukkit.getOfflinePlayer(placa.getLine(0));
         if (target == null) {
             throw new TargetUnknowException("Jogador com o nick '" + placa.getLine(0) + "' não foi encontrado.");
-        }
-
-        Double valorVenda = (double) Utilidades.getPrices(LojaEnum.VENDER, placa);
-        if (valorVenda == 0) {
-            throw new SignUnknowSell("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para vender.");
         }
 
         if (!Utilidades.temEspacoInvParaItem(chest.getInventory(), item, qntItemJogadorTem)) {

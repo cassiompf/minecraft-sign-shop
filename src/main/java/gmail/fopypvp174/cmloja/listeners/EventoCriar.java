@@ -1,8 +1,8 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
-import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.exceptions.*;
+import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -12,12 +12,16 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-public class EventoCriar implements Listener {
+public final class EventoCriar implements Listener {
 
-    private CmLoja plugin = CmLoja.getPlugin(CmLoja.class);
+    private CmLoja plugin;
+
+    public EventoCriar(CmLoja plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onCriar(SignChangeEvent e) {
+    private void onCriar(SignChangeEvent e) {
         Player jogador = e.getPlayer();
 
         Sign sign = (Sign) e.getBlock().getState();
@@ -58,7 +62,7 @@ public class EventoCriar implements Listener {
         jogador.sendMessage(plugin.getMessageConfig().message("mensagens.criar_success"));
     }
 
-    public void createSignLoja(Player jogador, String[] linhas, Sign placa) throws CreateSignPlayerWithoutPermissionException, CreateSignWithoutChestException,
+    private void createSignLoja(Player jogador, String[] linhas, Sign placa) throws CreateSignPlayerWithoutPermissionException, CreateSignWithoutChestException,
             CreateSignItemInvalidException, CreateSignNickOtherPlayerException, CreateSignServerWithoutPermissionException, CreateSignServerOnChestException {
         if ((!jogador.hasPermission("loja.admin")) && (!jogador.hasPermission("loja.jogador"))) {
             throw new CreateSignPlayerWithoutPermissionException("O jogador " + jogador.getName() + " tentou criar loja sem permissão.");

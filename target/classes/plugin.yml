@@ -1,5 +1,5 @@
 name: cmLoja
-version: ${project.version}
+version: 1.7.7-SNAPSHOT
 main: gmail.fopypvp174.cmloja.CmLoja
 authors: [C4ssi0]
 description: Plugin de loja por placa
