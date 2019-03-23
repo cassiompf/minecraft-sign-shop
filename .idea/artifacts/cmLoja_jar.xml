@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="cmLoja:jar">
-    <output-path>$PROJECT_DIR$/../../Servidores/Minez-V2/plugins</output-path>
+    <output-path>$PROJECT_DIR$/../../Servidores Minecraft/Spigot1.8.8/plugins</output-path>
     <root id="archive" name="cmLoja.jar">
       <element id="module-output" name="cmLoja" />
     </root>

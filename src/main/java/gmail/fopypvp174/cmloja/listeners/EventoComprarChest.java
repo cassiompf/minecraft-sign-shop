@@ -67,7 +67,8 @@ public class EventoComprarChest implements Listener {
     }
 
     public void comprarPeloBau(Player player, Sign placa, Chest chest, ItemStack item) throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException {
-        if (placa.getLine(0).equals(player.getDisplayName())) {
+        String linha1 = Utilidades.replace(placa.getLine(0));
+        if (linha1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
 
@@ -119,7 +120,7 @@ public class EventoComprarChest implements Listener {
                     } else if ((amout - item.getAmount()) == 0) {
                         chest.getInventory().setItem(i, new ItemStack(Material.AIR));
                         break;
-                    } else {
+                    } else if ((amout - item.getAmount()) < 0) {
                         item.setAmount(item.getAmount() - amout);
                         break;
                     }

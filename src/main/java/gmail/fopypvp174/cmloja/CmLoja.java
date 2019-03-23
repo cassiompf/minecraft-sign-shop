@@ -19,40 +19,44 @@ public class CmLoja extends JavaPlugin {
     @Override
     public void onEnable() {
         if (setupVault() == false) {
-            Bukkit.getLogger().info(String.format("[%s] Disabled due to no Vault dependency found!", getDescription().getName()));
+            Bukkit.getLogger().info(String.format("[%s] O Vault + plugin de economia não foram encontrados na pasta do servidor!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
+        } else {
+            loja = new LojaConfig(this, "itens.yml", "itens.yml");
+            messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
+
+            getServer().getPluginManager().registerEvents(new EventoCriar(), this);
+
+            getServer().getPluginManager().registerEvents(new EventoComprarSign(), this);
+            getServer().getPluginManager().registerEvents(new EventoComprarChest(), this);
+
+            getServer().getPluginManager().registerEvents(new EventoVenderSign(), this);
+            getServer().getPluginManager().registerEvents(new EventoVenderChest(), this);
+
+            getServer().getPluginManager().registerEvents(new EventoPlayer(), this);
+
+            getCommand("geraritem").setExecutor(new GerarItem());
+            getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Plugin ativado com sucesso!");
+            getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Autor: C4ssi0");
+            getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] GitHub: github.com/C4ssi0/cmLoja");
         }
-        loja = new LojaConfig(this, "itens.yml", "itens.yml");
-        messageConfig = new MessageConfig(this, "configurar.yml", "configurar.yml");
-
-        getServer().getPluginManager().registerEvents(new EventoCriar(), this);
-
-        getServer().getPluginManager().registerEvents(new EventoComprarSign(), this);
-        getServer().getPluginManager().registerEvents(new EventoComprarChest(), this);
-
-        getServer().getPluginManager().registerEvents(new EventoVenderSign(), this);
-        getServer().getPluginManager().registerEvents(new EventoVenderChest(), this);
-
-        getServer().getPluginManager().registerEvents(new EventoPlayer(), this);
-
-        getCommand("geraritem").setExecutor(new GerarItem());
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Plugin ativado com sucesso!");
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Autor: C4ssi0");
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] GitHub: github.com/C4ssi0/cmLoja");
     }
 
     public boolean setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
             RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+            if (rsp == null) {
+                return false;
+            }
             econ = rsp.getProvider();
-            return econ != null;
+            return true;
         }
         return false;
     }
 
     @Override
     public void onDisable() {
-        if (getServer().getPluginManager().getPlugin("Vault") != null) {
+        if (setupVault() == true) {
             loja.save();
             messageConfig.save();
             getServer().getConsoleSender().sendMessage(ChatColor.RED + "Plugin [cmLoja] desativado com sucesso!");

@@ -80,7 +80,9 @@ public class EventoVenderChest implements Listener {
     }
 
     public void venderPelaPlaca(Player player, Sign placa, Chest chest, ItemStack item) throws PlayerEqualsTargetException, PlayerUnknowItemException, TargetUnknowException, SignUnknowSell, InventoryFullException, TargetMoneyException {
-        if (placa.getLine(0).equals(player.getDisplayName())) {
+        String linha1 = Utilidades.replace(placa.getLine(0));
+
+        if (linha1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 

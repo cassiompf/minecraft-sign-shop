@@ -80,14 +80,14 @@ public class EventoComprarSign implements Listener {
             throw new InventoryFullException("Inventário do jogador está lotado e não tem como receber os itens.");
         }
 
-        boolean descontoVip = false;
+        int quantiaDesconto = 0;
         for (int i = 0; i <= 100; i++) {
             if (player.hasPermission("*") || player.isOp()) {
                 break;
             }
             if (player.hasPermission("loja.comprar." + i)) {
                 valorCompra -= (valorCompra * i) / 100;
-                descontoVip = true;
+                quantiaDesconto = i;
                 break;
             }
         }
@@ -96,11 +96,11 @@ public class EventoComprarSign implements Listener {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
         }
 
-        if (descontoVip) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem"));
+        if (quantiaDesconto > 0) {
+            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", quantiaDesconto));
         }
         String dinheiroFormatado = String.format("%.2f", valorCompra);
-        player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success", qntItemPlaca, dinheiroFormatado));
+        player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success_sign", qntItemPlaca, dinheiroFormatado));
 
         plugin.getEcon().withdrawPlayer(player, valorCompra);
 

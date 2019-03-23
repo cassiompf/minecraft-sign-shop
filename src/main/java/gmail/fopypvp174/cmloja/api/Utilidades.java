@@ -93,16 +93,18 @@ public class Utilidades {
         int quantidade = amount;
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack item = inventory.getItem(i);
+            if (quantidade <= 0) {
+                return true;
+            }
             if (item == null) {
                 quantidade -= 64;
+                continue;
             }
             if (itemStack.isSimilar(item)) {
                 if (itemStack.getMaxStackSize() != 1) {
                     quantidade -= (64 - item.getAmount());
                 }
-            }
-            if (quantidade <= 0) {
-                return true;
+                continue;
             }
         }
         return false;

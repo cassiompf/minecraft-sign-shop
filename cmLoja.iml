@@ -24,21 +24,21 @@
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Servidores/Minez-V2/plugins/Vault.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Servidores Minecraft/Spigot1.8.8/spigot.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../../Servidores Minecraft/Spigot1.8.8/spigot.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Servidores/Spigot-Versions/spigot1.8.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Servidores Minecraft/Spigot1.8.8/plugins/Vault.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../Servidores/Spigot-Versions/spigot1.8.8.jar!/" />
-        </SOURCES>
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT" level="project" />
