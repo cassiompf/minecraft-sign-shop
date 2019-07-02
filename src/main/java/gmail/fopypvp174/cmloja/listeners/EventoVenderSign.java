@@ -1,12 +1,12 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
+import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import gmail.fopypvp174.cmloja.exceptions.PlayerEqualsTargetException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerUnknowItemException;
 import gmail.fopypvp174.cmloja.exceptions.SignUnknowSell;
 import gmail.fopypvp174.cmloja.handlers.LojaSellServer;
-import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -80,46 +80,49 @@ public final class EventoVenderSign implements Listener {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 
-        Double valorVenda = (double) Utilidades.getPrices(LojaEnum.VENDER, placa);
-        if (valorVenda == 0) {
+        Double valorVendaSemDesconto = Double.valueOf(Utilidades.getPrices(LojaEnum.VENDER, placa));
+        if (valorVendaSemDesconto.doubleValue() == 0.0D) {
             throw new SignUnknowSell("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para vender.");
         }
 
-        Integer qntItemJogadorTem = Utilidades.quantidadeItemInventory(player.getInventory(), item);
-        if (qntItemJogadorTem == 0) {
+        Integer qntItemJogadorTem = Integer.valueOf(Utilidades.quantidadeItemInventory(player.getInventory(), item));
+        if (qntItemJogadorTem.intValue() == 0) {
             throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
         }
 
-        Integer qntItemPlaca = Integer.parseInt(Utilidades.replace(placa.getLine(1)));
-        boolean descontoVip = false;
-        Double valorFinalVenda = valorVenda;
-
+        Integer qntItemPlaca = Integer.valueOf(Integer.parseInt(Utilidades.replace(placa.getLine(1))));
+        valorVendaSemDesconto = Double.valueOf(valorVendaSemDesconto.doubleValue() * qntItemJogadorTem.intValue() / qntItemPlaca.intValue());
+        Double valorVendaComDesconto = Double.valueOf(0.0D);
         for (int i = 0; i <= 100; i++) {
-            if (player.hasPermission("*") || player.isOp()) {
+            if ((player.hasPermission("*")) || (player.isOp())) {
                 break;
             }
             if (player.hasPermission("loja.vender." + i)) {
-                valorFinalVenda = valorVenda + ((valorVenda * (double) i) / 100.0);
-                descontoVip = true;
+                valorVendaComDesconto = Double.valueOf(valorVendaSemDesconto.doubleValue() + valorVendaSemDesconto.doubleValue() * i / 100.0D);
                 break;
             }
         }
+        if (valorVendaComDesconto.doubleValue() > 0.0D) {
+            String dinheiroFormatado = String.format("%.2f", Double.valueOf(valorVendaComDesconto.doubleValue() - valorVendaSemDesconto.doubleValue()));
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", dinheiroFormatado));
 
-        String dinheiroFormatado = String.format("%.2f", (valorFinalVenda - valorVenda));
-        if (descontoVip) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", dinheiroFormatado));
+            dinheiroFormatado = String.format("%.2f", valorVendaComDesconto);
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", qntItemJogadorTem, dinheiroFormatado));
+
+            this.plugin.getEcon().depositPlayer(player, valorVendaComDesconto.doubleValue());
+
+            LojaSellServer eventBuy = new LojaSellServer(player, valorVendaComDesconto, item, qntItemJogadorTem);
+            Bukkit.getServer().getPluginManager().callEvent(eventBuy);
+        } else {
+            String dinheiroFormatado = String.format("%.2f", valorVendaSemDesconto);
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", qntItemJogadorTem, dinheiroFormatado));
+
+            this.plugin.getEcon().depositPlayer(player, valorVendaSemDesconto.doubleValue());
+
+            LojaSellServer eventBuy = new LojaSellServer(player, valorVendaSemDesconto, item, qntItemJogadorTem);
+            Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         }
-
-        valorFinalVenda *= ((double) qntItemJogadorTem / (double) qntItemPlaca);
-        dinheiroFormatado = String.format("%.2f", valorFinalVenda);
-        player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_success_sign", qntItemJogadorTem, dinheiroFormatado));
-
-        item.setAmount(qntItemJogadorTem);
+        item.setAmount(qntItemJogadorTem.intValue());
         player.getInventory().removeItem(item);
-
-        plugin.getEcon().depositPlayer(player, valorVenda);
-
-        LojaSellServer eventBuy = new LojaSellServer(player, valorFinalVenda, item, qntItemJogadorTem);
-        Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 }

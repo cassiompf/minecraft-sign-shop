@@ -1,13 +1,13 @@
 package gmail.fopypvp174.cmloja.listeners;
 
 import gmail.fopypvp174.cmloja.CmLoja;
+import gmail.fopypvp174.cmloja.api.Utilidades;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import gmail.fopypvp174.cmloja.exceptions.InventoryFullException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerEqualsTargetException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerMoneyException;
 import gmail.fopypvp174.cmloja.exceptions.SignUnknowBuy;
 import gmail.fopypvp174.cmloja.handlers.LojaBuyServer;
-import gmail.fopypvp174.cmloja.utilities.Utilidades;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -68,52 +68,45 @@ public final class EventoComprarSign implements Listener {
         }
     }
 
-    private void comprarPelaPlaca(Player player, Sign placa, ItemStack item) throws PlayerMoneyException, SignUnknowBuy, InventoryFullException, PlayerEqualsTargetException {
-
-        Double valorCompra = (double) Utilidades.getPrices(LojaEnum.COMPRAR, placa);
-
-        if (valorCompra == 0) {
+    private void comprarPelaPlaca(Player player, org.bukkit.block.Sign placa, ItemStack item)
+            throws PlayerMoneyException, SignUnknowBuy, InventoryFullException, PlayerEqualsTargetException {
+        Double valorCompra = Double.valueOf(Utilidades.getPrices(LojaEnum.COMPRAR, placa));
+        if (valorCompra.doubleValue() == 0.0D) {
             throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
         }
-
         if (placa.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
-
         int qntItemPlaca = Short.parseShort(Utilidades.replace(placa.getLine(1)));
-
         if (!Utilidades.temEspacoInvParaItem(player.getInventory(), item, qntItemPlaca)) {
             throw new InventoryFullException("Inventário do jogador está lotado e não tem como receber os itens.");
         }
-
         int quantiaDesconto = 0;
         for (int i = 0; i <= 100; i++) {
-            if (player.hasPermission("*") || player.isOp()) {
+            if ((player.hasPermission("*")) || (player.isOp())) {
                 break;
             }
             if (player.hasPermission("loja.comprar." + i)) {
-                valorCompra -= (valorCompra * i) / 100;
+                valorCompra = Double.valueOf(valorCompra.doubleValue() - valorCompra.doubleValue() * i / 100.0D);
                 quantiaDesconto = i;
                 break;
             }
         }
-
-        if (plugin.getEcon().getBalance(player) < valorCompra) {
+        if (this.plugin.getEcon().getBalance(player) < valorCompra.doubleValue()) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
         }
-
         if (quantiaDesconto > 0) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", quantiaDesconto));
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", Integer.valueOf(quantiaDesconto)));
         }
         String dinheiroFormatado = String.format("%.2f", valorCompra);
-        player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_success_sign", qntItemPlaca, dinheiroFormatado));
+        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_sign", Integer.valueOf(qntItemPlaca), dinheiroFormatado));
 
-        plugin.getEcon().withdrawPlayer(player, valorCompra);
+        this.plugin.getEcon().withdrawPlayer(player, valorCompra.doubleValue());
 
         item.setAmount(qntItemPlaca);
         player.getInventory().addItem(item);
 
-        LojaBuyServer eventBuy = new LojaBuyServer(player, valorCompra, item, qntItemPlaca);
+        LojaBuyServer eventBuy = new LojaBuyServer(player, valorCompra, item, Integer.valueOf(qntItemPlaca));
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 }

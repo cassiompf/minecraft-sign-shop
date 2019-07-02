@@ -38,6 +38,7 @@ public final class LojaConfig extends Config {
         return null;
     }
 
+    @Deprecated
     public void setItem(ItemStack item) {
         ItemStack itemStack = item.clone();
         itemStack.setAmount(1);

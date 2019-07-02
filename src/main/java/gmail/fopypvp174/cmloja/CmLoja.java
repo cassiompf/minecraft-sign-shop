@@ -45,13 +45,9 @@ public final class CmLoja extends JavaPlugin {
     public boolean setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
             RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-            if (rsp == null) {
-                return false;
-            }
-            econ = rsp.getProvider();
-            return true;
+            this.econ = (rsp == null ? null : rsp.getProvider());
         }
-        return false;
+        return this.econ != null;
     }
 
     @Override

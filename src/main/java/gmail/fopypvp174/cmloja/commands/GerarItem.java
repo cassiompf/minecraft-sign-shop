@@ -17,6 +17,7 @@ public final class GerarItem implements CommandExecutor {
     }
 
     @Override
+    @Deprecated
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "Apenas jogadores podem usar esse comando");
