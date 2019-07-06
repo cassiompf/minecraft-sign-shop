@@ -117,11 +117,7 @@ public final class SellChestShop implements Listener {
 
         item.setAmount(amoutItemPlayerHas);
         player.getInventory().removeItem(item);
-
-        plugin.getServer().getLogger().info("--------------------------");
-        plugin.getServer().getLogger().info("" + item.getMaxStackSize());
-        plugin.getServer().getLogger().info("--------------------------");
-
+        
         if (item.getMaxStackSize() != 1) {
             chest.getInventory().addItem(item);
         } else {
