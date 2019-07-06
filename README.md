@@ -2,36 +2,31 @@ Good morning, good afternoon and good night!
 
 Today I'm bringing for the first time a very simple store plugin for Minecraft servers.
 
-The cmLoja consists of creating stores using boards, such as the ChestShop plugin.
+The cmLoja consists of creating stores using signs, such as the ChestShop plugin.
 
 Both staff and players can create stores, so just have the permissions!
 
 
-✦ Test the versions ✦
-
-● 1.13x, 1.12x, 1.11x, 1.10x, 1.9x, 1.8x
+✦ Test the versions: 1.13x, 1.12x, 1.11x, 1.10x, 1.9x, 1.8x
 
 
-✦ Plugin Video ✦
-● https://youtu.be/Dklc07uynfg
+✦ Plugin Video: https://youtu.be/Dklc07uynfg
 
-✦ Commands ✦
+✦ Commands: /geraritem
 
-☛ /geraritem
-
-➤ Generates some custom item to add on sale using the board.
+➤ Generates some custom item to add on sale using the sign.
 
 ✦ Permissions ✦
 
-➤ loja.geraritem: Permission to use the /geraritem command
+loja.geraritem: Permission to use the /geraritem command
 
-➤ loja.admin: Permission for admin to create store of all kinds.
+loja.admin: Permission for admin to create store of all kinds.
 
-➤ loja.player: Permission for the player to create store using the chest.
+loja.player: Permission for the player to create store using the chest.
 
-➤ loja.quebrarloja: Permission for the player to be able to break any Vip store.
+loja.quebrarloja: Permission for the player to be able to break any Vip store.
 
-➤ loja.abrirbau: Permission for the player to be able to open the chest of any VIP store.
+loja.abrirbau: Permission for the player to be able to open the chest of any VIP store.
 
 ✦ VIP Discount ✦
 
@@ -41,10 +36,9 @@ Both staff and players can create stores, so just have the permissions!
 
 ➤ Example: loja.comprar.10 <- The player will have 10% discount on the server store.
 
-➤ OSB: ADMINS DO NOT HAVE DISCOUNTS IN SHOP, THAT IS, NO OF THE 2 PERMISSIONS WILL WORK.
+➤ ADMINS DO NOT HAVE DISCOUNTS IN SHOP, THAT IS, NO OF THE 2 PERMISSIONS WILL WORK.
 
-✦ Messages Config ✦
-https://pastebin.com/T2bkg1g7
+✦ Messages Config: https://pastebin.com/T2bkg1g7
 
 ✦ Events for programmers ✦
 
