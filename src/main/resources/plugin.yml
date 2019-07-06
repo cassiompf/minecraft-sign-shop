@@ -9,6 +9,7 @@ load: POSTWORLD
 commands:
   geraritem:
     description: Gerar um item customizado para loja
+    usage: "§cUse apenas /geraritem"
     permission: loja.geraritem
     permission-message: "§cVocê não tem permissão para usar o comando '/geraritem'."
     aliases: [itemgerar]
