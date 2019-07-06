@@ -4,10 +4,11 @@ main: gmail.fopypvp174.cmloja.CmLoja
 authors: [C4ssi0]
 description: Plugin de loja por placa
 depend: [Vault]
+softdepend: [AConomy, Essentials, Solary-Economy, gMoney, iConomy]
+load: POSTWORLD
 commands:
   geraritem:
     description: Gerar um item customizado para loja
-    usage:
     permission: loja.geraritem
     permission-message: "§cVocê não tem permissão para usar o comando '/geraritem'."
     aliases: [itemgerar]

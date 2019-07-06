@@ -1,6 +1,6 @@
 package gmail.fopypvp174.cmloja;
 
-import gmail.fopypvp174.cmloja.commands.GerarItem;
+import gmail.fopypvp174.cmloja.commands.ItemGenerate;
 import gmail.fopypvp174.cmloja.configurations.LojaConfig;
 import gmail.fopypvp174.cmloja.configurations.MessageConfig;
 import gmail.fopypvp174.cmloja.listeners.*;
@@ -18,31 +18,34 @@ public final class CmLoja extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if (setupVault() == false) {
+        if (!setupVault()) {
             Bukkit.getLogger().info(String.format("[%s] O Vault + plugin de economia não foram encontrados na pasta do servidor!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
         } else {
             loja = new LojaConfig(this, "itens.yml");
             messageConfig = new MessageConfig(this, "configurar.yml");
 
-            getServer().getPluginManager().registerEvents(new EventoCriar(this), this);
+            getServer().getPluginManager().registerEvents(new CreateShopEvent(this), this);
 
-            getServer().getPluginManager().registerEvents(new EventoComprarSign(this), this);
-            getServer().getPluginManager().registerEvents(new EventoComprarChest(this), this);
+            getServer().getPluginManager().registerEvents(new BuySignEvent(this), this);
+            getServer().getPluginManager().registerEvents(new BuyChestEvent(this), this);
 
-            getServer().getPluginManager().registerEvents(new EventoVenderSign(this), this);
-            getServer().getPluginManager().registerEvents(new EventoVenderChest(this), this);
+            getServer().getPluginManager().registerEvents(new SellSignEvent(this), this);
+            getServer().getPluginManager().registerEvents(new SellChestShop(this), this);
 
-            getServer().getPluginManager().registerEvents(new EventoPlayer(this), this);
+            getServer().getPluginManager().registerEvents(new PlayerShopEvent(this), this);
 
-            getCommand("geraritem").setExecutor(new GerarItem(this));
+            getServer().getPluginManager().registerEvents(new EventOpenChest(this), this);
+            getServer().getPluginManager().registerEvents(new EventBreakShop(this), this);
+
+            getCommand("geraritem").setExecutor(new ItemGenerate(this));
             getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Plugin ativado com sucesso!");
             getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] Autor: C4ssi0");
             getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[cmLoja] GitHub: github.com/C4ssi0/cmLoja");
         }
     }
 
-    public boolean setupVault() {
+    private boolean setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") != null) {
             RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
             this.econ = (rsp == null ? null : rsp.getProvider());
@@ -52,7 +55,7 @@ public final class CmLoja extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (setupVault() == true) {
+        if (setupVault()) {
             loja.saveConfig();
             messageConfig.saveConfig();
             getServer().getConsoleSender().sendMessage(ChatColor.RED + "[cmLoja] desativado com sucesso!");

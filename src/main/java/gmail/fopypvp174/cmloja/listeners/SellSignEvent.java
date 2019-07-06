@@ -20,11 +20,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public final class EventoVenderSign implements Listener {
+public final class SellSignEvent implements Listener {
 
     private CmLoja plugin;
 
-    public EventoVenderSign(CmLoja plugin) {
+    public SellSignEvent(CmLoja plugin) {
         this.plugin = plugin;
     }
 
@@ -34,8 +34,7 @@ public final class EventoVenderSign implements Listener {
             return;
         }
 
-        if (e.getClickedBlock().getType() != Material.SIGN_POST &&
-                e.getClickedBlock().getType() != Material.WALL_SIGN) {
+        if (e.getClickedBlock().getType() != Material.WALL_SIGN) {
             return;
         }
 
@@ -75,54 +74,54 @@ public final class EventoVenderSign implements Listener {
         }
     }
 
-    private void venderPelaPlaca(Player player, Sign placa, ItemStack item) throws PlayerEqualsTargetException, PlayerUnknowItemException, SignUnknowSell {
-        if (placa.getLine(0).equals(player.getDisplayName())) {
+    private void venderPelaPlaca(Player player, Sign sign, ItemStack item) throws PlayerEqualsTargetException, PlayerUnknowItemException, SignUnknowSell {
+        if (sign.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 
-        Double valorVendaSemDesconto = Double.valueOf(Utilidades.getPrices(LojaEnum.VENDER, placa));
-        if (valorVendaSemDesconto.doubleValue() == 0.0D) {
-            throw new SignUnknowSell("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para vender.");
+        Double priceSaleWithoutDiscount = Utilidades.getPrices(LojaEnum.VENDER, sign);
+        if (priceSaleWithoutDiscount == 0.0D) {
+            throw new SignUnknowSell("A placa {x=" + sign.getLocation().getX() + ",y=" + sign.getLocation().getY() + ",z=" + sign.getLocation().getZ() + "} não tem opção para vender.");
         }
 
-        Integer qntItemJogadorTem = Integer.valueOf(Utilidades.quantidadeItemInventory(player.getInventory(), item));
-        if (qntItemJogadorTem.intValue() == 0) {
+        Integer amoutItemPlayerHas = Utilidades.quantidadeItemInventory(player.getInventory(), item);
+        if (amoutItemPlayerHas == 0) {
             throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
         }
 
-        Integer qntItemPlaca = Integer.valueOf(Integer.parseInt(Utilidades.replace(placa.getLine(1))));
-        valorVendaSemDesconto = Double.valueOf(valorVendaSemDesconto.doubleValue() * qntItemJogadorTem.intValue() / qntItemPlaca.intValue());
-        Double valorVendaComDesconto = Double.valueOf(0.0D);
+        int qntItemPlaca = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
+        priceSaleWithoutDiscount = priceSaleWithoutDiscount * amoutItemPlayerHas / qntItemPlaca;
+        Double priceSaleWithDiscount = 0.0D;
         for (int i = 0; i <= 100; i++) {
             if ((player.hasPermission("*")) || (player.isOp())) {
                 break;
             }
             if (player.hasPermission("loja.vender." + i)) {
-                valorVendaComDesconto = Double.valueOf(valorVendaSemDesconto.doubleValue() + valorVendaSemDesconto.doubleValue() * i / 100.0D);
+                priceSaleWithDiscount = priceSaleWithoutDiscount + priceSaleWithoutDiscount * i / 100.0D;
                 break;
             }
         }
-        if (valorVendaComDesconto.doubleValue() > 0.0D) {
-            String dinheiroFormatado = String.format("%.2f", Double.valueOf(valorVendaComDesconto.doubleValue() - valorVendaSemDesconto.doubleValue()));
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", dinheiroFormatado));
+        if (priceSaleWithDiscount > 0.0D) {
+            String moneyFormatted = String.format("%.2f", priceSaleWithDiscount - priceSaleWithoutDiscount);
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", moneyFormatted));
 
-            dinheiroFormatado = String.format("%.2f", valorVendaComDesconto);
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", qntItemJogadorTem, dinheiroFormatado));
+            moneyFormatted = String.format("%.2f", priceSaleWithDiscount);
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", amoutItemPlayerHas, moneyFormatted));
 
-            this.plugin.getEcon().depositPlayer(player, valorVendaComDesconto.doubleValue());
+            this.plugin.getEcon().depositPlayer(player, priceSaleWithDiscount);
 
-            LojaSellServer eventBuy = new LojaSellServer(player, valorVendaComDesconto, item, qntItemJogadorTem);
+            LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithDiscount, item, amoutItemPlayerHas);
             Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         } else {
-            String dinheiroFormatado = String.format("%.2f", valorVendaSemDesconto);
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", qntItemJogadorTem, dinheiroFormatado));
+            String dinheiroFormatado = String.format("%.2f", priceSaleWithoutDiscount);
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", amoutItemPlayerHas, dinheiroFormatado));
 
-            this.plugin.getEcon().depositPlayer(player, valorVendaSemDesconto.doubleValue());
+            this.plugin.getEcon().depositPlayer(player, priceSaleWithoutDiscount);
 
-            LojaSellServer eventBuy = new LojaSellServer(player, valorVendaSemDesconto, item, qntItemJogadorTem);
+            LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithoutDiscount, item, amoutItemPlayerHas);
             Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         }
-        item.setAmount(qntItemJogadorTem.intValue());
+        item.setAmount(amoutItemPlayerHas);
         player.getInventory().removeItem(item);
     }
 }

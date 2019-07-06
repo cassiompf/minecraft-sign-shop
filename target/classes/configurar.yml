@@ -43,6 +43,11 @@ mensagens:
   #Mensagem para expulsar o jogador que entrar com o mesmo nome da placa do servidor
   kick_erro1: "&cVocê não pode entrar no servidor com o mesmo nome da loja"
 
+  #Mensagem quando alguém não tem permissão para abrir a loja dos jogadores
+  open_chest_shop: "&cVocê não tem permissão para abrir a loja do jogador %p."
+
+  #Mensagem quando alguém não tem permissão para quebrar a loja dos jogadores
+  break_chest_shop: "&cVocê não tem permissão para quebrar a loja do jogador %p."
 placa:
   #O nome da loja do servidor que deve ser colocado na primeira linha
   nomeLoja: "[Loja]"

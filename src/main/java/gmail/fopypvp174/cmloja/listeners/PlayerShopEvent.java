@@ -6,11 +6,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-public final class EventoPlayer implements Listener {
+public final class PlayerShopEvent implements Listener {
 
     private CmLoja plugin;
 
-    public EventoPlayer(CmLoja plugin) {
+    public PlayerShopEvent(CmLoja plugin) {
         this.plugin = plugin;
     }
 
@@ -19,7 +19,6 @@ public final class EventoPlayer implements Listener {
         if (e.getPlayer().getName().equalsIgnoreCase(plugin.getMessageConfig().message("placa.nomeLoja"))) {
             e.setKickMessage(plugin.getMessageConfig().message("mensagens.kick_erro1"));
             e.disallow(PlayerLoginEvent.Result.KICK_OTHER, e.getKickMessage());
-            return;
         }
     }
 }

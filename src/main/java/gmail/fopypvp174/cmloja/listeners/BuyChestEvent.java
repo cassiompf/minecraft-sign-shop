@@ -19,10 +19,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public final class EventoComprarChest implements Listener {
+public final class BuyChestEvent implements Listener {
     private CmLoja plugin;
 
-    public EventoComprarChest(CmLoja plugin) {
+    public BuyChestEvent(CmLoja plugin) {
         this.plugin = plugin;
     }
 
@@ -33,8 +33,7 @@ public final class EventoComprarChest implements Listener {
             return;
         }
 
-        if (e.getClickedBlock().getType() != Material.SIGN_POST &&
-                e.getClickedBlock().getType() != Material.WALL_SIGN) {
+        if (e.getClickedBlock().getType() != Material.WALL_SIGN) {
             return;
         }
 
@@ -74,62 +73,62 @@ public final class EventoComprarChest implements Listener {
     }
 
     @Deprecated
-    public void comprarPeloBau(Player player, org.bukkit.block.Sign placa, Chest chest, ItemStack item)
+    public void comprarPeloBau(Player player, org.bukkit.block.Sign sign, Chest chest, ItemStack item)
             throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException, SignUnknowBuy {
-        String linha1 = Utilidades.replace(placa.getLine(0));
-        if (linha1.equals(player.getDisplayName())) {
+        String line1 = Utilidades.replace(sign.getLine(0));
+        if (line1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
-        Double valorCompra = Utilidades.getPrices(LojaEnum.COMPRAR, placa);
-        if (valorCompra.doubleValue() == 0.0D) {
-            throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
+        Double priceBuy = Utilidades.getPrices(LojaEnum.COMPRAR, sign);
+        if (priceBuy == 0.0D) {
+            throw new SignUnknowBuy("A placa {x=" + sign.getLocation().getX() + ",y=" + sign.getLocation().getY() + ",z=" + sign.getLocation().getZ() + "} não tem opção para comprar.");
         }
-        if (this.plugin.getEcon().getBalance(player) < valorCompra.doubleValue()) {
+        if (this.plugin.getEcon().getBalance(player) < priceBuy) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
         }
-        int quantiaPlaca = Short.parseShort(Utilidades.replace(placa.getLine(1)));
-        int quantiaBau = Utilidades.quantidadeItemInventory(chest.getInventory(), item);
-        if (quantiaBau < quantiaPlaca) {
+        int amountSign = Short.parseShort(Utilidades.replace(sign.getLine(1)));
+        int amountChest = Utilidades.quantidadeItemInventory(chest.getInventory(), item);
+        if (amountChest < amountSign) {
             throw new EmptyChestException("Não tem item suficiente no baú para fazer a compra.");
         }
-        if (!Utilidades.temEspacoInvParaItem(player.getInventory(), item, quantiaPlaca)) {
+        if (!Utilidades.haveSlotClearInv(player.getInventory(), item, amountSign)) {
             throw new InventoryFullException("Inventário do jogador está lotado e não tem como receber os itens.");
         }
-        OfflinePlayer target = Bukkit.getOfflinePlayer(placa.getLine(0));
+        OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
         if (target == null) {
-            throw new TargetUnknowException("Jogador com o nick '" + placa.getLine(0) + "' não foi encontrado.");
+            throw new TargetUnknowException("Jogador com o nick '" + sign.getLine(0) + "' não foi encontrado.");
         }
-        this.plugin.getEcon().depositPlayer(target, valorCompra.doubleValue());
-        this.plugin.getEcon().withdrawPlayer(player, valorCompra.doubleValue());
+        this.plugin.getEcon().depositPlayer(target, priceBuy);
+        this.plugin.getEcon().withdrawPlayer(player, priceBuy);
 
-        item.setAmount(quantiaPlaca);
+        item.setAmount(amountSign);
 
         player.getInventory().addItem(item);
-        removeItemBau(chest, item, quantiaPlaca);
+        removeItemBau(chest, item, amountSign);
 
-        String dinheiroFormatado = String.format("%.2f", valorCompra);
-        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_chest", Integer.valueOf(quantiaPlaca), dinheiroFormatado, target));
+        String moneyFormatted = String.format("%.2f", priceBuy);
+        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_chest", amountSign, moneyFormatted, target));
 
-        LojaBuyOtherPlayer eventBuy = new LojaBuyOtherPlayer(target, player, valorCompra, item, Integer.valueOf(quantiaPlaca));
+        LojaBuyOtherPlayer eventBuy = new LojaBuyOtherPlayer(target, player, priceBuy, item, amountSign);
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 
-    private void removeItemBau(Chest chest, ItemStack itemStack, int quantidade) {
-        int amout = quantidade;
+    private void removeItemBau(Chest chest, ItemStack itemStack, int amount) {
+        int var = amount;
         for (int i = 0; i < chest.getInventory().getSize(); i++) {
             ItemStack item = chest.getInventory().getItem(i);
             if (item != null) {
                 if (item.isSimilar(itemStack)) {
-                    if (amout - item.getAmount() > 0) {
-                        amout -= item.getAmount();
+                    if (var - item.getAmount() > 0) {
+                        var -= item.getAmount();
                         chest.getInventory().setItem(i, new ItemStack(Material.AIR));
                     } else {
-                        if (amout - item.getAmount() == 0) {
+                        if (var - item.getAmount() == 0) {
                             chest.getInventory().setItem(i, new ItemStack(Material.AIR));
                             break;
                         }
-                        if (amout - item.getAmount() < 0) {
-                            item.setAmount(item.getAmount() - amout);
+                        if (var - item.getAmount() < 0) {
+                            item.setAmount(item.getAmount() - var);
                             break;
                         }
                     }

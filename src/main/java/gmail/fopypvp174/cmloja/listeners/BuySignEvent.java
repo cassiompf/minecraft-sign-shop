@@ -20,11 +20,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public final class EventoComprarSign implements Listener {
+public final class BuySignEvent implements Listener {
 
     private CmLoja plugin;
 
-    public EventoComprarSign(CmLoja plugin) {
+    public BuySignEvent(CmLoja plugin) {
         this.plugin = plugin;
     }
 
@@ -34,8 +34,7 @@ public final class EventoComprarSign implements Listener {
             return;
         }
 
-        if (e.getClickedBlock().getType() != Material.SIGN_POST &&
-                e.getClickedBlock().getType() != Material.WALL_SIGN) {
+        if (e.getClickedBlock().getType() != Material.WALL_SIGN) {
             return;
         }
 
@@ -70,43 +69,43 @@ public final class EventoComprarSign implements Listener {
 
     private void comprarPelaPlaca(Player player, org.bukkit.block.Sign placa, ItemStack item)
             throws PlayerMoneyException, SignUnknowBuy, InventoryFullException, PlayerEqualsTargetException {
-        Double valorCompra = Double.valueOf(Utilidades.getPrices(LojaEnum.COMPRAR, placa));
-        if (valorCompra.doubleValue() == 0.0D) {
+        Double priceBuy = Utilidades.getPrices(LojaEnum.COMPRAR, placa);
+        if (priceBuy == 0.0D) {
             throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
         }
         if (placa.getLine(0).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
-        int qntItemPlaca = Short.parseShort(Utilidades.replace(placa.getLine(1)));
-        if (!Utilidades.temEspacoInvParaItem(player.getInventory(), item, qntItemPlaca)) {
+        int amountItemSign = Short.parseShort(Utilidades.replace(placa.getLine(1)));
+        if (!Utilidades.haveSlotClearInv(player.getInventory(), item, amountItemSign)) {
             throw new InventoryFullException("Inventário do jogador está lotado e não tem como receber os itens.");
         }
-        int quantiaDesconto = 0;
+        int discount = 0;
         for (int i = 0; i <= 100; i++) {
             if ((player.hasPermission("*")) || (player.isOp())) {
                 break;
             }
             if (player.hasPermission("loja.comprar." + i)) {
-                valorCompra = Double.valueOf(valorCompra.doubleValue() - valorCompra.doubleValue() * i / 100.0D);
-                quantiaDesconto = i;
+                priceBuy = priceBuy - priceBuy * i / 100.0D;
+                discount = i;
                 break;
             }
         }
-        if (this.plugin.getEcon().getBalance(player) < valorCompra.doubleValue()) {
+        if (this.plugin.getEcon().getBalance(player) < priceBuy) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
         }
-        if (quantiaDesconto > 0) {
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", Integer.valueOf(quantiaDesconto)));
+        if (discount > 0) {
+            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", amountItemSign));
         }
-        String dinheiroFormatado = String.format("%.2f", valorCompra);
-        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_sign", Integer.valueOf(qntItemPlaca), dinheiroFormatado));
+        String moneyFormatted = String.format("%.2f", priceBuy);
+        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_sign", amountItemSign, moneyFormatted));
 
-        this.plugin.getEcon().withdrawPlayer(player, valorCompra.doubleValue());
+        this.plugin.getEcon().withdrawPlayer(player, priceBuy);
 
-        item.setAmount(qntItemPlaca);
+        item.setAmount(amountItemSign);
         player.getInventory().addItem(item);
 
-        LojaBuyServer eventBuy = new LojaBuyServer(player, valorCompra, item, Integer.valueOf(qntItemPlaca));
+        LojaBuyServer eventBuy = new LojaBuyServer(player, priceBuy, item, amountItemSign);
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 }

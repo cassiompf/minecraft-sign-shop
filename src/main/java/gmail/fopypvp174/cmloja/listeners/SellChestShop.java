@@ -20,11 +20,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public final class EventoVenderChest implements Listener {
+public final class SellChestShop implements Listener {
 
     private CmLoja plugin;
 
-    public EventoVenderChest(CmLoja plugin) {
+    public SellChestShop(CmLoja plugin) {
         this.plugin = plugin;
     }
 
@@ -36,8 +36,7 @@ public final class EventoVenderChest implements Listener {
             return;
         }
 
-        if (e.getClickedBlock().getType() != Material.SIGN_POST &&
-                e.getClickedBlock().getType() != Material.WALL_SIGN) {
+        if (e.getClickedBlock().getType() != Material.WALL_SIGN) {
             return;
         }
 
@@ -88,43 +87,60 @@ public final class EventoVenderChest implements Listener {
     @Deprecated
     public void venderPelaPlaca(Player player, org.bukkit.block.Sign placa, Chest chest, ItemStack item)
             throws PlayerEqualsTargetException, PlayerUnknowItemException, TargetUnknowException, SignUnknowSell, InventoryFullException, TargetMoneyException {
-        String linha1 = Utilidades.replace(placa.getLine(0));
-        if (linha1.equals(player.getDisplayName())) {
+        String line1 = Utilidades.replace(placa.getLine(0));
+        if (line1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
-        Double valorVenda = Double.valueOf(Utilidades.getPrices(LojaEnum.VENDER, placa));
-        if (valorVenda.doubleValue() == 0.0D) {
+        Double priceSell = Utilidades.getPrices(LojaEnum.VENDER, placa);
+        if (priceSell == 0.0D) {
             throw new SignUnknowSell("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para vender.");
         }
-        Integer qntItemJogadorTem = Integer.valueOf(Utilidades.quantidadeItemInventory(player.getInventory(), item));
-        if (qntItemJogadorTem.intValue() == 0) {
+        Integer amoutItemPlayerHas = Utilidades.quantidadeItemInventory(player.getInventory(), item);
+        if (amoutItemPlayerHas == 0) {
             throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
         }
         OfflinePlayer target = Bukkit.getOfflinePlayer(placa.getLine(0));
         if (target == null) {
             throw new TargetUnknowException("Jogador com o nick '" + placa.getLine(0) + "' não foi encontrado.");
         }
-        if (!Utilidades.temEspacoInvParaItem(chest.getInventory(), item, qntItemJogadorTem.intValue())) {
+        if (!Utilidades.haveSlotClearInv(chest.getInventory(), item, amoutItemPlayerHas)) {
             throw new InventoryFullException("O baú {x=" + chest.getLocation().getX() + ",y= + " + chest.getLocation().getY() + ",z=" + chest.getLocation().getZ() + "} não tem espaço para receber itens de venda do jogador ." + player.getName());
         }
-        Integer qntItemPlaca = Integer.valueOf(Integer.parseInt(Utilidades.replace(placa.getLine(1))));
-        Double valorFinalVenda = Double.valueOf((qntItemJogadorTem.intValue() / qntItemPlaca.intValue()) * valorVenda.doubleValue());
-        if (this.plugin.getEcon().getBalance(target) < valorFinalVenda.doubleValue()) {
+        Integer amoutItemSign = Integer.parseInt(Utilidades.replace(placa.getLine(1)));
+        double finalValueSale = (amoutItemPlayerHas / amoutItemSign) * priceSell;
+        if (this.plugin.getEcon().getBalance(target) < finalValueSale) {
             throw new TargetMoneyException("O jogador " + target.getName() + " não tem dinheiro para pagar o jogador " + player.getName() + " pela venda.");
         }
 
-        String dinheiroFormatado = String.format("%.2f", valorFinalVenda);
-        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_chest", qntItemJogadorTem, dinheiroFormatado, target));
+        String moneyFormatted = String.format("%.2f", finalValueSale);
+        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_chest", amoutItemPlayerHas, moneyFormatted, target));
 
-        item.setAmount(qntItemJogadorTem.intValue());
-
+        item.setAmount(amoutItemPlayerHas);
         player.getInventory().removeItem(item);
-        chest.getInventory().addItem(item);
 
-        this.plugin.getEcon().withdrawPlayer(target, valorFinalVenda.doubleValue());
-        this.plugin.getEcon().depositPlayer(player, valorFinalVenda.doubleValue());
+        plugin.getServer().getLogger().info("--------------------------");
+        plugin.getServer().getLogger().info("" + item.getMaxStackSize());
+        plugin.getServer().getLogger().info("--------------------------");
 
-        LojaSellOtherPlayer eventBuy = new LojaSellOtherPlayer(target, player, valorFinalVenda, item, qntItemJogadorTem);
+        if (item.getMaxStackSize() != 1) {
+            chest.getInventory().addItem(item);
+        } else {
+            item.setAmount(1);
+            for (int a = 0; a < amoutItemPlayerHas; a++) {
+                for (int b = 0; b < chest.getInventory().getSize(); b++) {
+                    if (chest.getInventory().getItem(b) == null) {
+                        chest.getInventory().setItem(b, item);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        this.plugin.getEcon().withdrawPlayer(target, finalValueSale);
+        this.plugin.getEcon().depositPlayer(player, finalValueSale);
+
+        LojaSellOtherPlayer eventBuy = new LojaSellOtherPlayer(target, player, finalValueSale, item, amoutItemPlayerHas);
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);
     }
 }
