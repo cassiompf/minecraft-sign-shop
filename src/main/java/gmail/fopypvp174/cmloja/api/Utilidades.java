@@ -5,6 +5,7 @@ import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import org.bukkit.block.Sign;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 public class Utilidades {
 
@@ -30,12 +31,17 @@ public class Utilidades {
         if (replace(lines[3]).matches("^[1-9](\\d)*(#(\\w){4}){1}(\\s|$)")) {
             return CmLoja.getPlugin(CmLoja.class).getLoja().getCustomConfig().getItemStack("itens." + replace(lines[3]));
         }
+        if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){1,2}){1}(\\s|$)")) {
+            String[] valores = replace(lines[3]).split(":");
+            int idType = Integer.parseInt(valores[0]);
+            byte dataId = Byte.parseByte(valores[1]);
+            return new MaterialData(idType, dataId).toItemStack();
+        }
         if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){1,4}){1}(\\s|$)")) {
             String[] valores = replace(lines[3]).split(":");
             int idType = Integer.parseInt(valores[0]);
-            ItemStack item;
             short dataId = Short.parseShort(valores[1]);
-            item = new ItemStack(idType, 1);
+            ItemStack item = new ItemStack(idType, 1);
             item.setDurability(dataId);
             return item;
         }
