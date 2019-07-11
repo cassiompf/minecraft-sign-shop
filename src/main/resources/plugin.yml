@@ -12,7 +12,7 @@ commands:
     usage: "§cUse apenas /geraritem"
     permission: loja.geraritem
     permission-message: "§cVocê não tem permissão para usar o comando '/geraritem'."
-    aliases: [itemgerar]
+    aliases: [itemgerar, iteminfo, infoitem]
 
 permissions:
   loja.geraritem:

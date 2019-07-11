@@ -51,7 +51,7 @@ public class EventOpenChest implements Listener {
                 return;
             }
 
-            if (e.getPlayer().getName().equals(sign.getLine(0))) {
+            if (e.getPlayer().getName().equals(Utilidades.replaceShopName(sign.getLine(0)))) {
                 return;
             }
 
@@ -62,7 +62,7 @@ public class EventOpenChest implements Listener {
             e.getPlayer().sendMessage(
                     plugin.getMessageConfig()
                             .message("mensagens.open_chest_shop")
-                            .replace("%p", sign.getLine(0)));
+                            .replace("%p", Utilidades.replaceShopName(sign.getLine(0))));
 
             e.setCancelled(true);
         });

@@ -34,7 +34,9 @@ public final class BuySignEvent implements Listener {
             return;
         }
 
-        if (e.getClickedBlock().getType() != Material.WALL_SIGN) {
+        if (e.getClickedBlock().getType() != Material.SIGN_POST
+                && e.getClickedBlock().getType() != Material.SIGN
+                && e.getClickedBlock().getType() != Material.WALL_SIGN) {
             return;
         }
 
@@ -42,8 +44,9 @@ public final class BuySignEvent implements Listener {
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
+        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
 
-        if (!sign.getLine(0).equals(plugin.getMessageConfig().message("placa.nomeLoja"))) {
+        if (!Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
             return;
         }
 
@@ -73,7 +76,7 @@ public final class BuySignEvent implements Listener {
         if (priceBuy == 0.0D) {
             throw new SignUnknowBuy("A placa {x=" + placa.getLocation().getX() + ",y=" + placa.getLocation().getY() + ",z=" + placa.getLocation().getZ() + "} não tem opção para comprar.");
         }
-        if (placa.getLine(0).equals(player.getDisplayName())) {
+        if (Utilidades.replaceShopName(placa.getLine(0)).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
         int amountItemSign = Short.parseShort(Utilidades.replace(placa.getLine(1)));

@@ -37,7 +37,7 @@ public class Utilidades {
             byte dataId = Byte.parseByte(valores[1]);
             return new MaterialData(idType, dataId).toItemStack();
         }
-        if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){1,4}){1}(\\s|$)")) {
+        if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){1,5}){1}(\\s|$)")) {
             String[] valores = replace(lines[3]).split(":");
             int idType = Integer.parseInt(valores[0]);
             short dataId = Short.parseShort(valores[1]);
@@ -61,11 +61,15 @@ public class Utilidades {
             return false;
         }
         String item = replace(lines[3]);
-        return item.matches("^[1-9](\\d)*(:(\\d){1,4}|#(\\w){4,4})?(\\s|$)");
+        return item.matches("^[1-9](\\d)*(:(\\d){1,5}|#(\\w){4,4})?(\\s|$)");
     }
 
     public static String replace(String price) {
         return price.replace(" ", "").replace("§2", "").replace("§4", "").replace("§0", "");
+    }
+
+    public static String replaceShopName(String price) {
+        return price.replace("§0", "");
     }
 
     public static String updatePriceSign(String line) {

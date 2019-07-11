@@ -64,18 +64,20 @@ public final class CreateShopEvent implements Listener {
 
     private void createSignLoja(Player player, String[] lines, org.bukkit.block.Sign sign)
             throws CreateSignPlayerWithoutPermissionException, CreateSignWithoutChestException, CreateSignItemInvalidException, CreateSignNickOtherPlayerException, CreateSignServerWithoutPermissionException, CreateSignServerOnChestException {
-        if ((!player.hasPermission("loja.admin")) && (!player.hasPermission("loja.player"))) {
+
+        if ((!player.hasPermission("loja.admin")) && (!player.hasPermission("loja.player")) && (!player.isOp())) {
             throw new CreateSignPlayerWithoutPermissionException("O player " + player.getName() + " tentou criar loja sem permissão.");
         }
         if (Utilidades.getItemLoja(lines) == null) {
             throw new CreateSignItemInvalidException("O player " + player.getName() + " tentou criar uma loja com um item inválido: " + lines[3]);
         }
         Block block = sign.getBlock().getRelative(((org.bukkit.material.Sign) sign.getData()).getAttachedFace());
-        if (!lines[0].equals(this.plugin.getMessageConfig().message("sign.nomeLoja"))) {
+        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
+        if (!Utilidades.replaceShopName(lines[0]).equals(placaLoja)) {
             if ((!block.getType().equals(Material.CHEST)) && (!block.getType().equals(Material.TRAPPED_CHEST))) {
                 throw new CreateSignWithoutChestException("O player " + player.getName() + " tentou criar uma loja fora do baú.");
             }
-            if (!lines[0].equals(player.getName())) {
+            if (!Utilidades.replaceShopName(lines[0]).equalsIgnoreCase(player.getName())) {
                 throw new CreateSignNickOtherPlayerException("O player " + player.getName() + " tentou criar uma loja com o nick de outro player.");
             }
             return;
@@ -83,7 +85,7 @@ public final class CreateShopEvent implements Listener {
         if ((block.getType().equals(Material.CHEST)) || (block.getType().equals(Material.TRAPPED_CHEST))) {
             throw new CreateSignServerOnChestException("O player " + player.getName() + " tentou criar uma loja do servidor em um baú.");
         }
-        if (!player.hasPermission("loja.admin")) {
+        if ((!player.hasPermission("loja.admin")) && (!player.isOp())) {
             throw new CreateSignServerWithoutPermissionException("O player " + player.getName() + " tentou criar uma loja com o nome do servidor sem permissão.");
         }
     }

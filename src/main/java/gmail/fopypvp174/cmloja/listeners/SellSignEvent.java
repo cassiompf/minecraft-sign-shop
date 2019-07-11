@@ -34,7 +34,9 @@ public final class SellSignEvent implements Listener {
             return;
         }
 
-        if (e.getClickedBlock().getType() != Material.WALL_SIGN) {
+        if (e.getClickedBlock().getType() != Material.SIGN_POST
+                && e.getClickedBlock().getType() != Material.SIGN
+                && e.getClickedBlock().getType() != Material.WALL_SIGN) {
             return;
         }
 
@@ -42,8 +44,9 @@ public final class SellSignEvent implements Listener {
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
+        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
 
-        if (!sign.getLine(0).equals(plugin.getMessageConfig().message("placa.nomeLoja"))) {
+        if (!Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
             return;
         }
 
@@ -75,7 +78,7 @@ public final class SellSignEvent implements Listener {
     }
 
     private void venderPelaPlaca(Player player, Sign sign, ItemStack item) throws PlayerEqualsTargetException, PlayerUnknowItemException, SignUnknowSell {
-        if (sign.getLine(0).equals(player.getDisplayName())) {
+        if (Utilidades.replaceShopName(sign.getLine(0)).equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 

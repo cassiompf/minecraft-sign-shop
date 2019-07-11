@@ -41,8 +41,9 @@ public final class BuyChestEvent implements Listener {
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
+        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
 
-        if (sign.getLine(0).equals(plugin.getMessageConfig().message("placa.nomeLoja"))) {
+        if (Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
             return;
         }
 
@@ -66,7 +67,7 @@ public final class BuyChestEvent implements Listener {
         } catch (InventoryFullException erro4) {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full"));
         } catch (TargetUnknowException erro5) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown").replace("%p", sign.getLine(0)));
+            player.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown").replace("%p", Utilidades.replaceShopName(sign.getLine(0))));
         } catch (SignUnknowBuy erro6) {
             player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro4"));
         }
@@ -75,7 +76,7 @@ public final class BuyChestEvent implements Listener {
     @Deprecated
     public void comprarPeloBau(Player player, org.bukkit.block.Sign sign, Chest chest, ItemStack item)
             throws EmptyChestException, InventoryFullException, TargetUnknowException, PlayerMoneyException, PlayerEqualsTargetException, SignUnknowBuy {
-        String line1 = Utilidades.replace(sign.getLine(0));
+        String line1 = Utilidades.replaceShopName(sign.getLine(0));
         if (line1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando comprar dele mesmo.");
         }
@@ -94,9 +95,9 @@ public final class BuyChestEvent implements Listener {
         if (!Utilidades.haveSlotClearInv(player.getInventory(), item, amountSign)) {
             throw new InventoryFullException("Inventário do jogador está lotado e não tem como receber os itens.");
         }
-        OfflinePlayer target = Bukkit.getOfflinePlayer(sign.getLine(0));
+        OfflinePlayer target = Bukkit.getOfflinePlayer(line1);
         if (target == null) {
-            throw new TargetUnknowException("Jogador com o nick '" + sign.getLine(0) + "' não foi encontrado.");
+            throw new TargetUnknowException("Jogador com o nick '" + Utilidades.replaceShopName(sign.getLine(0)) + "' não foi encontrado.");
         }
         this.plugin.getEcon().depositPlayer(target, priceBuy);
         this.plugin.getEcon().withdrawPlayer(player, priceBuy);
