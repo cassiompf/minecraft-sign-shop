@@ -57,7 +57,3 @@ LojaSignCreate - It is called whenever a player creates a store.
 The plugin needs Vault and some economy plugin on the server.
 
 If you find errors in the plugin let me know that I will edit to launch in the next version.
-
-♦ Download Plugin Compiled (cmLoja.jar) ♦
-
-Link: http://www.mediafire.com/file/opp64v359p6pqd2/cmLoja.jar/file
