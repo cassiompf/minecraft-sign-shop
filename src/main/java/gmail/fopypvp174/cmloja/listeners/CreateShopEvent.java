@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.inventory.ItemStack;
 
 public final class CreateShopEvent implements Listener {
 
@@ -33,27 +34,27 @@ public final class CreateShopEvent implements Listener {
         try {
             createSignLoja(player, e.getLines(), sign);
         } catch (CreateSignNickOtherPlayerException error) {
-            e.getBlock().breakNaturally(null);
+            e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
             player.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro3"));
             return;
         } catch (CreateSignPlayerWithoutPermissionException error) {
-            e.getBlock().breakNaturally(null);
+            e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
             player.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro5"));
             return;
         } catch (CreateSignServerWithoutPermissionException error) {
-            e.getBlock().breakNaturally(null);
+            e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
             player.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro4"));
             return;
         } catch (CreateSignItemInvalidException error) {
-            e.getBlock().breakNaturally(null);
+            e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
             player.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro2"));
             return;
         } catch (CreateSignWithoutChestException error) {
-            e.getBlock().breakNaturally(null);
+            e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
             player.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro1"));
             return;
         } catch (CreateSignServerOnChestException error) {
-            e.getBlock().breakNaturally(null);
+            e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
             player.sendMessage(plugin.getMessageConfig().message("mensagens.criar_erro6"));
             return;
         }

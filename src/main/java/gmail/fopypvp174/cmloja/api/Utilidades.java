@@ -74,12 +74,12 @@ public class Utilidades {
 
     public static String updatePriceSign(String line) {
         if (replace(line).matches("^(?i)c([1-9]){1}(\\d)*:(?i)v([1-9]){1}(\\d)*")) {
-            return "§2C§r " + replace(line).split(":")[0].replace("C", "").replace("c", "") + " : §4V§r " + replace(line).split(":")[1].replace("V", "").replace("v", "");
+            return "§2§lC§r " + replace(line).split(":")[0].replace("C", "").replace("c", "") + " : §4§lV§r " + replace(line).split(":")[1].replace("V", "").replace("v", "");
         }
         if (replace(line).matches("^(?i)c([1-9]){1}(\\d)*(\\s|$)")) {
-            return "§2C§r " + replace(line).replace("C", "").replace("c", "");
+            return "§2§lC§r " + replace(line).replace("C", "").replace("c", "");
         }
-        return "§4V§r " + replace(line).replace("V", "").replace("v", "");
+        return "§4§lV§r " + replace(line).replace("V", "").replace("v", "");
     }
 
     public static boolean haveSlotClearInv(Inventory inventory, ItemStack itemStack, int amount) {
