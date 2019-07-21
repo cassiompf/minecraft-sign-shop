@@ -65,7 +65,7 @@ public class Utilidades {
     }
 
     public static String replace(String price) {
-        return price.replace(" ", "").replace("§2", "").replace("§4", "").replace("§0", "");
+        return price.replace(" ", "").replace("§2", "").replace("§4", "").replace("§0", "").replace("§l", "");
     }
 
     public static String replaceShopName(String price) {
@@ -103,8 +103,7 @@ public class Utilidades {
     public static int quantidadeItemInventory(Inventory inventory, ItemStack itemStack) {
         int quantia = 0;
         for (ItemStack item : inventory.getContents()) {
-            if ((item != null) &&
-                    (item.isSimilar(itemStack))) {
+            if ((item != null) && (item.isSimilar(itemStack))) {
                 quantia += item.getAmount();
             }
         }

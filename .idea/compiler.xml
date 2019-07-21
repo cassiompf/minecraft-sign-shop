@@ -6,12 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cmloja" />
+        <module name="cmLoja" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cmLoja" target="1.8" />
-      <module name="cmloja" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

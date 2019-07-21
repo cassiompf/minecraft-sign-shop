@@ -96,7 +96,7 @@ public final class SellChestShop implements Listener {
         if (priceSell == 0.0D) {
             throw new SignUnknowSell("A placa {x=" + sign.getLocation().getX() + ",y=" + sign.getLocation().getY() + ",z=" + sign.getLocation().getZ() + "} não tem opção para vender.");
         }
-        Integer amoutItemPlayerHas = Utilidades.quantidadeItemInventory(player.getInventory(), item);
+        int amoutItemPlayerHas = Utilidades.quantidadeItemInventory(player.getInventory(), item);
         if (amoutItemPlayerHas == 0) {
             throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
         }
@@ -107,8 +107,9 @@ public final class SellChestShop implements Listener {
         if (!Utilidades.haveSlotClearInv(chest.getInventory(), item, amoutItemPlayerHas)) {
             throw new InventoryFullException("O baú {x=" + chest.getLocation().getX() + ",y= + " + chest.getLocation().getY() + ",z=" + chest.getLocation().getZ() + "} não tem espaço para receber itens de venda do jogador ." + player.getName());
         }
-        Integer amoutItemSign = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
-        double finalValueSale = (amoutItemPlayerHas / amoutItemSign) * priceSell;
+        int amoutItemSign = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
+        double finalValueSale = ((double) amoutItemPlayerHas / (double) amoutItemSign) * priceSell;
+
         if (this.plugin.getEcon().getBalance(target) < finalValueSale) {
             throw new TargetMoneyException("O jogador " + target.getName() + " não tem dinheiro para pagar o jogador " + player.getName() + " pela venda.");
         }
