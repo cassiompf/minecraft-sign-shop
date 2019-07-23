@@ -78,7 +78,7 @@ public final class CreateShopEvent implements Listener {
             if ((!block.getType().equals(Material.CHEST)) && (!block.getType().equals(Material.TRAPPED_CHEST))) {
                 throw new CreateSignWithoutChestException("O player " + player.getName() + " tentou criar uma loja fora do baú.");
             }
-            if (!Utilidades.replaceShopName(lines[0]).equalsIgnoreCase(player.getName())) {
+            if (!Utilidades.replaceShopName(lines[0]).equals(player.getName())) {
                 throw new CreateSignNickOtherPlayerException("O player " + player.getName() + " tentou criar uma loja com o nick de outro player.");
             }
             return;

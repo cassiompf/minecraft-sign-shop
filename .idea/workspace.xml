@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00905234-805d-414a-b2d9-8011b086f4d1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cmLoja_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/cmLoja_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmloja.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cmLoja.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/SellChestShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/SellChestShop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gmail/fopypvp174/cmloja/api/Utilidades.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gmail/fopypvp174/cmloja/api/Utilidades.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,12 +22,36 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
               <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="82" column="13" lean-forward="true" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventBreakShop.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1245">
+              <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,7 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>N�o</find>
       <find>Invent�rio</find>
       <find>permiss�o</find>
       <find>inv�lido</find>
@@ -80,6 +96,7 @@
       <find>sign.getLine(0</find>
       <find>getLine(0</find>
       <find>replace</find>
+      <find>player.getName</find>
     </findStrings>
     <replaceStrings>
       <replace>plugin.getMessageConfig()</replace>
@@ -158,9 +175,9 @@
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventOpenChest.java" />
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/BuySignEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/SellSignEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/api/Utilidades.java" />
         <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/SellChestShop.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -187,7 +204,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -235,12 +251,22 @@
               <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="cmloja" type="462c0819:PsiDirectoryNode" />
+              <item name="listeners" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cmLoja" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cmLoja" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,7 +274,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543941865208" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Servidores/Survival/plugins" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -426,7 +452,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2344932" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23827533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -507,7 +533,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Arrumando ao criar a placa 3" />
     <MESSAGE value="Arrumando o bug de criar placas" />
     <MESSAGE value="Mudando expressões regulares" />
     <MESSAGE value="Arrumando setupVault()" />
@@ -532,7 +557,8 @@
     <MESSAGE value="Version 2.0.1-SNAPSHOT;&#10;Bugs corrigidos, arrumado espaço na configuração da placa da loja!" />
     <MESSAGE value="Version 2.0.1-SNAPSHOT;&#10;Se a placa criada estiver errada o bloco quebrará e dropará uma placa no chão." />
     <MESSAGE value="Version 2.0.1-SNAPSHOT;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 2.0.1-SNAPSHOT;" />
+    <MESSAGE value="Version 2.0.2-SNAPSHOT;&#10;Bugs fixed when any player sell in the store of some player vip;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 2.0.2-SNAPSHOT;&#10;Bugs fixed when any player sell in the store of some player vip;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -782,16 +808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventBreakShop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1145">
-          <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -832,16 +848,6 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1084" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="53" column="51" selection-start-line="53" selection-start-column="51" selection-end-line="53" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/gmail/fopypvp174/cmloja/api/Utilidades.class">
@@ -898,6 +904,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-275">
           <caret line="82" column="15" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/CreateShopEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="82" column="13" lean-forward="true" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gmail/fopypvp174/cmloja/listeners/EventBreakShop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1245">
+          <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -970,7 +996,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
