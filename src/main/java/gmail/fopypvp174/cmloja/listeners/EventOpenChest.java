@@ -1,7 +1,7 @@
 package gmail.fopypvp174.cmloja.listeners;
 
-import gmail.fopypvp174.cmloja.CmLoja;
 import gmail.fopypvp174.cmloja.api.Utilidades;
+import gmail.fopypvp174.cmloja.configurations.MessageConfig;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -15,12 +15,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class EventOpenChest implements Listener {
+public final class EventOpenChest implements Listener {
 
-    private CmLoja plugin;
+    private final MessageConfig messageConfig;
 
-    public EventOpenChest(CmLoja plugin) {
-        this.plugin = plugin;
+    public EventOpenChest(MessageConfig messageConfig) {
+        this.messageConfig = messageConfig;
     }
 
     @Deprecated
@@ -60,7 +60,7 @@ public class EventOpenChest implements Listener {
                 return;
             }
             e.getPlayer().sendMessage(
-                    plugin.getMessageConfig()
+                    messageConfig
                             .message("mensagens.open_chest_shop")
                             .replace("%p", Utilidades.replaceShopName(sign.getLine(0))));
 

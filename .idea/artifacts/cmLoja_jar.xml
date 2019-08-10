@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="cmLoja:jar">
-    <output-path>$PROJECT_DIR$/../../Servidores/Survival/plugins</output-path>
-    <root id="archive" name="cmLoja.jar">
-      <element id="module-output" name="cmLoja" />
-    </root>
-  </artifact>
-</component>

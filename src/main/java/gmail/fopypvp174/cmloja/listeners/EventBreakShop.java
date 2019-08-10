@@ -1,7 +1,7 @@
 package gmail.fopypvp174.cmloja.listeners;
 
-import gmail.fopypvp174.cmloja.CmLoja;
 import gmail.fopypvp174.cmloja.api.Utilidades;
+import gmail.fopypvp174.cmloja.configurations.MessageConfig;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
@@ -13,16 +13,16 @@ import org.bukkit.event.block.BlockBreakEvent;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class EventBreakShop implements Listener {
+public final class EventBreakShop implements Listener {
 
-    private CmLoja plugin;
+    private final MessageConfig messageConfig;
 
-    public EventBreakShop(CmLoja plugin) {
-        this.plugin = plugin;
+    public EventBreakShop(MessageConfig messageConfig) {
+        this.messageConfig = messageConfig;
     }
 
     @Deprecated
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void chestBreak(BlockBreakEvent e) {
 
         if (e.getBlock().getType() != Material.CHEST &&
@@ -53,7 +53,7 @@ public class EventBreakShop implements Listener {
                 return;
             }
             e.getPlayer().sendMessage(
-                    plugin.getMessageConfig()
+                    messageConfig
                             .message("mensagens.break_chest_shop")
                             .replace("%p", sign.getLine(0)));
 
@@ -62,7 +62,7 @@ public class EventBreakShop implements Listener {
     }
 
     @Deprecated
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void signBreak(BlockBreakEvent e) {
 
         if (e.getBlock().getType() != Material.WALL_SIGN) {
@@ -83,7 +83,7 @@ public class EventBreakShop implements Listener {
             return;
         }
         e.getPlayer().sendMessage(
-                plugin.getMessageConfig()
+                messageConfig
                         .message("mensagens.break_chest_shop")
                         .replace("%p", sign.getLine(0)));
 

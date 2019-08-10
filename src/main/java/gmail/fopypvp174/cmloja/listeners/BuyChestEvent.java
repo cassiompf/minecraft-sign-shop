@@ -1,10 +1,12 @@
 package gmail.fopypvp174.cmloja.listeners;
 
-import gmail.fopypvp174.cmloja.CmLoja;
 import gmail.fopypvp174.cmloja.api.Utilidades;
+import gmail.fopypvp174.cmloja.configurations.LojaConfig;
+import gmail.fopypvp174.cmloja.configurations.MessageConfig;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import gmail.fopypvp174.cmloja.exceptions.*;
 import gmail.fopypvp174.cmloja.handlers.LojaBuyOtherPlayer;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -20,10 +22,15 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public final class BuyChestEvent implements Listener {
-    private CmLoja plugin;
 
-    public BuyChestEvent(CmLoja plugin) {
-        this.plugin = plugin;
+    private final Economy economy;
+    private final MessageConfig messageConfig;
+    private final LojaConfig lojaConfig;
+
+    public BuyChestEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+        this.economy = economy;
+        this.messageConfig = messageConfig;
+        this.lojaConfig = lojaConfig;
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -41,7 +48,7 @@ public final class BuyChestEvent implements Listener {
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
-        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
+        String placaLoja = messageConfig.getCustomConfig().getString("placa.nomeLoja");
 
         if (Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
             return;
@@ -54,22 +61,22 @@ public final class BuyChestEvent implements Listener {
 
 
         Player player = e.getPlayer();
-        ItemStack item = Utilidades.getItemLoja(sign.getLines());
+        ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
         Chest chest = (Chest) block.getState();
         try {
             comprarPeloBau(player, sign, chest, item);
         } catch (PlayerEqualsTargetException error1) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro3"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro3"));
         } catch (PlayerMoneyException error2) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro1"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro1"));
         } catch (EmptyChestException error3) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro2"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro2"));
         } catch (InventoryFullException erro4) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full"));
+            player.sendMessage(messageConfig.message("mensagens.inventory_full"));
         } catch (TargetUnknowException erro5) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.player_unknown").replace("%p", Utilidades.replaceShopName(sign.getLine(0))));
+            player.sendMessage(messageConfig.message("mensagens.player_unknown").replace("%p", Utilidades.replaceShopName(sign.getLine(0))));
         } catch (SignUnknowBuy erro6) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro4"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro4"));
         }
     }
 
@@ -84,7 +91,7 @@ public final class BuyChestEvent implements Listener {
         if (priceBuy == 0.0D) {
             throw new SignUnknowBuy("A placa {x=" + sign.getLocation().getX() + ",y=" + sign.getLocation().getY() + ",z=" + sign.getLocation().getZ() + "} não tem opção para comprar.");
         }
-        if (this.plugin.getEcon().getBalance(player) < priceBuy) {
+        if (economy.getBalance(player) < priceBuy) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
         }
         int amountSign = Short.parseShort(Utilidades.replace(sign.getLine(1)));
@@ -99,8 +106,8 @@ public final class BuyChestEvent implements Listener {
         if (target == null) {
             throw new TargetUnknowException("Jogador com o nick '" + Utilidades.replaceShopName(sign.getLine(0)) + "' não foi encontrado.");
         }
-        this.plugin.getEcon().depositPlayer(target, priceBuy);
-        this.plugin.getEcon().withdrawPlayer(player, priceBuy);
+        economy.depositPlayer(target, priceBuy);
+        economy.withdrawPlayer(player, priceBuy);
 
         item.setAmount(amountSign);
 
@@ -108,7 +115,7 @@ public final class BuyChestEvent implements Listener {
         removeItemBau(chest, item, amountSign);
 
         String moneyFormatted = String.format("%.2f", priceBuy);
-        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_chest", amountSign, moneyFormatted, target));
+        player.sendMessage(this.messageConfig.message("mensagens.comprar_success_chest", amountSign, moneyFormatted, target));
 
         LojaBuyOtherPlayer eventBuy = new LojaBuyOtherPlayer(target, player, priceBuy, item, amountSign);
         Bukkit.getServer().getPluginManager().callEvent(eventBuy);

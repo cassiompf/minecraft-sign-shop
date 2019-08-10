@@ -1,12 +1,14 @@
 package gmail.fopypvp174.cmloja.listeners;
 
-import gmail.fopypvp174.cmloja.CmLoja;
 import gmail.fopypvp174.cmloja.api.Utilidades;
+import gmail.fopypvp174.cmloja.configurations.LojaConfig;
+import gmail.fopypvp174.cmloja.configurations.MessageConfig;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import gmail.fopypvp174.cmloja.exceptions.PlayerEqualsTargetException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerUnknowItemException;
 import gmail.fopypvp174.cmloja.exceptions.SignUnknowSell;
 import gmail.fopypvp174.cmloja.handlers.LojaSellServer;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -22,10 +24,14 @@ import org.bukkit.inventory.ItemStack;
 
 public final class SellSignEvent implements Listener {
 
-    private CmLoja plugin;
+    private final Economy economy;
+    private final MessageConfig messageConfig;
+    private final LojaConfig lojaConfig;
 
-    public SellSignEvent(CmLoja plugin) {
-        this.plugin = plugin;
+    public SellSignEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+        this.economy = economy;
+        this.messageConfig = messageConfig;
+        this.lojaConfig = lojaConfig;
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -44,7 +50,7 @@ public final class SellSignEvent implements Listener {
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
-        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
+        String placaLoja = messageConfig.getCustomConfig().getString("placa.nomeLoja");
 
         if (!Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
             return;
@@ -64,16 +70,16 @@ public final class SellSignEvent implements Listener {
             return;
         }
 
-        ItemStack item = Utilidades.getItemLoja(sign.getLines());
+        ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
 
         try {
             venderPelaPlaca(player, sign, item);
         } catch (PlayerEqualsTargetException error1) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro1"));
+            player.sendMessage(messageConfig.message("mensagens.vender_erro1"));
         } catch (PlayerUnknowItemException error2) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro3"));
+            player.sendMessage(messageConfig.message("mensagens.vender_erro3"));
         } catch (SignUnknowSell error3) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.vender_erro5"));
+            player.sendMessage(messageConfig.message("mensagens.vender_erro5"));
         }
     }
 
@@ -106,20 +112,20 @@ public final class SellSignEvent implements Listener {
         }
         if (priceSaleWithDiscount > 0.0D) {
             String moneyFormatted = String.format("%.2f", priceSaleWithDiscount - priceSaleWithoutDiscount);
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_vip_vantagem", moneyFormatted));
+            player.sendMessage(this.messageConfig.message("mensagens.vender_vip_vantagem", moneyFormatted));
 
             moneyFormatted = String.format("%.2f", priceSaleWithDiscount);
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", amoutItemPlayerHas, moneyFormatted));
+            player.sendMessage(this.messageConfig.message("mensagens.vender_success_sign", amoutItemPlayerHas, moneyFormatted));
 
-            this.plugin.getEcon().depositPlayer(player, priceSaleWithDiscount);
+            economy.depositPlayer(player, priceSaleWithDiscount);
 
             LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithDiscount, item, amoutItemPlayerHas);
             Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         } else {
             String dinheiroFormatado = String.format("%.2f", priceSaleWithoutDiscount);
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.vender_success_sign", amoutItemPlayerHas, dinheiroFormatado));
+            player.sendMessage(this.messageConfig.message("mensagens.vender_success_sign", amoutItemPlayerHas, dinheiroFormatado));
 
-            this.plugin.getEcon().depositPlayer(player, priceSaleWithoutDiscount);
+            economy.depositPlayer(player, priceSaleWithoutDiscount);
 
             LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithoutDiscount, item, amoutItemPlayerHas);
             Bukkit.getServer().getPluginManager().callEvent(eventBuy);

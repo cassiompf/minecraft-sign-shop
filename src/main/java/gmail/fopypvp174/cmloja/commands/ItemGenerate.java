@@ -1,6 +1,6 @@
 package gmail.fopypvp174.cmloja.commands;
 
-import gmail.fopypvp174.cmloja.CmLoja;
+import gmail.fopypvp174.cmloja.configurations.LojaConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack;
 
 public final class ItemGenerate implements CommandExecutor {
 
-    private CmLoja plugin;
+    private LojaConfig lojaConfig;
 
-    public ItemGenerate(CmLoja plugin) {
-        this.plugin = plugin;
+    public ItemGenerate(LojaConfig lojaConfig) {
+        this.lojaConfig = lojaConfig;
     }
 
     @Override
@@ -34,13 +34,13 @@ public final class ItemGenerate implements CommandExecutor {
                 return true;
             }
 
-            if (plugin.getLoja().equalsItem(item)) {
-                p.sendMessage(ChatColor.RED + "Esse item já tem ID: (" + ChatColor.WHITE + plugin.getLoja().nameItem(item) + ChatColor.RED + ").");
+            if (lojaConfig.equalsItem(item)) {
+                p.sendMessage(ChatColor.RED + "Esse item já tem ID: (" + ChatColor.WHITE + lojaConfig.nameItem(item) + ChatColor.RED + ").");
                 return true;
             }
 
-            plugin.getLoja().setItem(item);
-            p.sendMessage(ChatColor.GREEN + "ID do item: (" + ChatColor.WHITE + plugin.getLoja().nameItem(item) + ChatColor.GREEN + ").");
+            lojaConfig.setItem(item);
+            p.sendMessage(ChatColor.GREEN + "ID do item: (" + ChatColor.WHITE + lojaConfig.nameItem(item) + ChatColor.GREEN + ").");
             return true;
         }
         return false;

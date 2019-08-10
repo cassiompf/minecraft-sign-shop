@@ -1,13 +1,15 @@
 package gmail.fopypvp174.cmloja.listeners;
 
-import gmail.fopypvp174.cmloja.CmLoja;
 import gmail.fopypvp174.cmloja.api.Utilidades;
+import gmail.fopypvp174.cmloja.configurations.LojaConfig;
+import gmail.fopypvp174.cmloja.configurations.MessageConfig;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import gmail.fopypvp174.cmloja.exceptions.InventoryFullException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerEqualsTargetException;
 import gmail.fopypvp174.cmloja.exceptions.PlayerMoneyException;
 import gmail.fopypvp174.cmloja.exceptions.SignUnknowBuy;
 import gmail.fopypvp174.cmloja.handlers.LojaBuyServer;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -22,10 +24,14 @@ import org.bukkit.inventory.ItemStack;
 
 public final class BuySignEvent implements Listener {
 
-    private CmLoja plugin;
+    private final Economy economy;
+    private final MessageConfig messageConfig;
+    private final LojaConfig lojaConfig;
 
-    public BuySignEvent(CmLoja plugin) {
-        this.plugin = plugin;
+    public BuySignEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+        this.economy = economy;
+        this.messageConfig = messageConfig;
+        this.lojaConfig = lojaConfig;
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -44,7 +50,7 @@ public final class BuySignEvent implements Listener {
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
-        String placaLoja = plugin.getMessageConfig().getCustomConfig().getString("placa.nomeLoja");
+        String placaLoja = messageConfig.getCustomConfig().getString("placa.nomeLoja");
 
         if (!Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
             return;
@@ -56,17 +62,17 @@ public final class BuySignEvent implements Listener {
         }
 
         Player player = e.getPlayer();
-        ItemStack item = Utilidades.getItemLoja(sign.getLines());
+        ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
         try {
             comprarPelaPlaca(player, sign, item);
         } catch (PlayerEqualsTargetException error1) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro3"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro3"));
         } catch (SignUnknowBuy error2) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro4"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro4"));
         } catch (InventoryFullException error3) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.inventory_full"));
+            player.sendMessage(messageConfig.message("mensagens.inventory_full"));
         } catch (PlayerMoneyException erro4) {
-            player.sendMessage(plugin.getMessageConfig().message("mensagens.comprar_erro1"));
+            player.sendMessage(messageConfig.message("mensagens.comprar_erro1"));
         }
     }
 
@@ -94,16 +100,16 @@ public final class BuySignEvent implements Listener {
                 break;
             }
         }
-        if (this.plugin.getEcon().getBalance(player) < priceBuy) {
+        if (economy.getBalance(player) < priceBuy) {
             throw new PlayerMoneyException("O jogador '" + player.getName() + "' não tem dinheiro suficiente para fazer a compra.");
         }
         if (discount > 0) {
-            player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_vip_vantagem", amountItemSign));
+            player.sendMessage(this.messageConfig.message("mensagens.comprar_vip_vantagem", amountItemSign));
         }
         String moneyFormatted = String.format("%.2f", priceBuy);
-        player.sendMessage(this.plugin.getMessageConfig().message("mensagens.comprar_success_sign", amountItemSign, moneyFormatted));
+        player.sendMessage(this.messageConfig.message("mensagens.comprar_success_sign", amountItemSign, moneyFormatted));
 
-        this.plugin.getEcon().withdrawPlayer(player, priceBuy);
+        economy.withdrawPlayer(player, priceBuy);
 
         item.setAmount(amountItemSign);
         player.getInventory().addItem(item);

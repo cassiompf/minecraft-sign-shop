@@ -10,26 +10,31 @@ public final class MessageConfig extends Config {
     }
 
     public String message(String string) {
-        return ChatColor.translateAlternateColorCodes('&', getCustomConfig().getString(string));
+        return colorText(getCustomConfig().getString(string));
+    }
+
+
+    public String colorText(String input) {
+        return ChatColor.translateAlternateColorCodes('&', input);
     }
 
     public String message(String string, String money) {
-        return ChatColor.translateAlternateColorCodes('&', getCustomConfig().getString(string).replace("%m", money != null ? money : ""));
+        return colorText(getCustomConfig().getString(string).replace("%m", money != null ? money : ""));
     }
 
     public String message(String string, Integer itemQuantia) {
-        return ChatColor.translateAlternateColorCodes('&',
+        return colorText(
                 getCustomConfig().getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : ""));
     }
 
     public String message(String string, Integer itemQuantia, String money) {
-        return ChatColor.translateAlternateColorCodes('&',
+        return colorText(
                 getCustomConfig().getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : "")
                         .replace("%m", money != null ? money : ""));
     }
 
     public String message(String string, Integer itemQuantia, String money, OfflinePlayer target) {
-        return ChatColor.translateAlternateColorCodes('&',
+        return colorText(
                 getCustomConfig().getString(string).replace("%i", itemQuantia != null ? itemQuantia.toString() : "")
                         .replace("%m", money != null ? money : "")
                         .replace("%p", target != null ? target.getName() : ""));

@@ -1,6 +1,6 @@
 package gmail.fopypvp174.cmloja.api;
 
-import gmail.fopypvp174.cmloja.CmLoja;
+import gmail.fopypvp174.cmloja.configurations.LojaConfig;
 import gmail.fopypvp174.cmloja.enums.LojaEnum;
 import org.bukkit.block.Sign;
 import org.bukkit.inventory.Inventory;
@@ -27,9 +27,9 @@ public class Utilidades {
         return 0.0D;
     }
 
-    public static ItemStack getItemLoja(String[] lines) {
+    public static ItemStack getItemLoja(String[] lines, LojaConfig loja) {
         if (replace(lines[3]).matches("^[1-9](\\d)*(#(\\w){4}){1}(\\s|$)")) {
-            return CmLoja.getPlugin(CmLoja.class).getLoja().getCustomConfig().getItemStack("itens." + replace(lines[3]));
+            return loja.getCustomConfig().getItemStack("itens." + replace(lines[3]));
         }
         if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){1,2}){1}(\\s|$)")) {
             String[] valores = replace(lines[3]).split(":");
