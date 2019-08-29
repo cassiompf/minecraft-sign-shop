@@ -10,24 +10,26 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 public final class CreateShopEvent implements Listener {
 
     private final Economy economy;
     private final MessageConfig messageConfig;
     private final LojaConfig lojaConfig;
+    private final Plugin plugin;
 
-    public CreateShopEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+    public CreateShopEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig, Plugin plugin) {
         this.economy = economy;
         this.messageConfig = messageConfig;
         this.lojaConfig = lojaConfig;
+        this.plugin = plugin;
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(ignoreCancelled = true)
     private void onCriar(SignChangeEvent e) {
         Player player = e.getPlayer();
 
@@ -39,8 +41,11 @@ public final class CreateShopEvent implements Listener {
 
         try {
             createSignLoja(player, e.getLines(), sign);
+            e.setLine(2, Utilidades.updatePriceSign(e.getLine(2)));
+            player.sendMessage(messageConfig.message("mensagens.criar_success"));
         } catch (CreateSignNickOtherPlayerException error) {
             e.getBlock().breakNaturally(new ItemStack(Material.SIGN));
+            e.getBlock().setType(Material.AIR);
             player.sendMessage(messageConfig.message("mensagens.criar_erro3"));
             return;
         } catch (CreateSignPlayerWithoutPermissionException error) {
@@ -64,9 +69,6 @@ public final class CreateShopEvent implements Listener {
             player.sendMessage(messageConfig.message("mensagens.criar_erro6"));
             return;
         }
-
-        e.setLine(2, Utilidades.updatePriceSign(e.getLine(2)));
-        player.sendMessage(messageConfig.message("mensagens.criar_success"));
     }
 
     private void createSignLoja(Player player, String[] lines, org.bukkit.block.Sign sign)

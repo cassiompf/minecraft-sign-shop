@@ -15,25 +15,27 @@ import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 public final class BuyChestEvent implements Listener {
 
     private final Economy economy;
     private final MessageConfig messageConfig;
     private final LojaConfig lojaConfig;
+    private final Plugin plugin;
 
-    public BuyChestEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+    public BuyChestEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig, Plugin plugin) {
         this.economy = economy;
         this.messageConfig = messageConfig;
         this.lojaConfig = lojaConfig;
+        this.plugin = plugin;
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(ignoreCancelled = true)
     @Deprecated
     private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK) {
@@ -61,9 +63,9 @@ public final class BuyChestEvent implements Listener {
 
 
         Player player = e.getPlayer();
-        ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
-        Chest chest = (Chest) block.getState();
         try {
+            ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
+            Chest chest = (Chest) block.getState();
             comprarPeloBau(player, sign, chest, item);
         } catch (PlayerEqualsTargetException error1) {
             player.sendMessage(messageConfig.message("mensagens.comprar_erro3"));

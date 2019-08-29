@@ -37,7 +37,7 @@ public class Utilidades {
             byte dataId = Byte.parseByte(valores[1]);
             return new MaterialData(idType, dataId).toItemStack();
         }
-        if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){1,5}){1}(\\s|$)")) {
+        if (replace(lines[3]).matches("^[1-9](\\d)*(:(\\d){3,5}){1}(\\s|$)")) {
             String[] valores = replace(lines[3]).split(":");
             int idType = Integer.parseInt(valores[0]);
             short dataId = Short.parseShort(valores[1]);

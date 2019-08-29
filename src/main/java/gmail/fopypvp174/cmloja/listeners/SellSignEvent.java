@@ -16,25 +16,27 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 public final class SellSignEvent implements Listener {
 
     private final Economy economy;
     private final MessageConfig messageConfig;
+    private final Plugin plugin;
     private final LojaConfig lojaConfig;
 
-    public SellSignEvent(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+    public SellSignEvent(Economy economy, MessageConfig messageConfig, Plugin plugin, LojaConfig lojaConfig) {
         this.economy = economy;
         this.messageConfig = messageConfig;
+        this.plugin = plugin;
         this.lojaConfig = lojaConfig;
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(ignoreCancelled = true)
     private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_BLOCK) {
             return;
@@ -70,9 +72,9 @@ public final class SellSignEvent implements Listener {
             return;
         }
 
-        ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
 
         try {
+            ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
             venderPelaPlaca(player, sign, item);
         } catch (PlayerEqualsTargetException error1) {
             player.sendMessage(messageConfig.message("mensagens.vender_erro1"));
@@ -88,19 +90,19 @@ public final class SellSignEvent implements Listener {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
 
-        Double priceSaleWithoutDiscount = Utilidades.getPrices(LojaEnum.VENDER, sign);
+        double priceSaleWithoutDiscount = Utilidades.getPrices(LojaEnum.VENDER, sign);
         if (priceSaleWithoutDiscount == 0.0D) {
             throw new SignUnknowSell("A placa {x=" + sign.getLocation().getX() + ",y=" + sign.getLocation().getY() + ",z=" + sign.getLocation().getZ() + "} não tem opção para vender.");
         }
 
-        Integer amoutItemPlayerHas = Utilidades.quantidadeItemInventory(player.getInventory(), item);
+        double amoutItemPlayerHas = Utilidades.quantidadeItemInventory(player.getInventory(), item);
         if (amoutItemPlayerHas == 0) {
             throw new PlayerUnknowItemException("O jogador '" + player.getName() + "' está tentando vender um item que ele não tem no inventário.");
         }
 
-        int qntItemPlaca = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
+        double qntItemPlaca = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
         priceSaleWithoutDiscount = priceSaleWithoutDiscount * amoutItemPlayerHas / qntItemPlaca;
-        Double priceSaleWithDiscount = 0.0D;
+        double priceSaleWithDiscount = 0.0D;
         for (int i = 0; i <= 100; i++) {
             if ((player.hasPermission("*")) || (player.isOp())) {
                 break;
@@ -115,22 +117,22 @@ public final class SellSignEvent implements Listener {
             player.sendMessage(this.messageConfig.message("mensagens.vender_vip_vantagem", moneyFormatted));
 
             moneyFormatted = String.format("%.2f", priceSaleWithDiscount);
-            player.sendMessage(this.messageConfig.message("mensagens.vender_success_sign", amoutItemPlayerHas, moneyFormatted));
+            player.sendMessage(this.messageConfig.message("mensagens.vender_success_sign", (int) amoutItemPlayerHas, moneyFormatted));
 
             economy.depositPlayer(player, priceSaleWithDiscount);
 
-            LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithDiscount, item, amoutItemPlayerHas);
+            LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithDiscount, item, (int) amoutItemPlayerHas);
             Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         } else {
             String dinheiroFormatado = String.format("%.2f", priceSaleWithoutDiscount);
-            player.sendMessage(this.messageConfig.message("mensagens.vender_success_sign", amoutItemPlayerHas, dinheiroFormatado));
+            player.sendMessage(this.messageConfig.message("mensagens.vender_success_sign", (int) amoutItemPlayerHas, dinheiroFormatado));
 
             economy.depositPlayer(player, priceSaleWithoutDiscount);
 
-            LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithoutDiscount, item, amoutItemPlayerHas);
+            LojaSellServer eventBuy = new LojaSellServer(player, priceSaleWithoutDiscount, item, (int) amoutItemPlayerHas);
             Bukkit.getServer().getPluginManager().callEvent(eventBuy);
         }
-        item.setAmount(amoutItemPlayerHas);
+        item.setAmount((int) amoutItemPlayerHas);
         player.getInventory().removeItem(item);
     }
 }

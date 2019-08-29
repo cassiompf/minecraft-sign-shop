@@ -16,25 +16,27 @@ import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 public final class SellChestShop implements Listener {
 
     private final Economy economy;
     private final MessageConfig messageConfig;
     private final LojaConfig lojaConfig;
+    private final Plugin plugin;
 
-    public SellChestShop(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig) {
+    public SellChestShop(Economy economy, MessageConfig messageConfig, LojaConfig lojaConfig, Plugin plugin) {
         this.economy = economy;
         this.messageConfig = messageConfig;
         this.lojaConfig = lojaConfig;
+        this.plugin = plugin;
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    @EventHandler(ignoreCancelled = true)
     @Deprecated
     private void onComprar(PlayerInteractEvent e) {
         if (e.getAction() != Action.LEFT_CLICK_BLOCK) {
@@ -46,10 +48,10 @@ public final class SellChestShop implements Listener {
         }
 
         Sign sign = (Sign) e.getClickedBlock().getState();
-
         if (!Utilidades.isLojaValid(sign.getLines())) {
             return;
         }
+
         String placaLoja = messageConfig.getCustomConfig().getString("placa.nomeLoja");
 
         if (Utilidades.replaceShopName(sign.getLine(0)).equals(placaLoja)) {
@@ -70,10 +72,9 @@ public final class SellChestShop implements Listener {
             return;
         }
 
-        Chest chest = (Chest) block.getState();
-        ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
-
         try {
+            Chest chest = (Chest) block.getState();
+            ItemStack item = Utilidades.getItemLoja(sign.getLines(), lojaConfig);
             venderPelaPlaca(player, sign, chest, item);
         } catch (PlayerEqualsTargetException error) {
             player.sendMessage(messageConfig.message("mensagens.vender_erro1"));
@@ -97,7 +98,7 @@ public final class SellChestShop implements Listener {
         if (line1.equals(player.getDisplayName())) {
             throw new PlayerEqualsTargetException("O jogador '" + player.getName() + "' está tentando vender para ele mesmo.");
         }
-        Double priceSell = Utilidades.getPrices(LojaEnum.VENDER, sign);
+        double priceSell = Utilidades.getPrices(LojaEnum.VENDER, sign);
         if (priceSell == 0.0D) {
             throw new SignUnknowSell("A placa {x=" + sign.getLocation().getX() + ",y=" + sign.getLocation().getY() + ",z=" + sign.getLocation().getZ() + "} não tem opção para vender.");
         }
@@ -112,8 +113,8 @@ public final class SellChestShop implements Listener {
         if (!Utilidades.haveSlotClearInv(chest.getInventory(), item, amoutItemPlayerHas)) {
             throw new InventoryFullException("O baú {x=" + chest.getLocation().getX() + ",y= + " + chest.getLocation().getY() + ",z=" + chest.getLocation().getZ() + "} não tem espaço para receber itens de venda do jogador ." + player.getName());
         }
-        int amoutItemSign = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
-        double finalValueSale = ((double) amoutItemPlayerHas / (double) amoutItemSign) * priceSell;
+        double amoutItemSign = Integer.parseInt(Utilidades.replace(sign.getLine(1)));
+        double finalValueSale = ((double) amoutItemPlayerHas / amoutItemSign) * priceSell;
 
         if (economy.getBalance(target) < finalValueSale) {
             throw new TargetMoneyException("O jogador " + target.getName() + " não tem dinheiro para pagar o jogador " + player.getName() + " pela venda.");

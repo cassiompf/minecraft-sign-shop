@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.plugin.Plugin;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -18,9 +19,11 @@ import java.util.Set;
 public final class EventOpenChest implements Listener {
 
     private final MessageConfig messageConfig;
+    private final Plugin plugin;
 
-    public EventOpenChest(MessageConfig messageConfig) {
+    public EventOpenChest(MessageConfig messageConfig, Plugin plugin) {
         this.messageConfig = messageConfig;
+        this.plugin = plugin;
     }
 
     @Deprecated
